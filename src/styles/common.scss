@@ -1,3 +1,18 @@
+$green: #214e34;
+$middle-green: #5c7457;
+$light-green: #979b8d;
+$border-gray: #dee2e6;
+$bg-gray: #f1f3f5;
+$bg-white: #fff;
+$color-black: #212529;
+$color-gray: #adb5bd;
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 * {
   box-sizing: border-box;
   font-family: 'Gothic A1', sans-serif;
@@ -17,18 +32,3 @@ input {
 input:focus {
   outline: none;
 }
-
-@mixin flexCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-$green: #214e34;
-$middle-green: #5c7457;
-$light-green: #979b8d;
-$border-gray: #dee2e6;
-$bg-gray: #f1f3f5;
-$bg-white: #fff;
-$color-black: #212529;
-$color-gray: #adb5bd;
