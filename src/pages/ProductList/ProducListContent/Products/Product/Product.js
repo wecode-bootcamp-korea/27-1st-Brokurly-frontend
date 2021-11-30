@@ -1,19 +1,24 @@
 import React from 'react';
 import './Product.scss';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 
-function Product({ productName }) {
+function Product({ product }) {
+  const { name, image, price, introduction } = product;
+  const addComma = num => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
   return (
-    <div className="product">
-      <article className="product">
-        <div className="img">
-          <img src="" alt={productName} />
-          <button className="cartBtn" />
-        </div>
-        <h3 className="name">브로콜리</h3>
-        <span className="price">5,490 원</span>
-        <span className="information">너무도 맛있는 브로콜리</span>
-      </article>
-    </div>
+    <article className="product">
+      <div className="imgContainer">
+        <img src={`./images/${image}`} alt={name} />
+        <button className="cartBtn">
+          <AiOutlineShoppingCart />
+        </button>
+      </div>
+      <h3 className="name">{name}</h3>
+      <span className="price">{addComma(price)}원</span>
+      <span className="information">{introduction}</span>
+    </article>
   );
 }
 
