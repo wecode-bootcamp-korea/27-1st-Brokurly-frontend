@@ -1,1 +1,45 @@
 @import '../../styles/common.scss';
+
+@mixin loginIdPwStyle {
+  width: 340px;
+  height: 54px;
+  border: solid 1px #cacaca;
+  border-radius: 5px;
+  font-size: 14px;
+  padding-right: 19px;
+  padding-left: 19px;
+}
+
+.login {
+  @include flexCenter;
+  width: 100%;
+}
+
+.loginSection {
+  width: 340px;
+  padding-top: 90px;
+}
+
+.loginText {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #5fa800;
+}
+
+.loginForm {
+  padding-top: 36px;
+}
+.loginId {
+  @include loginIdPwStyle;
+}
+
+.loginPw {
+  @include loginIdPwStyle;
+  margin-top: 10px;
+}
+
+.checkboxBar {
+  display: flex;
+  justify-content: space-between;
+}
