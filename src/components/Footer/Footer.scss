@@ -4,17 +4,15 @@
   @include flexCenter;
   width: 100%;
   background-color: $bg-gray;
-
+  min-width: 1050px;
+  padding-right: 20px;
+  padding-left: 20px;
   .footerSection {
     display: flex;
     justify-content: space-between;
-    min-width: 1050px;
     max-width: 1050px;
     padding-top: 30px;
-    padding-right: 20px;
     padding-bottom: 20px;
-    padding-left: 20px;
-
     .footerLeftSection {
       width: 505px;
       .CustomerHappinessCenter {
@@ -79,7 +77,7 @@
         line-height: 1.5;
       }
       .businessText {
-        color: $middle-green;
+        color: $green;
       }
       .corpText {
         color: $color-gray;
