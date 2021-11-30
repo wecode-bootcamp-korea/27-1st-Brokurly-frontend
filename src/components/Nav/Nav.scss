@@ -1,57 +1,144 @@
 @import '../../styles/common.scss';
 
 .nav {
-  width: 100%;
+  @include flexCenter;
+  position: sticky;
+  top: 0%;
+  background-color: $bg-white;
 
-  .moveHeader {
-    width: 100%;
-    padding: 20px 20px 0 20px;
+  .navContainer {
+    min-width: 1050px;
+    max-width: 1050px;
+    padding: 20px;
 
-    .join {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      width: 90%;
+    .moveHeader {
+      width: 100%;
 
-      .joinSignup {
-        padding: 0 10px;
-        color: $green;
-        border-right: 1px solid $green;
-        font-weight: 600;
+      .join {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .joinSignup {
+          padding: 0 10px;
+          color: $green;
+          border-right: 1px solid $green;
+          font-weight: 600;
+        }
+
+        .joinSignin {
+          padding: 10px;
+          font-weight: 600;
+        }
       }
-
-      .joinSignin {
+      .navLogo {
+        @include flexCenter;
         padding: 10px;
-        font-weight: 600;
       }
     }
-    .navLogo {
-      @include flexCenter;
-    }
-  }
-  .stickyNav {
-    .categoryBar {
-      @include flexCenter;
-      .categoryList {
+    .stickyNav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .categoryBar {
         @include flexCenter;
 
-        .categoryName {
-          font-size: 20px;
-          padding: 20px;
+        .categoryList {
+          @include flexCenter;
+
+          .categoryName {
+            font-size: 20px;
+            padding: 10px 30px;
+          }
+
+          .focusLink:hover {
+            color: $green;
+            border-bottom: 2px solid $green;
+          }
         }
       }
       .navSearch {
         @include flexCenter;
+        width: 25%;
+        border-radius: 30px;
+        background-color: $bg-gray;
+
         .searchInput {
-          width: 100px;
+          padding: 10px;
+          font-size: 15px;
         }
         .searchButton {
-          background-color: none;
+          border: 0;
+          padding: 10px;
+          background-color: transparent;
+          font-size: 15px;
         }
       }
       .navIcon {
-        padding: 30px;
-        font-size: 35px;
+        font-size: 30px;
+
+        .iconWrap {
+          margin: 0 15px;
+
+          .iconImage:hover {
+            stroke: $green;
+          }
+        }
+      }
+    }
+  }
+}
+
+.stickyNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 10px;
+
+  .categoryBar {
+    @include flexCenter;
+
+    .categoryList {
+      @include flexCenter;
+
+      .categoryName {
+        font-size: 20px;
+        padding: 10px 30px;
+      }
+
+      .focusLink:hover {
+        color: $green;
+        border-bottom: 2px solid $green;
+      }
+    }
+  }
+  .navSearch {
+    @include flexCenter;
+    width: 25%;
+    border-radius: 30px;
+    background-color: $bg-gray;
+
+    .searchInput {
+      padding: 10px;
+      font-size: 15px;
+    }
+    .searchButton {
+      border: 0;
+      padding: 10px;
+      background-color: transparent;
+      font-size: 15px;
+    }
+  }
+  .navIcon {
+    font-size: 30px;
+
+    .iconWrap {
+      margin: 0 15px;
+
+      .iconImage:hover {
+        stroke: $green;
       }
     }
   }
