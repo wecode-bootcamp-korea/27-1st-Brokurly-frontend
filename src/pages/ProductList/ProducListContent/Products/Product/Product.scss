@@ -29,13 +29,14 @@
       border: none;
       font-size: 24px;
       cursor: pointer;
+      opacity: 0.5;
 
       path {
         color: #fafafa;
       }
 
       &:hover {
-        opacity: 0.5;
+        opacity: 1;
       }
     }
   }
