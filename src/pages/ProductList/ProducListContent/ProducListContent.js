@@ -7,7 +7,7 @@ function ProducListContent() {
   return (
     <div className="productListContent">
       <ContentHeader />
-      <Products />
+      {/* <Products /> */}
     </div>
   );
 }

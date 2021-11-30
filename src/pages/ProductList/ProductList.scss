@@ -1,1 +1,14 @@
 @import '../../styles/common.scss';
+
+.productList {
+  background-color: $bg-gray;
+  @include flexCenter;
+  min-width: 1050px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  .productListContent {
+    width: 100%;
+    max-width: 1050px;
+  }
+}
