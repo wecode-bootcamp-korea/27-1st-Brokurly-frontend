@@ -1,1 +1,80 @@
 @import '../../styles/common.scss';
+
+.footer {
+  @include flexCenter;
+}
+
+.footerSection {
+  display: flex;
+  justify-content: space-between;
+  width: 1050px;
+  padding-top: 30px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.footerLeftSection {
+  width: 505px;
+}
+
+.CustomerHappinessCenter {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.footerRightSection {
+  width: 505px;
+}
+.num1 {
+  display: flex;
+  justify-content: space-between;
+  justify-content: flex-start;
+  padding-top: 16px;
+}
+.box1-1 {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  font-size: 28px;
+  font-weight: 600;
+  margin-right: 5px;
+}
+.box1-2 {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.gogaeksencer {
+  font-size: 14px;
+  height: 22px;
+}
+
+.time {
+  font-size: 14px;
+  height: 22px;
+}
+
+.introduce {
+  display: flex;
+  justify-content: space-between;
+
+  height: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  padding-bottom: 30px;
+}
+.business {
+  color: $color-gray;
+}
+.text {
+  font-size: 12px;
+}
+
+.corpText {
+  font-size: 12px;
+}
