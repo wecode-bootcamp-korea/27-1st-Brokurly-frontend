@@ -2,79 +2,90 @@
 
 .footer {
   @include flexCenter;
-}
+  width: 100%;
+  background-color: $bg-gray;
 
-.footerSection {
-  display: flex;
-  justify-content: space-between;
-  width: 1050px;
-  padding-top: 30px;
-  padding-right: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-}
+  .footerSection {
+    display: flex;
+    justify-content: space-between;
+    min-width: 1050px;
+    max-width: 1050px;
+    padding-top: 30px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
 
-.footerLeftSection {
-  width: 505px;
-}
+    .footerLeftSection {
+      width: 505px;
+      .CustomerHappinessCenter {
+        font-size: 20px;
+        font-weight: 600;
+        padding-left: 10px;
+      }
+      .CustomerCenterBox {
+        display: flex;
+        justify-content: space-between;
+        justify-content: flex-start;
+        padding-top: 16px;
+        .phoneNumber {
+          display: flex;
+          align-items: center;
+          width: 145px;
+          font-size: 28px;
+          font-weight: 600;
+          margin-right: 10px;
+        }
+        .kakaotalk {
+          display: flex;
+          align-items: center;
+          width: 145px;
+          font-size: 14px;
+          font-weight: 600;
+          margin-right: 10px;
+        }
+        .kakaotalkText {
+          text-align: center;
+          width: 140px;
+          border: solid 1px $color-gray;
+          border-radius: 5px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+        .everydayCenter {
+          font-size: 14px;
+          height: 22px;
+        }
+        .operatingHours {
+          color: $color-gray;
+          font-size: 14px;
+          height: 22px;
+        }
+      }
+    }
 
-.CustomerHappinessCenter {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.footerRightSection {
-  width: 505px;
-}
-.num1 {
-  display: flex;
-  justify-content: space-between;
-  justify-content: flex-start;
-  padding-top: 16px;
-}
-.box1-1 {
-  display: flex;
-  align-items: center;
-  width: 150px;
-  font-size: 28px;
-  font-weight: 600;
-  margin-right: 5px;
-}
-.box1-2 {
-  display: flex;
-  align-items: center;
-  width: 150px;
-  font-size: 14px;
-  font-weight: 600;
-  margin-right: 5px;
-}
-
-.gogaeksencer {
-  font-size: 14px;
-  height: 22px;
-}
-
-.time {
-  font-size: 14px;
-  height: 22px;
-}
-
-.introduce {
-  display: flex;
-  justify-content: space-between;
-
-  height: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  padding-bottom: 30px;
-}
-.business {
-  color: $color-gray;
-}
-.text {
-  font-size: 12px;
-}
-
-.corpText {
-  font-size: 12px;
+    .footerRightSection {
+      width: 505px;
+      .introduceBar {
+        display: flex;
+        justify-content: space-between;
+        height: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        padding-bottom: 30px;
+      }
+      .introduceText {
+        color: $color-gray;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .businessText {
+        color: $middle-green;
+      }
+      .corpText {
+        color: $color-gray;
+        font-size: 12px;
+        padding-top: 16px;
+      }
+    }
+  }
 }
