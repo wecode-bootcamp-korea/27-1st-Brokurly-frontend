@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './ContentHeader.scss';
 
-function ContentHeader() {
-  const [sortCheck, setSortCheck] = useState([true, false, false]);
+function ContentHeader({ setCurCategoty, curCategoty }) {
+  const [sortCheck, setSortCheck] = useState(0);
   const SORT_BTNS = ['신상품순', '낮은 가격순', '높은 가격순'];
   const TOTAL = 6;
 
   const clickSortBtn = id => {
-    setSortCheck(sortCheck.map((_, i) => (i === id ? true : false)));
+    setSortCheck(id);
+    setCurCategoty(`${curCategoty}${id}`);
   };
 
   return (
@@ -16,7 +17,7 @@ function ContentHeader() {
       <div className="sortBtns">
         {SORT_BTNS.map((name, i) => (
           <button
-            className={`sortBtn ${sortCheck[i] ? 'checked' : ''}`}
+            className={`sortBtn ${sortCheck === i ? 'checked' : ''}`}
             onClick={() => clickSortBtn(i)}
             key={i}
           >

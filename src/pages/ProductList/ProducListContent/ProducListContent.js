@@ -3,11 +3,14 @@ import ContentHeader from './ContentHeader/ContentHeader';
 import Products from './Products/Products';
 import './ProducListContent';
 
-function ProducListContent() {
+function ProducListContent({ products, setCurCategoty, curCategoty }) {
   return (
     <div className="productListContent">
-      <ContentHeader />
-      <Products />
+      <ContentHeader
+        setCurCategoty={setCurCategoty}
+        curCategoty={curCategoty}
+      />
+      <Products products={products} />
     </div>
   );
 }
