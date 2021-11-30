@@ -11,7 +11,7 @@ function Product({ productName }) {
         </div>
         <h3 className="name">브로콜리</h3>
         <span className="price">5,490 원</span>
-        <span className="infomation">너무도 맛있는 브로콜리</span>
+        <span className="information">너무도 맛있는 브로콜리</span>
       </article>
     </div>
   );
