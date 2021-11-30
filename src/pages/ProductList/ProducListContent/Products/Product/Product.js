@@ -4,9 +4,11 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 function Product({ product }) {
   const { name, image, price, introduction } = product;
+
   const addComma = num => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
+
   return (
     <article className="product">
       <div className="imgContainer">

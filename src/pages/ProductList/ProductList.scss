@@ -1,8 +1,14 @@
 @import '../../styles/common.scss';
 
 .productList {
-  background-color: $bg-gray;
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
   @include flexCenter;
+  background-color: $bg-gray;
   min-width: 1050px;
   padding-left: 20px;
   padding-right: 20px;
