@@ -3,10 +3,9 @@
 .footer {
   @include flexCenter;
   width: 100%;
-  background-color: $bg-gray;
   min-width: 1050px;
-  padding-right: 20px;
-  padding-left: 20px;
+  padding: 0 20px;
+  background-color: $bg-gray;
 
   .footerSection {
     display: flex;
@@ -19,14 +18,13 @@
       width: 505px;
 
       .CustomerHappinessCenter {
+        padding-left: 10px;
         font-size: 20px;
         font-weight: 600;
-        padding-left: 10px;
       }
 
       .CustomerCenterBox {
         display: flex;
-        justify-content: space-between;
         justify-content: flex-start;
         padding-top: 16px;
 
@@ -34,38 +32,38 @@
           display: flex;
           align-items: center;
           width: 145px;
+          margin-right: 10px;
           font-size: 28px;
           font-weight: 600;
-          margin-right: 10px;
         }
 
         .kakaotalk {
           display: flex;
           align-items: center;
           width: 145px;
+          margin-right: 10px;
           font-size: 14px;
           font-weight: 600;
-          margin-right: 10px;
         }
 
         .kakaotalkText {
           text-align: center;
           width: 140px;
-          border: solid 1px $color-gray;
-          border-radius: 5px;
           padding-top: 10px;
           padding-bottom: 10px;
+          border: solid 1px $color-gray;
+          border-radius: 5px;
         }
 
         .everydayCenter {
-          font-size: 14px;
           height: 22px;
+          font-size: 14px;
         }
 
         .operatingHours {
+          height: 22px;
           color: $color-gray;
           font-size: 14px;
-          height: 22px;
         }
       }
     }
@@ -76,15 +74,15 @@
         display: flex;
         justify-content: space-between;
         height: 20px;
+        padding-bottom: 30px;
         font-size: 14px;
         font-weight: 600;
-        padding-bottom: 30px;
       }
 
       .introduceText {
         color: $color-gray;
-        font-size: 12px;
         line-height: 1.5;
+        font-size: 12px;
       }
 
       .businessText {
@@ -92,9 +90,9 @@
       }
 
       .corpText {
+        padding-top: 16px;
         color: $color-gray;
         font-size: 12px;
-        padding-top: 16px;
       }
     }
   }
