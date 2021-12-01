@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
 import { FiShoppingCart } from 'react-icons/fi';
-
 import './Nav.scss';
 
 function Nav() {
@@ -12,15 +11,17 @@ function Nav() {
       <header className="navContainer">
         <div className="moveHeader">
           <div className="join">
-            <Link className="joinSignup" to="">
+            <Link className="joinSignup" to="/signup">
               회원가입
             </Link>
-            <Link className="joinSignin" to="">
+            <Link className="joinSignin" to="/signin">
               로그인
             </Link>
           </div>
           <div className="navLogo">
-            <img src="images/dummylog.png" alt="logo" />
+            <Link className="clickToMain" to="/">
+              <img className="mainLog" src="images/dummylog.png" alt="logo" />
+            </Link>
           </div>
         </div>
         <div className="stickyNav">
@@ -52,7 +53,7 @@ function Nav() {
             <input
               className="searchInput"
               text="text"
-              placeholder="검색어를 입력해주세요.."
+              placeholder="검색어를 입력해주세요"
             />
             <button className="searchButton">
               <BiSearch />
@@ -62,7 +63,7 @@ function Nav() {
             <Link className="iconWrap" to="/">
               <HiOutlineLocationMarker className="iconImage" />
             </Link>
-            <Link className="iconWrap" to="/">
+            <Link className="iconWrap" to="/cart">
               <FiShoppingCart className="iconImage" />
             </Link>
           </div>

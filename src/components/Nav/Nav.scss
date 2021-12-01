@@ -2,14 +2,13 @@
 
 .nav {
   @include flexCenter;
-  position: sticky;
-  top: 0%;
+  min-width: 1050px;
+  padding: 20px 20px 10px 20px;
   background-color: $bg-white;
 
   .navContainer {
-    min-width: 1050px;
+    width: 100%;
     max-width: 1050px;
-    padding: 20px 20px 10px 20px;
 
     .moveHeader {
       width: 100%;
@@ -31,11 +30,20 @@
           font-weight: 600;
         }
       }
+
       .navLogo {
         @include flexCenter;
         padding: 10px;
+
+        .clickToMain {
+          .mainLog {
+            width: 100px;
+            height: 80px;
+          }
+        }
       }
     }
+
     .stickyNav {
       display: flex;
       justify-content: space-between;
@@ -58,6 +66,7 @@
           }
         }
       }
+
       .navSearch {
         @include flexCenter;
         width: 25%;
@@ -85,60 +94,6 @@
             stroke: $green;
           }
         }
-      }
-    }
-  }
-}
-
-.stickyNav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 10px;
-
-  .categoryBar {
-    @include flexCenter;
-
-    .categoryList {
-      @include flexCenter;
-
-      .categoryName {
-        font-size: 20px;
-        padding: 10px 30px;
-      }
-
-      .focusLink:hover {
-        color: $green;
-        border-bottom: 2px solid $green;
-      }
-    }
-  }
-  .navSearch {
-    @include flexCenter;
-    width: 25%;
-    border-radius: 30px;
-    background-color: $bg-gray;
-
-    .searchInput {
-      padding: 10px;
-      font-size: 15px;
-    }
-    .searchButton {
-      border: 0;
-      padding: 10px;
-      background-color: transparent;
-      font-size: 15px;
-    }
-  }
-  .navIcon {
-    font-size: 30px;
-
-    .iconWrap {
-      margin: 0 15px;
-
-      .iconImage:hover {
-        stroke: $green;
       }
     }
   }
