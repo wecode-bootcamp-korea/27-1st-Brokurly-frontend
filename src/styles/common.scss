@@ -12,23 +12,3 @@ $color-gray: #91979e;
   justify-content: center;
   align-items: center;
 }
-
-* {
-  box-sizing: border-box;
-  font-family: 'Gothic A1', sans-serif;
-  color: $color-black;
-}
-
-a {
-  color: $color-black;
-  text-decoration: none;
-}
-
-input {
-  border: none;
-  background: transparent;
-}
-
-input:focus {
-  outline: none;
-}
