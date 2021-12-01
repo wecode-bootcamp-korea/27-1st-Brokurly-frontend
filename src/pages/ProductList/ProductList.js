@@ -4,7 +4,8 @@ import ProducListContent from './ProducListContent/ProducListContent';
 import './ProductList.scss';
 
 function ProductList() {
-  const [curCategoty, setCurCategoty] = useState(0);
+  const [currentCategory, setCurrentCategory] = useState(0);
+  const [currentSort, setCurrentSort] = useState(0);
   const [products, setProducts] = useState([]);
 
   const PRODUCT_MENU = {
@@ -13,26 +14,27 @@ function ProductList() {
   };
 
   useEffect(() => {
-    fetch(`data/productListData${curCategoty}.json`)
+    fetch(`data/productListData${currentCategory}${currentSort}.json`)
       .then(res => {
         return res.json();
       })
       .then(res => {
         setProducts(res);
       });
-  }, [curCategoty]);
+  }, [currentCategory, currentSort]);
 
   return (
     <section className="productList">
       <div className="productListContent">
         <ProductListHeader
           productMenu={PRODUCT_MENU}
-          setCurCategoty={setCurCategoty}
+          currentCategory={currentCategory}
+          setCurrentCategory={setCurrentCategory}
         />
         <ProducListContent
           products={products}
-          curCategoty={curCategoty}
-          setCurCategoty={setCurCategoty}
+          setCurrentSort={setCurrentSort}
+          currentSort={currentSort}
         />
       </div>
     </section>

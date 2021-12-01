@@ -3,12 +3,13 @@ import ContentHeader from './ContentHeader/ContentHeader';
 import Products from './Products/Products';
 import './ProducListContent';
 
-function ProducListContent({ products, setCurCategoty, curCategoty }) {
+function ProducListContent({ products, setCurrentSort, currentSort }) {
   return (
     <div className="productListContent">
       <ContentHeader
-        setCurCategoty={setCurCategoty}
-        curCategoty={curCategoty}
+        setCurrentSort={setCurrentSort}
+        currentSort={currentSort}
+        productTotal={products.length}
       />
       <Products products={products} />
     </div>

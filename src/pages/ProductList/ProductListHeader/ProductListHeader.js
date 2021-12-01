@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ProductListHeader.scss';
 
-function ProductListHeader({ productMenu, setCurCategoty }) {
+function ProductListHeader({
+  productMenu,
+  setCurrentCategory,
+  currentCategory,
+}) {
   const { menuName, categories } = productMenu;
-  const [categoryCheck, setCategoryCheck] = useState(0);
-
-  const clickCategory = id => {
-    setCurCategoty(`${id}0`);
-    setCategoryCheck(id);
-  };
 
   return (
     <div className="productListHeader">
@@ -17,10 +15,10 @@ function ProductListHeader({ productMenu, setCurCategoty }) {
         {categories.map((category, i) => (
           <button
             className={`category ${
-              categoryCheck === i ? 'category-checked' : ''
+              currentCategory === i ? 'category-checked' : ''
             }`}
             key={i}
-            onClick={() => clickCategory(i)}
+            onClick={() => setCurrentCategory(i)}
           >
             {category}
           </button>
