@@ -5,10 +5,6 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 function Product({ product }) {
   const { name, image, price, introduction } = product;
 
-  const addComma = num => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  };
-
   return (
     <article className="product">
       <div className="imgContainer">
@@ -18,7 +14,7 @@ function Product({ product }) {
         </button>
       </div>
       <h3 className="name">{name}</h3>
-      <span className="price">{addComma(price)}원</span>
+      <span className="price">{Number(price).toLocaleString()}원</span>
       <span className="information">{introduction}</span>
     </article>
   );
