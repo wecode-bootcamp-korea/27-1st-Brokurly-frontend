@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
 import { FiShoppingCart } from 'react-icons/fi';
-import CATEGORY_LIST from './categoryData';
+import CATEGORY_DATA from '../../data/categoryData';
 import './Nav.scss';
 
 function Nav() {
@@ -32,7 +32,7 @@ function Nav() {
         <div className="stickyNav">
           <div className="categoryBar">
             <ul className="categoryList">
-              {CATEGORY_LIST.map(category => (
+              {CATEGORY_DATA.map(category => (
                 <li className="categoryName" key={category.id}>
                   <Link className="focusLink" to="/vegetables">
                     {category.name}
