@@ -1,16 +1,13 @@
 import React from 'react';
 import './ProductDetail.scss';
+import ArticleLeft from './ArticleLeft/ArticleLeft';
+import ArticleRight from './ArticleRight/ArticleRight';
 
 function ProductDetail() {
   return (
     <div className="productDetail">
-      <article className="articleLeft">
-        <img
-          className="detailImage"
-          src="images/dummy_detail_img.jpg"
-          alt="상품"
-        />
-      </article>
+      <ArticleLeft />
+      <ArticleRight />
     </div>
   );
 }

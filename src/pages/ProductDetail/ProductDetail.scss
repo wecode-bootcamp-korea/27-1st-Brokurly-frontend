@@ -1,7 +1,5 @@
 @import '../../styles/common.scss';
 
 .productDetail {
-  .articleLeft {
-    width: 500px;
-  }
+  @include flexCenter;
 }
