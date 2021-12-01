@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { BiSearch } from 'react-icons/bi';
 import { FiShoppingCart } from 'react-icons/fi';
+import CATEGORY_LIST from './categoryData';
 import './Nav.scss';
 
 function Nav() {
@@ -20,33 +21,24 @@ function Nav() {
           </div>
           <div className="navLogo">
             <Link className="clickToMain" to="/">
-              <img className="mainLog" src="images/dummylog.png" alt="logo" />
+              <img
+                className="mainLog"
+                src="http://localhost:3000/images/dummylog.png"
+                alt="logo"
+              />
             </Link>
           </div>
         </div>
         <div className="stickyNav">
           <div className="categoryBar">
             <ul className="categoryList">
-              <li className="categoryName">
-                <Link className="focusLink" to="/vegetables">
-                  채소
-                </Link>
-              </li>
-              <li className="categoryName">
-                <Link className="focusLink" to="/salads">
-                  샐러드
-                </Link>
-              </li>
-              <li className="categoryName">
-                <Link className="focusLink" to="/fruits">
-                  과일
-                </Link>
-              </li>
-              <li className="categoryName">
-                <Link className="focusLink" to="/meal">
-                  간편식
-                </Link>
-              </li>
+              {CATEGORY_LIST.map(category => (
+                <li className="categoryName" key={category.id}>
+                  <Link className="focusLink" to="/vegetables">
+                    {category.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="navSearch">
