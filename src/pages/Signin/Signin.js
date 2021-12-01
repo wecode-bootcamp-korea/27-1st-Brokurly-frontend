@@ -41,8 +41,10 @@ function Signin() {
             <button className="loginBtn" type="button">
               로그인
             </button>
-            <a className="joinBtn" href="https://www.kurly.com/">
-              <button type="button">회원가입</button>
+            <a className="joinLink" href="https://www.kurly.com/">
+              <button className="joinBtn" type="button">
+                회원가입
+              </button>
             </a>
           </form>
         </div>
