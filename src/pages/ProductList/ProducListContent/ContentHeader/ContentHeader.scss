@@ -9,32 +9,30 @@
     font-size: 13px;
   }
 
-  .sortBtns {
-    .sortBtn {
-      padding-right: 7px;
+  .sortBtn {
+    padding-right: 7px;
+    color: $color-gray;
+    font-size: 13px;
+
+    &::after {
+      content: '|';
+      margin-left: 7px;
       color: $color-gray;
-      font-size: 13px;
+      font-weight: 500;
+    }
+
+    &:last-child {
+      padding-right: 0;
 
       &::after {
-        margin-left: 7px;
-        content: '|';
+        content: '';
       }
+    }
 
-      &:last-child {
-        padding-right: 0;
-
-        &::after {
-          content: '';
-        }
-      }
-
-      &:hover {
-        color: $color-black;
-      }
-
-      &.checked {
-        color: $color-black;
-      }
+    &:hover,
+    &.sortBtnChecked {
+      font-weight: 600;
+      color: $green;
     }
   }
 }

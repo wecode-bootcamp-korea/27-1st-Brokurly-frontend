@@ -8,7 +8,7 @@ function ContentHeader({ setCurrentSort, productTotal, currentSort }) {
       <div className="sortBtns">
         {SORT_BTNS.map((name, i) => (
           <button
-            className={`sortBtn ${currentSort === i ? 'checked' : ''}`}
+            className={`sortBtn ${currentSort === i ? 'sortBtnChecked' : ''}`}
             onClick={() => setCurrentSort(i)}
             key={i}
           >

@@ -1,6 +1,6 @@
 import React from 'react';
-import './Products.scss';
 import Product from './Product/Product';
+import './Products.scss';
 
 function Products({ products }) {
   return (

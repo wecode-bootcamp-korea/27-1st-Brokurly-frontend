@@ -15,12 +15,8 @@ function ProductList() {
 
   useEffect(() => {
     fetch(`data/productListData${currentCategory}${currentSort}.json`)
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        setProducts(res);
-      });
+      .then(res => res.json())
+      .then(res => setProducts(res));
   }, [currentCategory, currentSort]);
 
   return (

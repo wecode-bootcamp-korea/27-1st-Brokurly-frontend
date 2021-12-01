@@ -28,11 +28,7 @@
       padding-right: 0;
     }
 
-    &:hover {
-      font-weight: 600;
-      color: $green;
-    }
-
+    &:hover,
     &.category-checked {
       font-weight: 600;
       color: $green;
