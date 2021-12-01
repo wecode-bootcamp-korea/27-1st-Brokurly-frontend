@@ -25,7 +25,12 @@ function Signin() {
 
             <div className="checkboxBar">
               <div className="CheckboxSection">
-                <input className="securityCheckbox" type="checkbox" />
+                <input
+                  className="securityCheckbox"
+                  // id="checkboxLabel"
+                  type="checkbox"
+                />
+                {/* <label for="checkboxLabel" /> */}
                 <span className="securityText">보안접속</span>
               </div>
               <div className="searchSection">

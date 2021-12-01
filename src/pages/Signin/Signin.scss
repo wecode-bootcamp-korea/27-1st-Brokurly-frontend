@@ -1,10 +1,12 @@
 @import '../../styles/common.scss';
 
+$borderRadius: 3px;
+
 @mixin loginIdPwStyle {
   width: 340px;
   height: 54px;
   border: solid 1px #cacaca;
-  border-radius: 5px;
+  border-radius: $borderRadius;
   font-size: 14px;
   padding-right: 19px;
   padding-left: 19px;
@@ -32,9 +34,13 @@
 
 .loginId {
   @include loginIdPwStyle;
-  &:placeholder {
-    color: black;
-  }
+  // &:placeholder {
+  //   color: $color-gray;
+  // }
+}
+
+.loginId:hover {
+  color: black;
 }
 
 .loginPw {
@@ -52,8 +58,9 @@
 }
 
 .securityCheckbox {
-  width: 12.8px;
-  height: 12.8px;
+}
+
+.checkboxLabel {
 }
 
 .serchSectionBar {
@@ -66,19 +73,22 @@
   height: 54px;
   background-color: $green;
   border: solid 1px #333333;
-  border-radius: 5px;
+  border-radius: $borderRadius;
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .joinBtn {
   width: 340px;
   height: 54px;
   margin-top: 10px;
+  background-color: white;
   border: solid 1px #333333;
-  border-radius: 5px;
+  border-radius: $borderRadius;
   color: $green;
   font-size: 16px;
   font-weight: 600;
+  cursor: pointer;
 }
