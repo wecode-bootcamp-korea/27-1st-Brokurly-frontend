@@ -7,24 +7,29 @@
   min-width: 1050px;
   padding-right: 20px;
   padding-left: 20px;
+
   .footerSection {
     display: flex;
     justify-content: space-between;
     max-width: 1050px;
     padding-top: 30px;
     padding-bottom: 20px;
+
     .footerLeftSection {
       width: 505px;
+
       .CustomerHappinessCenter {
         font-size: 20px;
         font-weight: 600;
         padding-left: 10px;
       }
+
       .CustomerCenterBox {
         display: flex;
         justify-content: space-between;
         justify-content: flex-start;
         padding-top: 16px;
+
         .phoneNumber {
           display: flex;
           align-items: center;
@@ -33,6 +38,7 @@
           font-weight: 600;
           margin-right: 10px;
         }
+
         .kakaotalk {
           display: flex;
           align-items: center;
@@ -41,6 +47,7 @@
           font-weight: 600;
           margin-right: 10px;
         }
+
         .kakaotalkText {
           text-align: center;
           width: 140px;
@@ -49,10 +56,12 @@
           padding-top: 10px;
           padding-bottom: 10px;
         }
+
         .everydayCenter {
           font-size: 14px;
           height: 22px;
         }
+
         .operatingHours {
           color: $color-gray;
           font-size: 14px;
@@ -71,14 +80,17 @@
         font-weight: 600;
         padding-bottom: 30px;
       }
+
       .introduceText {
         color: $color-gray;
         font-size: 12px;
         line-height: 1.5;
       }
+
       .businessText {
         color: $green;
       }
+
       .corpText {
         color: $color-gray;
         font-size: 12px;
