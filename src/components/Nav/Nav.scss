@@ -11,6 +11,8 @@
     max-width: 1050px;
 
     .moveHeader {
+      width: 100%;
+
       .join {
         display: flex;
         justify-content: flex-end;
@@ -64,7 +66,6 @@
           }
         }
       }
-
       .navSearch {
         @include flexCenter;
         width: 25%;
