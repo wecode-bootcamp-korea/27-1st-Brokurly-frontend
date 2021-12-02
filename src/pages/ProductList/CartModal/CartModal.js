@@ -8,9 +8,13 @@ function CartModal({ product, setCartInfo }) {
     setCartInfo({});
   };
 
+  const stopClickPropagation = e => {
+    e.stopPropagation();
+  };
+
   return (
     <div className="modal" onClick={closeModal}>
-      <div className="modalContent">
+      <div className="modalContent" onClick={stopClickPropagation}>
         <div className="top">
           <div className="productName">{name}</div>
           <div className="productDetail">
