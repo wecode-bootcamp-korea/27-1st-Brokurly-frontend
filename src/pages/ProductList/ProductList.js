@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProductListHeader from './ProductListHeader/ProductListHeader';
 import ProducListContent from './ProducListContent/ProducListContent';
 import './ProductList.scss';
+import CartModal from './CartModal/CartModal';
 
 function ProductList() {
   const [currentCategory, setCurrentCategory] = useState(0);
@@ -33,6 +34,7 @@ function ProductList() {
           currentSort={currentSort}
         />
       </div>
+      <CartModal />
     </section>
   );
 }
