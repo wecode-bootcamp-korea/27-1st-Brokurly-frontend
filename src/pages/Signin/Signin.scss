@@ -104,6 +104,9 @@ $letterSpacing: -1.2px;
   color: $bg-white;
 }
 
+.disabled {
+}
+
 .joinBtn {
   @include BtnStyle;
   background-color: $bg-white;

@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Signin.scss';
 
 function Signin() {
+  const [idValue, setIdValue] = useState('');
+  const [pwValue, setPwValue] = useState('');
+
+  //로그인 버튼 활성화 (임시)
+  const activeLoginBtn = (idValue.length > 6 && idValue.includes(putInId)) && (pwValue.length > 10 && pwValue.includes(putInPw));
+
+  //idValue, pwValue관련 정규식 (임시)
+  const putInId = /^[a-z|A-Z|0-9]+$/;
+  const putInPw = /^[a-z|A-Z|0-9|~!@#$%^&*()_+|<>?:{}]+$/;
+
+  const inputIdValue = function (e) {
+    setIdValue(e.target.value);
+  };
+  const inputPwValue = e => setPwValue(e.target.value);
+
   return (
     <div className="login">
       <div className="loginSection">
@@ -11,6 +27,7 @@ function Signin() {
             <div className="loginIdForm">
               <input
                 className="loginId"
+                onChange={inputIdValue}
                 type="text"
                 placeholder="아이디를 입력해주세요"
               />
@@ -19,7 +36,8 @@ function Signin() {
             <div className="loginPwForm">
               <input
                 className="loginPw"
-                type="text"
+                onChange={inputPwValue}
+                type="password"
                 placeholder="비밀번호를 입력해주세요"
               />
             </div>
@@ -45,7 +63,13 @@ function Signin() {
                 </a>
               </div>
             </div>
-            <button className="loginBtn" type="button">
+            {/*  임시!!! */}
+            <button
+              className={
+                !activeLoginBtn ? 'http://localhost:3000/' : {alert('경고')}
+              }
+              type="button"
+            >
               로그인
             </button>
             <a className="joinLink" href="http://localhost:3000/signup">
