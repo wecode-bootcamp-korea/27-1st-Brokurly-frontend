@@ -7,7 +7,11 @@ function Signin() {
   const [pwValue, setPwValue] = useState('');
 
   //로그인 버튼 활성화 (임시)
-  const activeLoginBtn = (idValue.length > 6 && idValue.includes(putInId)) && (pwValue.length > 10 && pwValue.includes(putInPw));
+  const activeLoginBtn =
+    idValue.length > 6 &&
+    idValue.includes(putInId) &&
+    pwValue.length > 10 &&
+    pwValue.includes(putInPw);
 
   //idValue, pwValue관련 정규식 (임시)
   const putInId = /^[a-z|A-Z|0-9]+$/;
@@ -65,9 +69,7 @@ function Signin() {
             </div>
             {/*  임시!!! */}
             <button
-              className={
-                !activeLoginBtn ? 'http://localhost:3000/' : {alert('경고')}
-              }
+              className={!activeLoginBtn ? 'loginBtn' : 'disabled'}
               type="button"
             >
               로그인
