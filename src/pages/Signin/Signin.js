@@ -1,5 +1,6 @@
 import React from 'react';
 import './Signin.scss';
+
 function Signin() {
   return (
     <div className="login">
@@ -27,11 +28,12 @@ function Signin() {
               <div className="CheckboxSection">
                 <input
                   className="securityCheckbox"
-                  // id="checkboxLabel"
+                  id="checkboxLabel"
                   type="checkbox"
                 />
-                {/* <label for="checkboxLabel" /> */}
-                <span className="securityText">보안접속</span>
+                <label for="checkboxLabel">
+                  <span className="securityText">보안접속</span>
+                </label>
               </div>
               <div className="searchSection">
                 <a className="forgotId" href="https://www.kurly.com/">
@@ -46,7 +48,7 @@ function Signin() {
             <button className="loginBtn" type="button">
               로그인
             </button>
-            <a className="joinLink" href="https://www.kurly.com/">
+            <a className="joinLink" href="http://localhost:3000/signup">
               <button className="joinBtn" type="button">
                 회원가입
               </button>

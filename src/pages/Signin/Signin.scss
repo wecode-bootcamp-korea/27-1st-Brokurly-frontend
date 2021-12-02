@@ -1,6 +1,15 @@
 @import '../../styles/common.scss';
 
 $borderRadius: 3px;
+$letterSpacing: -1.2px;
+
+@mixin stopDrag {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
 
 @mixin loginIdPwStyle {
   width: 340px;
@@ -12,8 +21,22 @@ $borderRadius: 3px;
   padding-left: 19px;
 }
 
+@mixin BtnStyle {
+  width: 340px;
+  height: 54px;
+  margin-top: 10px;
+  border: solid 1px #333333;
+  border-radius: $borderRadius;
+  color: $green;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: -1px;
+}
+
 .login {
   @include flexCenter;
+  @include stopDrag;
   width: 100%;
 }
 
@@ -26,6 +49,7 @@ $borderRadius: 3px;
   text-align: center;
   font-size: 20px;
   font-weight: 600;
+  letter-spacing: $letterSpacing;
 }
 
 .loginForm {
@@ -34,9 +58,6 @@ $borderRadius: 3px;
 
 .loginId {
   @include loginIdPwStyle;
-  // &:placeholder {
-  //   color: $color-gray;
-  // }
 }
 
 .loginId:hover {
@@ -57,38 +78,34 @@ $borderRadius: 3px;
   padding-bottom: 28px;
 }
 
-.securityCheckbox {
+.CheckboxSection {
+  display: flex;
+  align-items: center;
 }
 
-.checkboxLabel {
+.securityCheckbox[id='checkboxLabel'] {
+  width: 17px;
+  height: 16px;
+  // color: black;
+  // background-color: $green;
 }
 
+.checkboxBar {
+  letter-spacing: $letterSpacing;
+}
 .serchSectionBar {
   margin-right: 5px;
   margin-left: 5px;
 }
 
 .loginBtn {
-  width: 340px;
-  height: 54px;
+  @include BtnStyle;
   background-color: $green;
-  border: solid 1px #333333;
-  border-radius: $borderRadius;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
+  color: $bg-white;
 }
 
 .joinBtn {
-  width: 340px;
-  height: 54px;
-  margin-top: 10px;
-  background-color: white;
-  border: solid 1px #333333;
-  border-radius: $borderRadius;
+  @include BtnStyle;
+  background-color: $bg-white;
   color: $green;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
 }
