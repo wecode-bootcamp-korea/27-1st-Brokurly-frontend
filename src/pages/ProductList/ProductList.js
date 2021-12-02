@@ -50,3 +50,8 @@ function ProductList() {
 }
 
 export default ProductList;
+
+const PRODUCT_MENU = {
+  menuName: '채소',
+  categories: ['전체보기', '브로컬리', '쌈채소', '간편채소'],
+};
