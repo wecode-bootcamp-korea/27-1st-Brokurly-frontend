@@ -1,17 +1,4 @@
-$green: #5fa800;
-$middle-green: #5c7457;
-$light-green: #979b8d;
-$border-gray: #d4d8db;
-$bg-gray: #fafafa;
-$bg-white: #fdfdfd;
-$color-black: #212529;
-$color-gray: #91979e;
-
-@mixin flexCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+@import './variables.scss';
 
 * {
   box-sizing: border-box;
