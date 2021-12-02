@@ -7,7 +7,7 @@ function ProducListContent({
   products,
   setCurrentSort,
   currentSort,
-  openCartModal,
+  putInfoIntoModal,
 }) {
   return (
     <div className="productListContent">
@@ -16,7 +16,7 @@ function ProducListContent({
         currentSort={currentSort}
         productTotal={products.length}
       />
-      <Products products={products} openCartModal={openCartModal} />
+      <Products products={products} putInfoIntoModal={putInfoIntoModal} />
     </div>
   );
 }

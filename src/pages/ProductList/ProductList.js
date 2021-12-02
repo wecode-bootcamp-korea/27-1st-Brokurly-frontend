@@ -9,27 +9,26 @@ function ProductList() {
   const [currentSort, setCurrentSort] = useState(0);
   const [products, setProducts] = useState([]);
   const [cartInfo, setCartInfo] = useState({});
-
-  const PRODUCT_MENU = {
-    menuName: '채소',
-    categories: ['전체보기', '브로컬리', '쌈채소', '간편채소'],
-  };
-
-  const isCartModalOpen = !!Object.keys(cartInfo).length;
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch(`data/productListData${currentCategory}${currentSort}.json`)
+    fetch(`/data/productListData${currentCategory}${currentSort}.json`)
       .then(res => res.json())
       .then(res => setProducts(res));
   }, [currentCategory, currentSort]);
 
-  const openCartModal = product => {
+  const putInfoIntoModal = product => {
     setCartInfo(product);
+    setIsCartModalOpen(true);
   };
 
   return (
     <section className="productList">
-      <div className="productListContent">
+      <div
+        className={`productListContent ${
+          isCartModalOpen ? 'overflowHidden' : ''
+        }`}
+      >
         <ProductListHeader
           productMenu={PRODUCT_MENU}
           currentCategory={currentCategory}
@@ -39,11 +38,15 @@ function ProductList() {
           products={products}
           setCurrentSort={setCurrentSort}
           currentSort={currentSort}
-          openCartModal={openCartModal}
+          putInfoIntoModal={putInfoIntoModal}
         />
       </div>
       {isCartModalOpen && (
-        <CartModal setCartInfo={setCartInfo} product={cartInfo} />
+        <CartModal
+          setCartInfo={setCartInfo}
+          product={cartInfo}
+          setIsCartModalOpen={setIsCartModalOpen}
+        />
       )}
     </section>
   );

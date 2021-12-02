@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './CartModal.scss';
 
-function CartModal({ product, setCartInfo }) {
+function CartModal({ product, setCartInfo, setIsCartModalOpen }) {
   const [quantity, setQuantity] = useState(1);
   const { name, price } = product;
 
   const closeModal = () => {
     setCartInfo({});
+    setIsCartModalOpen(false);
   };
 
   const addQuantity = () => {
@@ -21,17 +22,20 @@ function CartModal({ product, setCartInfo }) {
     setQuantity(quantity - 1);
   };
 
-  const stopClickPropagation = e => {
-    e.stopPropagation();
+  const clickOutside = e => {
+    if (!e.target.closest('.modalContent')) {
+      closeModal();
+    }
   };
 
+  // TODO : 장바구니 추가 시 fetch 하기
   const addProductToCart = () => {
     closeModal();
   };
 
   return (
-    <div className="modal" onClick={closeModal}>
-      <div className="modalContent" onClick={stopClickPropagation}>
+    <div className="modal" onClick={clickOutside}>
+      <div className="modalContent">
         <div className="top">
           <div className="productName">{name}</div>
           <div className="productDetail">
