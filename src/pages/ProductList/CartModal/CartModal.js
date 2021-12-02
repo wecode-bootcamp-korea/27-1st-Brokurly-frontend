@@ -1,14 +1,20 @@
 import React from 'react';
 import './CartModal.scss';
 
-function CartModal() {
+function CartModal({ product, setCartInfo }) {
+  const { name, price } = product;
+
+  const closeModal = () => {
+    setCartInfo({});
+  };
+
   return (
-    <div className="modal">
+    <div className="modal" onClick={closeModal}>
       <div className="modalContent">
         <div className="top">
-          <div className="productName">브로콜리</div>
+          <div className="productName">{name}</div>
           <div className="productDetail">
-            <div className="price">{Number(6000).toLocaleString()}원</div>
+            <div className="price">{Number(price).toLocaleString()}원</div>
             <div className="quantityContainer">
               <button className="down">-</button>
               <span className="quantity">1</span>
@@ -25,7 +31,9 @@ function CartModal() {
             </h2>
           </div>
           <div className="btns">
-            <button className="cancel btn">취소</button>
+            <button className="cancel btn" onClick={closeModal}>
+              취소
+            </button>
             <button className="addToCart btn">장바구니 담기</button>
           </div>
         </div>

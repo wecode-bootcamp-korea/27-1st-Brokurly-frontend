@@ -2,14 +2,14 @@ import React from 'react';
 import './Product.scss';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
-function Product({ product }) {
+function Product({ product, openCartModal }) {
   const { name, image, price, introduction } = product;
 
   return (
     <article className="product">
       <div className="imgContainer">
         <img src={`./images/${image}`} alt={name} />
-        <button className="cartBtn">
+        <button className="cartBtn" onClick={() => openCartModal(product)}>
           <AiOutlineShoppingCart />
         </button>
       </div>
