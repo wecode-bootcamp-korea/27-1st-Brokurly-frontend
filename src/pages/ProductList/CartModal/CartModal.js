@@ -25,6 +25,10 @@ function CartModal({ product, setCartInfo }) {
     e.stopPropagation();
   };
 
+  const addProductToCart = () => {
+    closeModal();
+  };
+
   return (
     <div className="modal" onClick={closeModal}>
       <div className="modalContent" onClick={stopClickPropagation}>
@@ -55,7 +59,9 @@ function CartModal({ product, setCartInfo }) {
             <button className="cancel btn" onClick={closeModal}>
               취소
             </button>
-            <button className="addToCart btn">장바구니 담기</button>
+            <button className="addToCart btn" onClick={addProductToCart}>
+              장바구니 담기
+            </button>
           </div>
         </div>
       </div>
