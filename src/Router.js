@@ -6,6 +6,7 @@ import Cart from './pages/Cart/Cart';
 import Signin from './pages/Signin/Signin';
 import Signup from './pages/Signup/Signup';
 import Nav from './components/Nav/Nav';
+import Footer from './components/Footer/Footer';
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
