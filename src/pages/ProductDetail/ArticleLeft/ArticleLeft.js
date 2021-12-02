@@ -1,14 +1,12 @@
 import React from 'react';
 import './ArticleLeft.scss';
 
-function ArticleLeft() {
+function ArticleLeft({ productData }) {
+  console.log(productData);
+  console.log(productData.image_url);
   return (
     <article className="articleLeft">
-      <img
-        className="detailImage"
-        src="images/dummy_detail_img.jpg"
-        alt="상품"
-      />
+      <img className="detailImage" src={productData.image_url} alt="상품" />
     </article>
   );
 }
