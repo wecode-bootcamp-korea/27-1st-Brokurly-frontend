@@ -24,11 +24,7 @@ function ProductList() {
 
   return (
     <section className="productList">
-      <div
-        className={`productListContent ${
-          isCartModalOpen ? 'overflowHidden' : ''
-        }`}
-      >
+      <div className="productListContent">
         <ProductListHeader
           productMenu={PRODUCT_MENU}
           currentCategory={currentCategory}
