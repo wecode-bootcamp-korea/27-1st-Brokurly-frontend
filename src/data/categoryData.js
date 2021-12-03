@@ -5,11 +5,11 @@ const CATEGORY_DATA = [
   },
   {
     id: 2,
-    name: '과일',
+    name: '샐러드',
   },
   {
     id: 3,
-    name: '샐러드',
+    name: '과일',
   },
   {
     id: 4,
