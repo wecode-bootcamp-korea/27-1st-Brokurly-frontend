@@ -4,13 +4,19 @@
   flex-direction: column;
   align-items: center;
 
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
   .cartTitle {
     padding: 70px 0;
     font-size: 28px;
     font-weight: 600;
   }
 
-  .cartContent {
+  .main {
     display: flex;
   }
 }

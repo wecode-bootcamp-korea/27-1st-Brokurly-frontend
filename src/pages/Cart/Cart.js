@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Cart.scss';
-import CartList from './CartList/CartList';
+import Items from './Items/Items';
+import SelectBtns from './SelectBtns/SelectBtns';
 import CartSummary from './CartSummary/CartSummary';
 
 function Cart() {
@@ -11,7 +12,7 @@ function Cart() {
     let coldArray = [];
     let boxArray = [];
 
-    Items.forEach(item => {
+    ITEMS.forEach(item => {
       if (item.package === 'cold') {
         coldArray.push(item);
       } else {
@@ -26,11 +27,14 @@ function Cart() {
   return (
     <section className="cart">
       <h2 className="cartTitle">장바구니</h2>
-      <main className="cartContent">
-        <div className="cartList">
-          <CartList items={coldItems} title="냉장 상품" />
-          <CartList items={boxItems} title="상온 제품" />
+      <main className="main">
+        <div className="cartContent">
+          <SelectBtns />
+          <Items title="냉장 상품" items={coldItems} />
+          <Items title="상온 제품" items={boxItems} />
+          <SelectBtns />
         </div>
+
         <CartSummary />
       </main>
     </section>
@@ -39,7 +43,7 @@ function Cart() {
 
 export default Cart;
 
-const Items = [
+const ITEMS = [
   {
     id: 1,
     name: '전체',

@@ -1,0 +1,22 @@
+@import '../../../../styles/variables.scss';
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .left {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 60px;
+      height: 78px;
+      object-fit: cover;
+    }
+  }
+
+  .right {
+    display: flex;
+  }
+}

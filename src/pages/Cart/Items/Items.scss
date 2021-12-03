@@ -1,0 +1,9 @@
+@import '../../../styles/variables.scss';
+
+.items {
+  flex: 2;
+  .itemsHeader {
+    display: flex;
+    justify-content: space-between;
+  }
+}

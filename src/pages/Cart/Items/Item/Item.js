@@ -1,13 +1,19 @@
 import React from 'react';
+import { TiDeleteOutline } from 'react-icons/ti';
+import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
+
 import './Item.scss';
 
-function Item(item) {
+function Item({ item }) {
   const { image, name, quantity, price } = item;
   return (
     <div className="item">
       <div className="left">
-        <button className="checkBtn">*</button>
-        <img src={image} alt={name} />
+        <button className="checkBtn">
+          <AiFillCheckCircle />
+        </button>
+        <img src={`/images/${image}`} alt={name} />
+        <span className="name">{name}</span>
       </div>
       <div className="right">
         <div className="changeAmountContainer">
@@ -18,7 +24,9 @@ function Item(item) {
         <div className="totalPrice">
           {Number(price * quantity).toLocaleString()}
         </div>
-        <button className="deleteBtn">x</button>
+        <button className="deleteBtn">
+          <TiDeleteOutline />
+        </button>
       </div>
     </div>
   );
