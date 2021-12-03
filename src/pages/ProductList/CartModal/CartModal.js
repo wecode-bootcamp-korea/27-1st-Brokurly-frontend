@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './CartModal.scss';
 
 function CartModal({ product, setCartInfo, setIsCartModalOpen }) {
+  const modalContent = useRef();
   const [quantity, setQuantity] = useState(1);
   const { name, price } = product;
 
@@ -23,7 +24,7 @@ function CartModal({ product, setCartInfo, setIsCartModalOpen }) {
   };
 
   const clickOutside = e => {
-    if (!e.target.closest('.modalContent')) {
+    if (!modalContent.current.contains(e.target)) {
       closeModal();
     }
   };
@@ -35,7 +36,7 @@ function CartModal({ product, setCartInfo, setIsCartModalOpen }) {
 
   return (
     <div className="modal" onClick={clickOutside}>
-      <div className="modalContent">
+      <div className="modalContent" ref={modalContent}>
         <div className="top">
           <div className="productName">{name}</div>
           <div className="productDetail">
