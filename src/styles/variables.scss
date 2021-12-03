@@ -1,12 +1,19 @@
-$green: #5fa800;
-$border-gray: #d4d8db;
-$bg-gray: #fafafa;
-$bg-white: #fdfdfd;
-$color-black: #212529;
-$color-gray: #91979e;
+* {
+  box-sizing: border-box;
+  font-family: 'Gothic A1', sans-serif;
+  color: $color-black;
+}
 
-@mixin flexCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+a {
+  color: $color-black;
+  text-decoration: none;
+}
+
+input {
+  border: none;
+  background: transparent;
+}
+
+input:focus {
+  outline: none;
 }
