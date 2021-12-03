@@ -1,5 +1,136 @@
 @import '../../styles/common.scss';
 
+$tableFontSize: 13.5px;
+$tableLetterSpacing: -0.3pt;
+$btnBorderRadius: 3px;
+
+@mixin stopMouseDrag {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@mixin tableName {
+  width: 139px;
+  height: 45px;
+  text-align: start;
+  font-size: $tableFontSize;
+  font-weight: 600;
+}
+
+@mixin tableInput {
+  width: 320px;
+  height: 45px;
+  padding-left: 14px;
+  font-size: $tableFontSize;
+  letter-spacing: $tableLetterSpacing;
+  border: solid 1px #d4d8db;
+  border-radius: 3px;
+}
+
+@mixin tableBtn {
+  width: 120px;
+  height: 45px;
+  border: solid 1px $green;
+  border-radius: $btnBorderRadius;
+  background-color: $bg-gray;
+  color: $green;
+  font-size: $tableFontSize;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .signup {
   @include flexCenter;
+  @include stopMouseDrag;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: $bg-gray;
+}
+
+.signupWidth {
+  width: 1050px;
+}
+
+.signupHeaderName {
+  @include flexCenter;
+  padding: 50px 0px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.signupBox {
+  display: flex;
+  justify-content: center;
+}
+
+.signupForm {
+  width: 640px;
+}
+.essentialInput {
+  font-size: 12px;
+  text-align: right;
+  padding-bottom: 10px;
+}
+
+.starMark {
+  color: red;
+}
+
+.signSection {
+  display: flex;
+  justify-content: center;
+  width: 640px;
+  padding-top: 15px;
+  border-top: solid 2px black;
+  border-bottom: solid 2px black;
+}
+
+.signTable {
+  width: 630px;
+}
+
+.tableName {
+  @include tableName;
+  $border-gray: #d4d8db;
+  padding: 10px;
+}
+
+.tableInput {
+  @include tableInput;
+  background-color: $bg-gray;
+  &::placeholder {
+    color: $color-gray;
+  }
+}
+
+.tableBtn {
+  @include tableBtn;
+}
+
+.verifiedCode {
+  border-color: $border-gray;
+  color: $color-gray;
+}
+.joinSection {
+  @include flexCenter;
+}
+
+.joinSection {
+  padding-top: 30px;
+  padding-bottom: 60px;
+}
+
+.joinBtn {
+  width: 240px;
+  height: 56px;
+  border-style: none;
+  border-radius: $btnBorderRadius;
+  background-color: $green;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
 }
