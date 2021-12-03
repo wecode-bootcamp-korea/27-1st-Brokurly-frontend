@@ -28,10 +28,10 @@ function Footer() {
 
         <div className="footerRightSection">
           <ul className="introduceBar">
-            <li className="introduce1">컬리소개</li>
-            <li className="introduce2">소개영상</li>
-            <li className="introduce3">인재채용</li>
-            <li className="introduce4">이용약관</li>
+            <li className="introduce">컬리소개</li>
+            <li className="introduce">소개영상</li>
+            <li className="introduce">인재채용</li>
+            <li className="introduce">이용약관</li>
           </ul>
           <address className="introduceText">
             <p className="introduceText">
