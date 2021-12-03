@@ -10,6 +10,7 @@ function Cart() {
   useEffect(() => {
     let coldArray = [];
     let boxArray = [];
+
     Items.forEach(item => {
       if (item.package === 'cold') {
         coldArray.push(item);
@@ -17,18 +18,20 @@ function Cart() {
         boxArray.push(item);
       }
     });
+
     setColdItems(coldArray);
     setBoxItems(boxArray);
   }, []);
 
   return (
     <section className="cart">
-      <h2>장바구니</h2>
-      <main>
+      <h2 className="cartTitle">장바구니</h2>
+      <main className="cartContent">
         <div className="cartList">
           <CartList items={coldItems} title="냉장 상품" />
-          {/* <CartSummary /> */}
+          <CartList items={boxItems} title="상온 제품" />
         </div>
+        <CartSummary />
       </main>
     </section>
   );
