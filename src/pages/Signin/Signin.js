@@ -32,17 +32,18 @@ function Signin() {
   };
   */
 
+  /*
+  // idValue, pwValue관련 정규식 (임시)
+  const putInId = /^[a-z|A-Z|0-9]+$/;
+  const putInPw = /^[a-z|A-Z|0-9|~!@#$%^&*()_+|<>?:{}]+$/;
+  */
+
   // 로그인 버튼 활성화 (임시)
   const activeLoginBtn =
     idValue.length > 6 &&
     idValue.includes('@') &&
     pwValue.length > 10 &&
     pwValue.includes('@');
-  /*
-  // idValue, pwValue관련 정규식 (임시)
-  const putInId = /^[a-z|A-Z|0-9]+$/;
-  const putInPw = /^[a-z|A-Z|0-9|~!@#$%^&*()_+|<>?:{}]+$/;
-  */
 
   const inputIdValue = function (e) {
     setIdValue(e.target.value);
