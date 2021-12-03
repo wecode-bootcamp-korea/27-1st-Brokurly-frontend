@@ -3,6 +3,7 @@ import ProductListHeader from './ProductListHeader/ProductListHeader';
 import ProducListContent from './ProducListContent/ProducListContent';
 import './ProductList.scss';
 import CartModal from './CartModal/CartModal';
+import Modal from '../../components/Modal/Modal';
 
 function ProductList() {
   const [currentCategory, setCurrentCategory] = useState(0);
@@ -22,6 +23,11 @@ function ProductList() {
     setIsCartModalOpen(true);
   };
 
+  const closeModal = () => {
+    setCartInfo({});
+    setIsCartModalOpen(false);
+  };
+
   return (
     <section className="productList">
       <div className="productListContent">
@@ -38,11 +44,9 @@ function ProductList() {
         />
       </div>
       {isCartModalOpen && (
-        <CartModal
-          setCartInfo={setCartInfo}
-          product={cartInfo}
-          setIsCartModalOpen={setIsCartModalOpen}
-        />
+        <Modal closeModal={closeModal}>
+          <CartModal closeModal={closeModal} product={cartInfo} />
+        </Modal>
       )}
     </section>
   );
