@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ArticleLeft from './ArticleLeft/ArticleLeft';
 import ArticleRight from './ArticleRight/ArticleRight';
+import DetailExplain from './DetailExplain/DetailExplain';
 import './ProductDetail.scss';
 
 function ProductDetail() {
@@ -18,8 +19,11 @@ function ProductDetail() {
 
   return (
     <div className="productDetail">
-      <ArticleLeft productData={productData} />
-      <ArticleRight price={productData.product_price} />
+      <section className="articleContainer">
+        <ArticleLeft productData={productData} />
+        <ArticleRight price={productData.product_price} />
+      </section>
+      <DetailExplain />
     </div>
   );
 }
