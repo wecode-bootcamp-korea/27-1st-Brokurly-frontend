@@ -5,10 +5,37 @@ import './Signup.scss';
 
 function Signup() {
   const navigate = useNavigate();
+
+  // input 클릭시 텍스트 등장(set, setState) - 시작 --------------------
+  const [isInputIdGuide, setIsInputIdGuide] = useState(false);
+  const [isInputPwGuide, setIsInputPwGuide] = useState(false);
+  const [isCorrectPwGuide, setIsCorrectPwGuide] = useState(false);
+  // input 클릭시 텍스트 등장(set, setState) - 끝 --------------------
+
+  const [inputId, setInputId] = useState('');
+
   const goToMain = () => {
     navigate('/');
     //fetch
   };
+
+  // input 클릭시 텍스트 등장(함수) - 시작 --------------------
+  const openInputId = () => {
+    setIsInputIdGuide(true);
+  };
+  const openInputPw = () => {
+    setIsInputPwGuide(true);
+  };
+  const openCorrectPw = () => {
+    setIsCorrectPwGuide(true);
+  };
+  // input 클릭시 텍스트 등장(함수) - 끝 --------------------
+
+  const inputIdValue = e => {
+    setInputId(e.target.value);
+  };
+
+  const checkId1 = inputId.length > 6;
 
   return (
     <div className="signup">
@@ -30,9 +57,28 @@ function Signup() {
                   <td>
                     <input
                       className="tableInput"
+                      onChange={inputIdValue}
+                      onClick={openInputId}
                       type="text"
                       placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"
                     />
+                    {isInputIdGuide && (
+                      <p className="guideTextBox">
+                        <span className="guideText">
+                          <div
+                            className={
+                              checkId1 !== true ? 'guideText' : 'passSign'
+                            }
+                          >
+                            <span className="dotMark">●</span> 6자 이상의 영문
+                            혹은 영문과 숫자를 조합
+                          </div>
+                        </span>
+                        <span className="guideText">
+                          <span className="dotMark">●</span> 아이디 중복확인
+                        </span>
+                      </p>
+                    )}
                   </td>
                   <td>
                     <button className="tableBtn" type="button">
@@ -47,8 +93,27 @@ function Signup() {
                   <td colspan="2">
                     <input
                       className="tableInput"
+                      // onChange={inputPwValue}
+                      onClick={openInputPw}
+                      type="password"
                       placeholder="비밀번호를 입력해주세요"
                     />
+                    {isInputPwGuide && (
+                      <p className="guideTextBox">
+                        <span className="guideText">
+                          <span className="dotMark">●</span> 10자 이상 입력
+                        </span>
+                        <span className="guideText">
+                          <span className="dotMark">●</span>{' '}
+                          영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상
+                          조합
+                        </span>
+                        <span className="guideText">
+                          <span className="dotMark">●</span> 동일한 숫자 3개
+                          이상 연속 사용 불가
+                        </span>
+                      </p>
+                    )}
                   </td>
                   <td />
                 </tr>
@@ -59,8 +124,19 @@ function Signup() {
                   <td colspan="2">
                     <input
                       className="tableInput"
+                      // onChange={correctPwValue}
+                      onClick={openCorrectPw}
+                      type="password"
                       placeholder="비밀번호를 한번 더 입력해주세요"
                     />
+                    {isCorrectPwGuide && (
+                      <p className="guideTextBox">
+                        <span className="guideText">
+                          <span className="dotMark">●</span> 동일한 비밀번호를
+                          입력해주세요
+                        </span>
+                      </p>
+                    )}
                   </td>
                   <td />
                 </tr>
