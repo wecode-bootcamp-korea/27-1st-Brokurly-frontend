@@ -8,8 +8,6 @@ import Signup from './pages/Signup/Signup';
 import Nav from './components/Nav/Nav';
 import Footer from './components/Footer/Footer';
 
-// useParams / useLocation
-
 function Router() {
   return (
     <BrowserRouter>
