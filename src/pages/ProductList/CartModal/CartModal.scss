@@ -1,24 +1,13 @@
 @import '../../../styles/variables.scss';
 
-.modal {
-  @include flexCenter;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba($color: #000000, $alpha: 0.3);
-
-  .modalContent {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: $bg-white;
-    width: 500px;
-    height: 300px;
-    padding: 30px;
-    border-radius: 15px;
-  }
+.cartModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 500px;
+  height: 300px;
+  padding: 30px;
+  border-radius: 15px;
 
   .productName {
     margin-top: 10px;
