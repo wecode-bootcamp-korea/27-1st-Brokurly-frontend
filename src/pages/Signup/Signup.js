@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
+import SignupChild from '../Signup/SignupChild';
 import './Signup.scss';
 
 function Signup() {
