@@ -176,6 +176,7 @@ function Signup() {
                   <td>
                     <input
                       className="tableInput"
+                      type="tel"
                       placeholder="숫자만 입력해주세요"
                     />
                   </td>
