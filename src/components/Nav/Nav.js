@@ -23,7 +23,7 @@ function Nav() {
             <Link className="clickToMain" to="/">
               <img
                 className="mainLog"
-                src="http://localhost:3000/images/dummylog.png"
+                src="http://localhost:3000/images/brokurlylog.png"
                 alt="logo"
               />
             </Link>
