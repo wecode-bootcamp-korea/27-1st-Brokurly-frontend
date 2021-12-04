@@ -31,11 +31,11 @@
       margin-bottom: 70px;
 
       .cartContent {
-        flex: 3 3;
+        flex: 10;
 
         .itemsWrapper {
-          border-bottom: 1px solid $color-gray;
           margin-bottom: 20px;
+          border-bottom: 1px solid $color-gray;
         }
       }
     }

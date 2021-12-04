@@ -1,6 +1,5 @@
 import React from 'react';
 import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
-import { IconContext } from 'react-icons/lib';
 import './SelectBtns.scss';
 
 function SelectBtns() {
