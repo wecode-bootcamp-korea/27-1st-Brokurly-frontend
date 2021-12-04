@@ -14,6 +14,7 @@ function Signup() {
   // input 클릭시 텍스트 등장(set, setState) - 끝 --------------------
 
   const [inputId, setInputId] = useState('');
+  const [inputPw, setInputPw] = useState('');
 
   const goToMain = () => {
     navigate('/');
@@ -38,11 +39,26 @@ function Signup() {
 
   const checkId1 = inputId.length > 6;
 
+  const inputPwValue = e => {
+    setInputPw(e.target.value);
+  };
+
+  const checkPw1 = inputPw.length > 10;
+  // const checkPw2 = inputPw
+
   return (
     <div className="signup">
       <div className="signupWidth">
         <header className="signupHeader">
           <h2 className="signupHeaderName">회원가입</h2>
+          {/* props관련
+           <SignupChild
+            openInputIdChild={setIsInputIdGuide}
+            // test={false}
+            //color="red"
+            //  titleColor={colorsssssss}
+            name="홍길동"
+          <SignupChild /> */}
         </header>
         <div className="signupBox">
           <form className="signupForm">
@@ -85,6 +101,13 @@ function Signup() {
                     <button className="tableBtn" type="button">
                       중복확인
                     </button>
+                    {/* 중복확인 모달 (시작) */}
+
+                    <div className="askCorrectModal">
+                      <div className="askCorrectMessage" />
+                    </div>
+
+                    {/* 중복확인 모달 (끝) */}
                   </td>
                 </tr>
                 <tr>
@@ -94,7 +117,7 @@ function Signup() {
                   <td colspan="2">
                     <input
                       className="tableInput"
-                      // onChange={inputPwValue}
+                      onChange={inputPwValue}
                       onClick={openInputPw}
                       type="password"
                       placeholder="비밀번호를 입력해주세요"
@@ -102,12 +125,24 @@ function Signup() {
                     {isInputPwGuide && (
                       <p className="guideTextBox">
                         <span className="guideText">
-                          <span className="dotMark">●</span> 10자 이상 입력
+                          <div
+                            className={
+                              checkPw1 !== true ? 'guideText' : 'passSign'
+                            }
+                          >
+                            <span className="dotMark">●</span> 10자 이상 입력
+                          </div>
                         </span>
                         <span className="guideText">
-                          <span className="dotMark">●</span>{' '}
+                          {/* <div
+                            className={
+                              checkPw2 !== true ? 'guideText' : 'passSign'
+                            }
+                          > */}
+                          <span className="dotMark">●</span>
                           영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상
                           조합
+                          {/* </div> */}
                         </span>
                         <span className="guideText">
                           <span className="dotMark">●</span> 동일한 숫자 3개

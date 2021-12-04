@@ -108,10 +108,12 @@ $btnBorderRadius: 3px;
 }
 
 .guideTextBox {
+  padding: 10px 0px 20px 0px;
 }
 
 .guideText {
   display: block;
+  // padding-bottom: 3px;
   font-size: 12px;
   color: gray;
 }
@@ -124,6 +126,10 @@ $btnBorderRadius: 3px;
   @include tableBtn;
 }
 
+/* 중복확인 모달 (시작) */
+.askCorrectModal {
+}
+/* 중복확인 모달 (끝) */
 .verifiedCode {
   border-color: $border-gray;
   color: $color-gray;
