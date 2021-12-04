@@ -1,15 +1,15 @@
 [
   {
-    "product_id": 1,
-    "product_name": "새빨간 오렌지",
-    "product_price": 3000,
-    "product_introduction": "새빨간 거짓말 처럼 빨간 오렌지",
-    "image_url": "http://localhost:3000/images/dummy_detail_img.jpg",
-    "product_unit": "1팩",
-    "product_weight": "100g",
-    "product_shipping": "샛별배송",
-    "product_package": "냉장배송",
-    "product_origin": "국내산",
-    "product_description": "맛있다"
+    "id": 1,
+    "name": "새빨간 오렌지",
+    "price": 3000.0,
+    "introduction": "새빨간 거짓말 처럼 빨간 오렌지",
+    "images": ["http://localhost:3000/images/dummy_detail_img.jpg"],
+    "unit": "1팩",
+    "weight": "100g",
+    "shipping": "샛별배송",
+    "package": "냉장배송",
+    "origin": "국내산",
+    "description": "맛있다"
   }
 ]

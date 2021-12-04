@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import DetailTable from './DetailTable';
 import './ArticleRight.scss';
 
-function ArticleRight(props) {
-  const [count, setCount] = useState(0);
+function ArticleRight({ price }) {
+  const [count, setCount] = useState(1);
 
-  const increaseCount = () => setCount(count + 1);
+  const increaseCount = () => setCount(prevCount => prevCount + 1);
+  const decreaseCount = () => setCount(prevCount => prevCount - 1);
 
-  const decreaseCount = () => (count > 0 ? setCount(count - 1) : setCount(0));
+  const newPrice = price;
+  const setPrice = count * price;
 
   return (
     <article className="articleRight">
@@ -17,12 +19,11 @@ function ArticleRight(props) {
       </div>
       <div className="productPriceWrap">
         <h2 className="productPrice">
-          {}
+          {newPrice}
           <span className="priceUnit">원</span>
         </h2>
       </div>
-      <div className="productContainer">
-        {}
+      <div>
         <dl className="productWrap">
           <dt className="listTitle">판매단위</dt>
           <dd className="listValue">1</dd>
@@ -46,7 +47,11 @@ function ArticleRight(props) {
         <dl className="productWrap">
           <dt className="listTitle">구매수량</dt>
           <dd className="buttonBox">
-            <button className="purchaseButton" onClick={decreaseCount}>
+            <button
+              className="purchaseButton"
+              onClick={decreaseCount}
+              disabled={count === 1}
+            >
               -
             </button>
             <span>{count}</span>
@@ -58,7 +63,7 @@ function ArticleRight(props) {
       </div>
       <div className="totalPriceBox">
         <span className="totalPriceTitle">총 상품금액 : </span>
-        <span className="totalPrice">30000</span>
+        <span className="totalPrice">{setPrice.toLocaleString()}</span>
         <span className="totalPriceUnit">원</span>
       </div>
       <button className="detailPurchase">구매하기</button>

@@ -1,7 +1,7 @@
 @import '../../../styles/variables.scss';
 
 .articleRight {
-  width: 510px;
+  width: 550px;
 
   .productTitleWrap {
     .productName {
@@ -16,42 +16,46 @@
   .productPriceWrap {
     padding-bottom: 30px;
     border-bottom: 1px solid $border-gray;
+
     .productPrice {
       font-size: 40px;
+
       .priceUnit {
         font-size: 20px;
       }
     }
   }
-  .productContainer {
-    .productWrap {
-      padding: 20px;
-      border-bottom: 1px solid $border-gray;
-      .listTitle {
-        float: left;
-        padding-right: 20px;
-        width: 150px;
-        color: #666666;
-      }
-      .buttonBox {
-        width: 90px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border: 1px solid $border-gray;
-        .purchaseButton {
-          padding: 3px 10px;
-          border: none;
-          background-color: transparent;
-          font-size: 20px;
-          font-weight: 600;
-        }
+  .productWrap {
+    padding: 20px;
+    border-bottom: 1px solid $border-gray;
+
+    .listTitle {
+      float: left;
+      padding-right: 20px;
+      width: 150px;
+      color: #666666;
+    }
+
+    .buttonBox {
+      width: 90px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid $border-gray;
+
+      .purchaseButton {
+        padding: 3px 10px;
+        border: none;
+        background-color: transparent;
+        font-size: 20px;
+        font-weight: 600;
       }
     }
   }
   .totalPriceBox {
     margin: 40px 0;
     text-align: right;
+
     .totalPriceTitle {
     }
     .totalPrice {

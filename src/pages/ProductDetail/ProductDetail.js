@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ArticleLeft from './ArticleLeft/ArticleLeft';
+import ProductThumbnail from './ArticleLeft/ProductThumbnail';
 import ArticleRight from './ArticleRight/ArticleRight';
 import DetailExplain from './DetailExplain/DetailExplain';
 import './ProductDetail.scss';
@@ -8,22 +8,22 @@ function ProductDetail() {
   const [productData, setProductData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/data/productDetail.json', {
-      method: 'GET',
-    })
+    fetch('/data/productDetail.json')
       .then(res => res.json())
       .then(data => {
-        setProductData(data[0]);
+        setProductData(data);
       });
   }, []);
 
   return (
     <div className="productDetail">
-      <section className="articleContainer">
-        <ArticleLeft productData={productData} />
-        <ArticleRight price={productData.product_price} />
-      </section>
-      <DetailExplain />
+      <main className="mainDetailPage">
+        <section className="articleContainer">
+          <ProductThumbnail productData={productData} />
+          <ArticleRight price={productData.price} />
+        </section>
+        <DetailExplain />
+      </main>
     </div>
   );
 }
