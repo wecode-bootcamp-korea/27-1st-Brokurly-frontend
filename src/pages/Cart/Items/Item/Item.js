@@ -9,20 +9,20 @@ function Item({ item }) {
   return (
     <div className="item">
       <div className="left">
-        <button className="checkBtn">
+        <button className="checkBtn checkBtn-green">
           <AiFillCheckCircle />
         </button>
-        <img src={`/images/${image}`} alt={name} />
+        <img className="itemImg" src={`/images/${image}`} alt={name} />
         <span className="name">{name}</span>
       </div>
       <div className="right">
         <div className="changeAmountContainer">
           <button className="changeBtn">-</button>
-          {quantity}
+          <input type="number" value={quantity} />
           <button className="changeBtn">+</button>
         </div>
         <div className="totalPrice">
-          {Number(price * quantity).toLocaleString()}
+          {Number(price * quantity).toLocaleString()}원
         </div>
         <button className="deleteBtn">
           <TiDeleteOutline />

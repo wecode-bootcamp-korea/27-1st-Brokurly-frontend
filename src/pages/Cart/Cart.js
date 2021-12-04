@@ -26,17 +26,20 @@ function Cart() {
 
   return (
     <section className="cart">
-      <h2 className="cartTitle">장바구니</h2>
-      <main className="main">
-        <div className="cartContent">
-          <SelectBtns />
-          <Items title="냉장 상품" items={coldItems} />
-          <Items title="상온 제품" items={boxItems} />
-          <SelectBtns />
-        </div>
-
-        <CartSummary />
-      </main>
+      <div className="cartWrapper">
+        <h2 className="cartTitle">장바구니</h2>
+        <main className="main">
+          <div className="cartContent">
+            <SelectBtns />
+            <div className="itemsWrapper">
+              <Items title="냉장 상품" items={coldItems} />
+              <Items title="상온 제품" items={boxItems} />
+            </div>
+            <SelectBtns />
+          </div>
+          <CartSummary />
+        </main>
+      </div>
     </section>
   );
 }

@@ -1,9 +1,49 @@
 @import '../../../styles/variables.scss';
 
 .items {
-  flex: 2;
+  flex: 1;
+
   .itemsHeader {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid $color-black;
+
+    .title {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+
+      .icon {
+        @include flexCenter;
+        margin-right: 10px;
+        font-size: 28px;
+
+        &-blue {
+          path {
+            color: lightseagreen;
+          }
+        }
+
+        &-orange {
+          path {
+            color: lightsalmon;
+          }
+        }
+      }
+
+      .titleText {
+        font-size: 17px;
+        font-weight: 600;
+        padding-left: 6px;
+      }
+    }
+    .toggleBtn {
+      font-size: 18px;
+      path {
+        color: $color-black;
+      }
+    }
   }
 }

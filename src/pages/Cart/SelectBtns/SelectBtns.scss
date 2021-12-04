@@ -1,1 +1,37 @@
 @import '../../../styles/variables.scss';
+
+.selectBtns {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+
+  .icon {
+    @include flexCenter;
+    padding: 0;
+    margin-right: 10px;
+    font-size: 28px;
+
+    &-green {
+      path {
+        color: $green;
+      }
+    }
+    &-gray {
+      path {
+        color: $color-gray;
+      }
+    }
+  }
+
+  .wordBorder {
+    margin: 0px 20px;
+    color: $color-gray;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  button {
+    font-size: 14px;
+    font-weight: 600;
+  }
+}

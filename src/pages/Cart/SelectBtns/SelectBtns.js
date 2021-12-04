@@ -1,13 +1,17 @@
 import React from 'react';
 import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
+import { IconContext } from 'react-icons/lib';
 import './SelectBtns.scss';
 
 function SelectBtns() {
   return (
     <div className="selectBtns">
-      <AiFillCheckCircle />
-      {/* <AiOutlineCheckCircle /> */}
-      <button className="selectAllBtn">전체선택</button>|
+      <button className="icon icon-gray">
+        {/* <AiFillCheckCircle /> */}
+        <AiOutlineCheckCircle />
+      </button>
+      <button className="selectAllBtn">전체선택(0/0)</button>
+      <span className="wordBorder">|</span>
       <button className="deleteSelectedBtn">선택삭제</button>
     </div>
   );

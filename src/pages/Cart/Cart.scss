@@ -1,8 +1,10 @@
 @import '../../styles/variables.scss';
 .cart {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  min-width: 1050px;
+  padding-left: 20px;
+  padding-right: 20px;
 
   button {
     background: transparent;
@@ -10,13 +12,32 @@
     cursor: pointer;
   }
 
-  .cartTitle {
-    padding: 70px 0;
-    font-size: 28px;
-    font-weight: 600;
-  }
-
-  .main {
+  .cartWrapper {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1010px;
+    width: 100%;
+
+    .cartTitle {
+      padding: 70px 0;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .main {
+      display: flex;
+      width: 100%;
+      margin-bottom: 70px;
+
+      .cartContent {
+        flex: 3 3;
+
+        .itemsWrapper {
+          border-bottom: 1px solid $color-gray;
+          margin-bottom: 20px;
+        }
+      }
+    }
   }
 }
