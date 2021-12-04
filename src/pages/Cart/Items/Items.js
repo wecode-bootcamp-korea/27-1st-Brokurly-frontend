@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Item from './Item/Item';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 import { IoWaterOutline } from 'react-icons/io5';
@@ -6,6 +6,12 @@ import { MdOutlineWbSunny } from 'react-icons/md';
 import './Items.scss';
 
 function Items({ title, items }) {
+  const [isItemsOpen, setIsItemsOpen] = useState(true);
+
+  const openItems = () => {
+    setIsItemsOpen(!isItemsOpen);
+  };
+
   return (
     <div className="items">
       <div className="itemsHeader">
@@ -19,14 +25,11 @@ function Items({ title, items }) {
           </div>
           <span className="titleText">{title}</span>
         </div>
-        <button className="toggleBtn">
-          <BsChevronUp />
-          {/* <BsChevronDown /> */}
+        <button className="toggleBtn" onClick={openItems}>
+          {isItemsOpen ? <BsChevronUp /> : <BsChevronDown />}
         </button>
       </div>
-      {items.map(item => (
-        <Item item={item} key={item.id} />
-      ))}
+      {isItemsOpen && items.map(item => <Item item={item} key={item.id} />)}
     </div>
   );
 }

@@ -5,12 +5,14 @@ import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import './Item.scss';
 
 function Item({ item }) {
-  const { image, name, quantity, price } = item;
+  const { image, name, quantity, price, checked } = item;
   return (
     <div className="item">
       <div className="left">
-        <button className="checkBtn checkBtn-green">
-          <AiFillCheckCircle />
+        <button
+          className={`checkBtn ${checked ? 'checkBtn-green' : 'checkBtn-gray'}`}
+        >
+          {checked ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
         </button>
         <img className="itemImg" src={`/images/${image}`} alt={name} />
         <span className="name">{name}</span>
