@@ -5,7 +5,7 @@ import { IoWaterOutline } from 'react-icons/io5';
 import { MdOutlineWbSunny } from 'react-icons/md';
 import './Items.scss';
 
-function Items({ title, items }) {
+function Items({ title, items, changeItemQuantity, deleteItem }) {
   const [isItemsOpen, setIsItemsOpen] = useState(true);
 
   const openItems = () => {
@@ -29,7 +29,15 @@ function Items({ title, items }) {
           {isItemsOpen ? <BsChevronUp /> : <BsChevronDown />}
         </button>
       </div>
-      {isItemsOpen && items.map(item => <Item item={item} key={item.id} />)}
+      {isItemsOpen &&
+        items.map(item => (
+          <Item
+            key={item.id}
+            item={item}
+            changeItemQuantity={changeItemQuantity}
+            deleteItem={deleteItem}
+          />
+        ))}
     </div>
   );
 }
