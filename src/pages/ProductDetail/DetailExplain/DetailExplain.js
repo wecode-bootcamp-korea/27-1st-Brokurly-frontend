@@ -1,7 +1,7 @@
 import React from 'react';
 import './DetailExplain.scss';
 
-function DetailExplain() {
+function DetailExplain({ images, description }) {
   return (
     <section className="bottomExplain">
       <nav className="explainNav">
@@ -11,11 +11,8 @@ function DetailExplain() {
         </ul>
       </nav>
       <div className="explainForUser">
-        <img
-          src="http://localhost:3000/images/dummy_detail_img.jpg"
-          alt="상세"
-        />
-        <p>오렌지가 새빨간 거짓말을 하고 있다.</p>
+        <img src={images} alt="상세" />
+        <p>{description}</p>
       </div>
     </section>
   );

@@ -4,12 +4,12 @@
     "name": "새빨간 오렌지",
     "price": 3000.0,
     "introduction": "새빨간 거짓말 처럼 빨간 오렌지",
-    "images": ["http://localhost:3000/images/dummy_detail_img.jpg"],
+    "images": ["/images/dummy_detail_img.jpg"],
     "unit": "1팩",
     "weight": "100g",
     "shipping": "샛별배송",
     "package": "냉장배송",
     "origin": "국내산",
-    "description": "맛있다"
+    "description": "새빨간 거짓말을 믿으시나요. 브로컬리만의 새빨간 오레지를 맛봐보세요"
   }
 ]

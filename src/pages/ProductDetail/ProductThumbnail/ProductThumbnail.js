@@ -1,10 +1,10 @@
 import React from 'react';
 import './ProductThumbnail.scss';
 
-function ProductThumbnail({ productData }) {
+function ProductThumbnail({ images }) {
   return (
     <article className="productThumbnail">
-      <img className="detailImage" src={productData.images} alt="상품" />
+      <img className="detailImage" src={images} alt="상품" />
     </article>
   );
 }

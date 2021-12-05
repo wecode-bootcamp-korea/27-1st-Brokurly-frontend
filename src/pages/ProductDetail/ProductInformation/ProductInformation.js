@@ -1,48 +1,54 @@
 import React, { useState } from 'react';
-import DetailTable from './DetailTable';
-import './ArticleRight.scss';
+import './ProductInformation.scss';
 
-function ArticleRight({ price }) {
+function ProductInformation({
+  name,
+  price,
+  introduction,
+  unit,
+  weight,
+  shipping,
+  packages,
+  origin,
+}) {
   const [count, setCount] = useState(1);
 
   const increaseCount = () => setCount(prevCount => prevCount + 1);
   const decreaseCount = () => setCount(prevCount => prevCount - 1);
+  const handleValue = e => setCount(Number(e.target.value));
 
-  const newPrice = price;
   const setPrice = count * price;
 
   return (
-    <article className="articleRight">
-      <div className="productTitleWrap">
-        <h1 className="productName">새빨간 오렌지</h1>
-        <p className="productExplain">새빨간 거짓말 같은 오렌지다</p>
-      </div>
+    <article className="productInformation">
+      <h1 className="productName">{name}</h1>
+      <p className="productExplain">{introduction}</p>
       <div className="productPriceWrap">
         <h2 className="productPrice">
-          {newPrice}
+          {Number(price).toLocaleString()}
           <span className="priceUnit">원</span>
         </h2>
       </div>
       <div>
         <dl className="productWrap">
           <dt className="listTitle">판매단위</dt>
-          <dd className="listValue">1</dd>
+          <dd className="listValue">{unit}</dd>
         </dl>
         <dl className="productWrap">
           <dt className="listTitle">중량/용량</dt>
-          <dd className="listValue">100g</dd>
+          <dd className="listValue">{weight}</dd>
         </dl>
         <dl className="productWrap">
           <dt className="listTitle">배송구분</dt>
-          <dd className="listValue">샛별배송</dd>
+          <dd className="listValue">{shipping}</dd>
         </dl>
         <dl className="productWrap">
           <dt className="listTitle">원산지</dt>
-          <dd className="listValue">국산</dd>
+          <dd className="listValue">{origin}</dd>
         </dl>
         <dl className="productWrap">
           <dt className="listTitle">포장타입</dt>
-          <dd className="listValue">냉장</dd>
+          <dd className="listValue">{packages}</dd>
         </dl>
         <dl className="productWrap">
           <dt className="listTitle">구매수량</dt>
@@ -50,11 +56,16 @@ function ArticleRight({ price }) {
             <button
               className="purchaseButton"
               onClick={decreaseCount}
-              disabled={count === 1}
+              disabled={count < 2}
             >
               -
             </button>
-            <span>{count}</span>
+            <input
+              className="productQuantity"
+              type="text"
+              onChange={handleValue}
+              value={count}
+            />
             <button className="purchaseButton" onClick={increaseCount}>
               +
             </button>
@@ -71,4 +82,4 @@ function ArticleRight({ price }) {
   );
 }
 
-export default ArticleRight;
+export default ProductInformation;
