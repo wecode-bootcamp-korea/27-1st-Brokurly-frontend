@@ -3,6 +3,7 @@ import { TiDeleteOutline } from 'react-icons/ti';
 import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 
 import './Item.scss';
+import { Link } from 'react-router-dom';
 
 function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
   const { id, image, name, quantity, price, notChecked, itemPackage } = item;
@@ -57,18 +58,20 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
 
   return (
     <div className="item">
-      <div className="left">
-        <button
-          className={`checkBtn ${
-            !notChecked ? 'checkBtn-green' : 'checkBtn-gray'
-          }`}
-          onClick={() => changeItemCheck(id, itemPackage)}
-        >
-          {!notChecked ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
-        </button>
-        <img className="itemImg" src={`/images/${image}`} alt={name} />
-        <span className="name">{name}</span>
-      </div>
+      <Link to={`/product/${id}`}>
+        <div className="left">
+          <button
+            className={`checkBtn ${
+              !notChecked ? 'checkBtn-green' : 'checkBtn-gray'
+            }`}
+            onClick={() => changeItemCheck(id, itemPackage)}
+          >
+            {!notChecked ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
+          </button>
+          <img className="itemImg" src={`/images/${image}`} alt={name} />
+          <span className="name">{name}</span>
+        </div>
+      </Link>
       <div className="right">
         <div className="changeAmountContainer">
           <button className="changeBtn" onClick={removeQuantity}>
