@@ -79,29 +79,16 @@ function Cart() {
   };
 
   const changeAllItemsCheck = isAllChecked => {
-    if (isAllChecked) {
       setColdItems(
         coldItems.map(item => {
-          return { ...item, notChecked: true };
+        return { ...item, notChecked: isAllChecked };
         })
       );
       setBoxItems(
         boxItems.map(item => {
-          return { ...item, notChecked: true };
+        return { ...item, notChecked: isAllChecked };
         })
       );
-    } else {
-      setColdItems(
-        coldItems.map(item => {
-          return { ...item, notChecked: false };
-        })
-      );
-      setBoxItems(
-        boxItems.map(item => {
-          return { ...item, notChecked: false };
-        })
-      );
-    }
   };
 
   const checkAllItems = () => {
