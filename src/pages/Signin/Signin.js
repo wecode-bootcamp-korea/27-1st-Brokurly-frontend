@@ -8,12 +8,71 @@ function Signin() {
   const [pwValue, setPwValue] = useState('');
 
   const navigate = useNavigate();
-  const goToMain = () => {
-    activeLoginBtn ? navigate('/') : alert('아이디 또는 비밀번호 오류입니다');
+  const successLogin = () => {
+    //activeLoginBtn ? navigate('/') : alert('아이디 또는 비밀번호 오류입니다');
+    // 여기에 fetch
+    fetch('API주소/', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: idValue, //왼쪽이 백앤드와 공통 키값
+        password: pwValue, //왼쪽이 백앤드와 공통 키값
+      }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        const loginMessages = {
+          // const 이름도 백엔드로부터 받아야하는지?
+          // 로그인성공(공통키값?): `${res.username}님 환영합니다!`,
+          // 아이디실패(공통키값?): `아이디를 다시 입력해주세요.`,
+          // 패스워드실패(공통키값?): `비밀번호를 다시 입력해주세요.`,
+        };
+        alert(loginMessages[result.message]);
+
+        if (result.Token) {
+          // 저장소 위치(임시)-로컬, 세션인지 아직 미정.. result인지 res인지..
+          localStorage.setItem('token', result.Token);
+          navigate('/');
+        }
+      });
   };
 
   /*
-    // fetch(임시)
+  // fetch (임시) 1
+  fetch('https://api.google.com/user/3')
+  .then(res => res.json())
+  .then(res => {
+    if (res.success) {
+        console.log(`${res.user.name}` 님 환영합니다);
+    }
+  });
+
+  // fetch (임시) 2
+  handleLogin = () => {
+    fetch(LOGIN_API, {
+      method: "POST",
+      body: JSON.stringify({
+        account_name: this.state.id,
+        password: this.state.password,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        const messages = {
+          LOGIN_SUCCESS: `로그인을 성공했습니다. ${this.state.id}님 반갑습니다!`,
+          INVALID_USER: "잘못된 회원정보입니다. 아이디를 다시 입력해주세요.",
+          INVALID_PASSWORD:
+            "잘못된 회원정보입니다. 비밀번호를 다시 입력해주세요.",
+        };
+        alert(messages[res.message]);
+
+        if (res.Token) {
+          localStorage.setItem("token", res.Token);
+          this.props.history.push("/");
+        }
+      });
+  };
+
+    // fetch (임시) 3
     fetch('API주소', {
       method: 'post',
       body: JSON.stringify({
@@ -38,7 +97,7 @@ function Signin() {
   const putInPw = /^[a-z|A-Z|0-9|~!@#$%^&*()_+|<>?:{}]+$/;
   */
 
-  // 로그인 버튼 활성화 (임시)
+  // 로그인 버튼 활성화
   const activeLoginBtn =
     idValue.length > 6 &&
     idValue.includes('@') &&
@@ -99,7 +158,7 @@ function Signin() {
             <button
               className="loginBtn"
               // className={activeLoginBtn ? 'loginBtn' : 'loginBtn disabled'}
-              onClick={goToMain}
+              onClick={successLogin}
               type="button"
             >
               로그인

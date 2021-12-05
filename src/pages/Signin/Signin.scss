@@ -58,15 +58,21 @@ $letterSpacing: -1.2px;
 
 .loginId {
   @include loginIdPwStyle;
+  &::placeholder {
+    color: $color-gray;
+  }
 }
 
 .loginId:hover {
-  color: black;
+  color: $color-black;
 }
 
 .loginPw {
   @include loginIdPwStyle;
   margin-top: 10px;
+  &::placeholder {
+    color: $color-gray;
+  }
 }
 
 .checkboxBar {
