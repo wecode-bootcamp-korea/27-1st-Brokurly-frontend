@@ -19,6 +19,19 @@ function Signup() {
   const goToMain = () => {
     navigate('/');
     //fetch
+    fetch('API주소', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: inputId,
+        password: inputPw,
+        name: this.state.username, // username.value
+        email: this.state.email, //  email.value
+        contact: this.state.contact, //  contact.value
+        address: this.state.address, //  address.value
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {});
   };
 
   // input 클릭시 텍스트 등장(함수) - 시작 --------------------
@@ -43,8 +56,10 @@ function Signup() {
     setInputPw(e.target.value);
   };
 
+  // 정규식 - 시작 --------------------
   const checkPw1 = inputPw.length > 10;
   // const checkPw2 = inputPw
+  // 정규식 - 끝 --------------------
 
   return (
     <div className="signup">
@@ -182,7 +197,7 @@ function Signup() {
                   </th>
                   <td colspan="2">
                     <input
-                      className="tableInput"
+                      className="tableInput username"
                       placeholder="이름을 입력해주세요"
                     />
                   </td>
@@ -194,7 +209,7 @@ function Signup() {
                   </th>
                   <td>
                     <input
-                      className="tableInput"
+                      className="tableInput email"
                       placeholder="예: brokurly@brokurly.com"
                     />
                   </td>
@@ -210,7 +225,7 @@ function Signup() {
                   </th>
                   <td>
                     <input
-                      className="tableInput"
+                      className="tableInput contact"
                       type="tel"
                       placeholder="숫자만 입력해주세요"
                     />
@@ -227,7 +242,7 @@ function Signup() {
                   </th>
                   <td colspan="2">
                     <input
-                      className="tableInput"
+                      className="tableInput address"
                       placeholder="주소를 입력해주세요"
                     />
                   </td>
