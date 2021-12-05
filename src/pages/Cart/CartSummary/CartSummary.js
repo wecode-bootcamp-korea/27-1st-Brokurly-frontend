@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './CartSummary.scss';
 import { GrLocation } from 'react-icons/gr';
 
-function CartSummary({ coldItems, boxItems }) {
-  const total =
-    coldItems.reduce((a, c) => {
-      if (c.notChecked) return a;
-      return a + c.quantity * c.price;
-    }, 0) +
-    boxItems.reduce((a, c) => {
-      if (c.notChecked) return a;
-      return a + c.quantity * c.price;
-    }, 0);
+function CartSummary({ coldItems, boxItems, orderItems }) {
+  const [total, setTotal] = useState(0);
 
+  useEffect(() => {
+    setTotal(
+      coldItems.reduce((a, c) => {
+        if (c.notChecked) return a;
+        return a + c.quantity * c.price;
+      }, 0) +
+        boxItems.reduce((a, c) => {
+          if (c.notChecked) return a;
+          return a + c.quantity * c.price;
+        }, 0)
+    );
+  }, [coldItems, boxItems]);
   return (
     <div className="cartSummery">
       <div className="cartSummeryContent">
@@ -32,7 +36,9 @@ function CartSummary({ coldItems, boxItems }) {
           </span>
         </div>
       </div>
-      <button className="orderBtn">주문하기</button>
+      <button className="orderBtn" onClick={orderItems}>
+        주문하기
+      </button>
     </div>
   );
 }

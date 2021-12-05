@@ -79,16 +79,16 @@ function Cart() {
   };
 
   const changeAllItemsCheck = isAllChecked => {
-      setColdItems(
-        coldItems.map(item => {
+    setColdItems(
+      coldItems.map(item => {
         return { ...item, notChecked: isAllChecked };
-        })
-      );
-      setBoxItems(
-        boxItems.map(item => {
+      })
+    );
+    setBoxItems(
+      boxItems.map(item => {
         return { ...item, notChecked: isAllChecked };
-        })
-      );
+      })
+    );
   };
 
   const checkAllItems = () => {
@@ -110,6 +110,15 @@ function Cart() {
         )
       );
     }
+  };
+
+  const orderItems = () => {
+    if (checkedItems < 1) {
+      alert('주문하실 상품을 선택해주세요');
+      return;
+    }
+    deleteAllCheckedItem();
+    alert('주문이 완료되었습니다.');
   };
 
   return (
@@ -149,7 +158,11 @@ function Cart() {
               deleteAllCheckedItem={deleteAllCheckedItem}
             />
           </div>
-          <CartSummary coldItems={coldItems} boxItems={boxItems} />
+          <CartSummary
+            coldItems={coldItems}
+            boxItems={boxItems}
+            orderItems={orderItems}
+          />
         </main>
       </div>
     </section>
