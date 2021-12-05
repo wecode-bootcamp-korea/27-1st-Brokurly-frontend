@@ -5,22 +5,36 @@
   align-items: center;
   margin-bottom: 15px;
 
-  .icon {
+  .selectAllBtn {
     @include flexCenter;
     padding: 0;
     margin-right: 10px;
     font-size: 28px;
 
-    &-green {
-      path {
-        color: $green;
+    .icon {
+      display: flex;
+      justify-content: center;
+
+      &-green {
+        path {
+          color: $green;
+        }
+      }
+      &-gray {
+        path {
+          color: $color-gray;
+        }
       }
     }
-    &-gray {
-      path {
-        color: $color-gray;
-      }
+
+    .selectAll {
+      margin-left: 30px;
     }
+  }
+
+  .selectText {
+    font-size: 14px;
+    font-weight: 600;
   }
 
   .wordBorder {
@@ -28,10 +42,5 @@
     color: $color-gray;
     font-size: 13px;
     font-weight: 400;
-  }
-
-  button {
-    font-size: 14px;
-    font-weight: 600;
   }
 }

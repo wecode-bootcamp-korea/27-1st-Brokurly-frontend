@@ -2,7 +2,7 @@ import React from 'react';
 import './ProductDetail.scss';
 
 function ProductDetail() {
-  return <div></div>;
+  return <div />;
 }
 
 export default ProductDetail;

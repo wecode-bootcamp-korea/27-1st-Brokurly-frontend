@@ -5,8 +5,11 @@ import SelectBtns from './SelectBtns/SelectBtns';
 import CartSummary from './CartSummary/CartSummary';
 
 function Cart() {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [coldItems, setColdItems] = useState([]);
   const [boxItems, setBoxItems] = useState([]);
+  const [checkedItems, setCheckedItems] = useState(0);
+  const [isAllchecked, setIsAllchecked] = useState(true);
 
   useEffect(() => {
     let coldArray = [];
@@ -19,10 +22,90 @@ function Cart() {
         boxArray.push(item);
       }
     });
-
     setColdItems(coldArray);
     setBoxItems(boxArray);
+    setIsLoaded(true);
+    setCheckedItems(Items.length);
   }, []);
+
+  useEffect(() => {
+    // 첫 로딩에서는 아이템 전체가 체크되기 때문에 이부분 처리하지 않아도됨
+    if (!isLoaded) return;
+    // undefined(처음, 체크 손대지 않았을 때) ,  체크된 것 -> false / 체크안된 것  -> true 로 해서
+    //  2 분법으로 처리하기 위해
+    const notCheckedColdItems = coldItems.filter(
+      item => item.notChecked
+    ).length;
+    const notCheckedBoxItems = boxItems.filter(item => item.notChecked).length;
+
+    setCheckedItems(
+      coldItems.length +
+        boxItems.length -
+        notCheckedColdItems -
+        notCheckedBoxItems
+    );
+  }, [coldItems, boxItems, isLoaded]);
+
+  const changeItemQuantity = (id, changedQuantity, itemPackage) => {
+    if (itemPackage === 'cold') {
+      setColdItems(
+        coldItems.map(item =>
+          item.id !== id ? item : { ...item, quantity: changedQuantity }
+        )
+      );
+    } else {
+      setBoxItems(
+        boxItems.map(item =>
+          item.id !== id ? item : { ...item, quantity: changedQuantity }
+        )
+      );
+    }
+  };
+
+  const deleteItem = (id, itemPackage) => {
+    // TODO fetch
+    if (itemPackage === 'cold') {
+      setColdItems(coldItems.filter(item => item.id !== id));
+    } else {
+      setBoxItems(boxItems.filter(item => item.id !== id));
+    }
+  };
+
+  const deleteAllCheckedItem = () => {
+    setColdItems(coldItems.filter(item => !item.notChecked));
+    setBoxItems(boxItems.filter(item => !item.notChecked));
+  };
+
+  const changeAllItemsCheck = isAllChecked => {
+    if (isAllChecked) {
+      setColdItems(
+        coldItems.map(item => {
+          return { ...item, notChecked: true };
+        })
+      );
+      setBoxItems(
+        boxItems.map(item => {
+          return { ...item, notChecked: true };
+        })
+      );
+    } else {
+      setColdItems(
+        coldItems.map(item => {
+          return { ...item, notChecked: false };
+        })
+      );
+      setBoxItems(
+        boxItems.map(item => {
+          return { ...item, notChecked: false };
+        })
+      );
+    }
+  };
+
+  const checkAllItems = () => {
+    setIsAllchecked(!isAllchecked);
+    changeAllItemsCheck(isAllchecked);
+  };
 
   return (
     <section className="cart">
@@ -30,14 +113,36 @@ function Cart() {
         <h2 className="cartTitle">장바구니</h2>
         <main className="main">
           <div className="cartContent">
-            <SelectBtns />
+            <SelectBtns
+              checkedItems={checkedItems}
+              itemsLength={coldItems.length + boxItems.length}
+              checkAllItems={checkAllItems}
+              isAllchecked={isAllchecked}
+              deleteAllCheckedItem={deleteAllCheckedItem}
+            />
             <div className="itemsWrapper">
-              <Items title="냉장 상품" items={coldItems} />
-              <Items title="상온 제품" items={boxItems} />
+              <Items
+                title="냉장 상품"
+                items={coldItems}
+                changeItemQuantity={changeItemQuantity}
+                deleteItem={deleteItem}
+              />
+              <Items
+                title="상온 제품"
+                items={boxItems}
+                changeItemQuantity={changeItemQuantity}
+                deleteItem={deleteItem}
+              />
             </div>
-            <SelectBtns />
+            <SelectBtns
+              checkedItems={checkedItems}
+              itemsLength={coldItems.length + boxItems.length}
+              checkAllItems={checkAllItems}
+              isAllchecked={isAllchecked}
+              deleteAllCheckedItem={deleteAllCheckedItem}
+            />
           </div>
-          <CartSummary />
+          <CartSummary coldItems={coldItems} boxItems={boxItems} />
         </main>
       </div>
     </section>

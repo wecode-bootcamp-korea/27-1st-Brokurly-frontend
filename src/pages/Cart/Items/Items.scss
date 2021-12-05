@@ -17,7 +17,6 @@
 
       .icon {
         @include flexCenter;
-        margin-right: 10px;
         font-size: 28px;
 
         &-blue {
@@ -36,7 +35,7 @@
       .titleText {
         font-size: 17px;
         font-weight: 600;
-        padding-left: 6px;
+        padding-left: 30px;
       }
     }
     .toggleBtn {
