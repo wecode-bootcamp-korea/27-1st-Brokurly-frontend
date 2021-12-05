@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import SignupChild from '../Signup/SignupChild';
@@ -46,19 +46,33 @@ function Signup() {
   };
   // input 클릭시 텍스트 등장(함수) - 끝 --------------------
 
+  // 정규식 - 시작 --------------------
+
+  //
   const inputIdValue = e => {
     setInputId(e.target.value);
   };
 
-  const checkId1 = inputId.length > 6;
+  function please(idValue) {
+    const regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/;
+    return regExp.test(idValue);
+  }
+  // function abc(str) {
+  //   return /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(str);
+  // }
 
-  const inputPwValue = e => {
+  // const abc = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test();
+  //const str = inputId.includes(re);
+  //const re = '^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$'.test(str);
+  // const checkId1 = inputId.includes(re);
+
+  function inputPwValue(e) {
     setInputPw(e.target.value);
-  };
+  }
 
-  // 정규식 - 시작 --------------------
   const checkPw1 = inputPw.length > 10;
-  // const checkPw2 = inputPw
+  const checkPw2 = inputPw.length > 4;
+
   // 정규식 - 끝 --------------------
 
   return (
@@ -99,9 +113,10 @@ function Signup() {
                         <span className="guideText">
                           <div
                             className={
-                              checkId1 !== true ? 'guideText' : 'passSign'
+                              please !== true ? 'guideText' : 'passSign'
                             }
                           >
+                            {console.log(please)}
                             <span className="dotMark">●</span> 6자 이상의 영문
                             혹은 영문과 숫자를 조합
                           </div>
@@ -149,15 +164,15 @@ function Signup() {
                           </div>
                         </span>
                         <span className="guideText">
-                          {/* <div
+                          <div
                             className={
                               checkPw2 !== true ? 'guideText' : 'passSign'
                             }
-                          > */}
-                          <span className="dotMark">●</span>
-                          영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상
-                          조합
-                          {/* </div> */}
+                          >
+                            <span className="dotMark">●</span>
+                            영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상
+                            조합
+                          </div>
                         </span>
                         <span className="guideText">
                           <span className="dotMark">●</span> 동일한 숫자 3개
