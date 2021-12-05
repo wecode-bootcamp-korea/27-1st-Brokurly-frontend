@@ -4,8 +4,8 @@ import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 
 import './Item.scss';
 
-function Item({ item, changeItemQuantity, deleteItem }) {
-  const { id, image, name, quantity, price, checked, itemPackage } = item;
+function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
+  const { id, image, name, quantity, price, notChecked, itemPackage } = item;
   const [inputValue, setInputValue] = useState(1);
 
   useEffect(() => setInputValue(quantity), [quantity]);
@@ -59,9 +59,12 @@ function Item({ item, changeItemQuantity, deleteItem }) {
     <div className="item">
       <div className="left">
         <button
-          className={`checkBtn ${checked ? 'checkBtn-green' : 'checkBtn-gray'}`}
+          className={`checkBtn ${
+            !notChecked ? 'checkBtn-green' : 'checkBtn-gray'
+          }`}
+          onClick={() => changeItemCheck(id, itemPackage)}
         >
-          {checked ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
+          {!notChecked ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
         </button>
         <img className="itemImg" src={`/images/${image}`} alt={name} />
         <span className="name">{name}</span>
@@ -84,7 +87,10 @@ function Item({ item, changeItemQuantity, deleteItem }) {
         <div className="totalPrice">
           {Number(price * quantity).toLocaleString()}원
         </div>
-        <button className="deleteBtn" onClick={() => deleteItem(id)}>
+        <button
+          className="deleteBtn"
+          onClick={() => deleteItem(id, itemPackage)}
+        >
           <TiDeleteOutline />
         </button>
       </div>

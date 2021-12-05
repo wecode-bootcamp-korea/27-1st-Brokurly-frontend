@@ -5,7 +5,13 @@ import { IoWaterOutline } from 'react-icons/io5';
 import { MdOutlineWbSunny } from 'react-icons/md';
 import './Items.scss';
 
-function Items({ title, items, changeItemQuantity, deleteItem }) {
+function Items({
+  title,
+  items,
+  changeItemQuantity,
+  deleteItem,
+  changeItemCheck,
+}) {
   const [isItemsOpen, setIsItemsOpen] = useState(true);
 
   const openItems = () => {
@@ -36,6 +42,7 @@ function Items({ title, items, changeItemQuantity, deleteItem }) {
             item={item}
             changeItemQuantity={changeItemQuantity}
             deleteItem={deleteItem}
+            changeItemCheck={changeItemCheck}
           />
         ))}
     </div>

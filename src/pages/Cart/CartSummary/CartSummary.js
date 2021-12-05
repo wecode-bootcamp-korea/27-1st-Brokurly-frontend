@@ -2,7 +2,17 @@ import React from 'react';
 import './CartSummary.scss';
 import { GrLocation } from 'react-icons/gr';
 
-function CartSummary() {
+function CartSummary({ coldItems, boxItems }) {
+  const total =
+    coldItems.reduce((a, c) => {
+      if (c.notChecked) return a;
+      return a + c.quantity * c.price;
+    }, 0) +
+    boxItems.reduce((a, c) => {
+      if (c.notChecked) return a;
+      return a + c.quantity * c.price;
+    }, 0);
+
   return (
     <div className="cartSummery">
       <div className="cartSummeryContent">
@@ -18,7 +28,7 @@ function CartSummary() {
         <div className="totalPriceContainer">
           <span className="totalPriceTitle">결제예정금액</span>
           <span className="totalPrice">
-            {Number(1000000).toLocaleString()} <span className="unit">원</span>
+            {Number(total).toLocaleString()} <span className="unit">원</span>
           </span>
         </div>
       </div>
