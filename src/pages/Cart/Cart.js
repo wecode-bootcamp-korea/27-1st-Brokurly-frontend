@@ -5,6 +5,7 @@ import SelectBtns from './SelectBtns/SelectBtns';
 import CartSummary from './CartSummary/CartSummary';
 
 function Cart() {
+  const [items, setItems] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [coldItems, setColdItems] = useState([]);
   const [boxItems, setBoxItems] = useState([]);
@@ -12,10 +13,20 @@ function Cart() {
   const [isAllchecked, setIsAllchecked] = useState(true);
 
   useEffect(() => {
+    fetch(`/data/cartItemsData.json`)
+      .then(res => res.json())
+      .then(items => {
+        setIsLoaded(true);
+        setItems(items);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    if (!items || !items.length) return;
     let coldArray = [];
     let boxArray = [];
-
-    ITEMS.forEach(item => {
+    items.forEach(item => {
       if (item.itemPackage === 'cold') {
         coldArray.push(item);
       } else {
@@ -24,9 +35,8 @@ function Cart() {
     });
     setColdItems(coldArray);
     setBoxItems(boxArray);
-    setIsLoaded(true);
     setCheckedItems(Items.length);
-  }, []);
+  }, [items, isLoaded]);
 
   useEffect(() => {
     // 첫 로딩에서는 아이템 전체가 체크되기 때문에 이부분 처리하지 않아도됨
@@ -170,61 +180,3 @@ function Cart() {
 }
 
 export default Cart;
-
-const ITEMS = [
-  {
-    id: 1,
-    name: '브로콜리',
-    image: 'whole_broccoli.jpg',
-    price: '6000',
-    introduction: '너무 맛있는 브로콜리',
-    quantity: 10,
-    itemPackage: 'cold',
-  },
-  {
-    id: 2,
-    name: '손질된 브로콜리',
-    image: 'cut_broccoli.jpg',
-    price: '7500',
-    introduction: '편리한 브로콜리',
-    quantity: 1,
-    itemPackage: 'box',
-  },
-  {
-    id: 3,
-    name: '햇 브로콜리',
-    image: 'thisyear_broccoli.jpg',
-    price: '6500',
-    introduction: '갓 수확된 브로콜리',
-    quantity: 5,
-    itemPackage: 'box',
-    img: '',
-  },
-  {
-    id: 4,
-    name: '오일 브로콜리',
-    image: 'oil_broccoli.jpg',
-    price: '11000',
-    introduction: '오일에 버무려진 브로콜리',
-    quantity: 2,
-    itemPackage: 'cold',
-  },
-  {
-    id: 5,
-    name: '컬리플라워',
-    image: 'whole_cauliflower.jpg',
-    price: '8000',
-    introduction: '건강식 컬리플라워',
-    quantity: 20,
-    itemPackage: 'cold',
-  },
-  {
-    id: 6,
-    name: '요리된 컬리플라워',
-    image: 'cooked_cauliflower.jpg',
-    price: '10000',
-    introduction: '먹기만 하면 되는 컬리플라워',
-    quantity: 8,
-    itemPackage: 'box',
-  },
-];
