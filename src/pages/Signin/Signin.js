@@ -29,67 +29,12 @@ function Signin() {
         alert(loginMessages[result.message]);
 
         if (result.Token) {
-          // 저장소 위치(임시)-로컬, 세션인지 아직 미정.. result인지 res인지..
-          localStorage.setItem('token', result.Token);
+          // 저장소 위치-  세션. 그리고 result인지 res인지는 보면서..
+          sessionStorage.setItem('token', result.Token);
           navigate('/');
         }
       });
   };
-
-  /*
-  // fetch (임시) 1
-  fetch('https://api.google.com/user/3')
-  .then(res => res.json())
-  .then(res => {
-    if (res.success) {
-        console.log(`${res.user.name}` 님 환영합니다);
-    }
-  });
-
-  // fetch (임시) 2
-  handleLogin = () => {
-    fetch(LOGIN_API, {
-      method: "POST",
-      body: JSON.stringify({
-        account_name: this.state.id,
-        password: this.state.password,
-      }),
-    })
-      .then(res => res.json())
-      .then(res => {
-        const messages = {
-          LOGIN_SUCCESS: `로그인을 성공했습니다. ${this.state.id}님 반갑습니다!`,
-          INVALID_USER: "잘못된 회원정보입니다. 아이디를 다시 입력해주세요.",
-          INVALID_PASSWORD:
-            "잘못된 회원정보입니다. 비밀번호를 다시 입력해주세요.",
-        };
-        alert(messages[res.message]);
-
-        if (res.Token) {
-          localStorage.setItem("token", res.Token);
-          this.props.history.push("/");
-        }
-      });
-  };
-
-    // fetch (임시) 3
-    fetch('API주소', {
-      method: 'post',
-      body: JSON.stringify({
-        email: idValue,
-        password: pwValue,
-      }),
-    })
-      .then(res => res.json())
-      .then(result => {
-        if ('access_token' in result) {
-          navigate('/');
-        } else {
-          alert('다시 시도하시오');
-        }
-      });
-  };
-  */
 
   /*
   // idValue, pwValue관련 정규식 (임시)
