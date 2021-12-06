@@ -26,24 +26,25 @@ function ProductInformation({
 
   const setPrice = count * price;
 
-  const goToCart = () => {
-    fetch('http://10.58.4.142:8000/', {
-      method: 'POST',
-      headers: {
-        Authorization: '토큰',
-      },
-      body: JSON.stringify({
-        product_id: { productId },
-        quantity: count,
-      }),
-    })
-      .then(response => response.json())
-      .then(result =>
-        result.success
-          ? alert('ok')
-          : alert('id와 password를 다시 입력해주세요.')
-      );
-  };
+  // 통신시 이용c
+  // const goToCart = () => {
+  //   fetch('http://10.58.4.142:8000/', {
+  //     method: 'POST',
+  //     headers: {
+  //       Authorization: '토큰',
+  //     },
+  //     body: JSON.stringify({
+  //       product_id: { productId },
+  //       quantity: count,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(result =>
+  //       result.success
+  //         ? alert('ok')
+  //         : alert('id와 password를 다시 입력해주세요.')
+  //     );
+  // };
 
   return (
     <article className="productInformation">
