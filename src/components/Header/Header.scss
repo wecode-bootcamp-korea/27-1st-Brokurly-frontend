@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+
+.header {
+  @include flexCenter;
+  min-width: 1050px;
+  padding: 20px 20px 0 20px;
+  background-color: $bg-white;
+
+  .headerContainer {
+    width: 100%;
+    max-width: 1010px;
+
+    .join {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .joinSignup {
+        padding: 0 10px;
+        color: $green;
+        border-right: 1px solid $border-gray;
+        font-weight: 600;
+      }
+
+      .joinSignin {
+        padding: 10px;
+        font-weight: 600;
+      }
+    }
+
+    .navLogo {
+      @include flexCenter;
+      padding: 0 10px;
+
+      .clickToMain {
+        .mainLog {
+          width: 100px;
+          height: 80px;
+        }
+      }
+    }
+  }
+}
