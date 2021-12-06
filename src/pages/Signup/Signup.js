@@ -21,7 +21,7 @@ function Signup() {
   const [inputContact, setInputContact] = useState('');
   const [inputAddress, setInputAddress] = useState('');
 
-  const goToMain = () => {
+  const successSign = () => {
     // navigate('/');
     //fetch
     fetch('API주소', {
@@ -37,11 +37,10 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
-
-          // if (조건이 맞으면) {
-          // 저장소 위치-  세션. 그리고 result인지 res인지는 보면서..
-          navigate('/');
-        }
+        // if (조건이 맞으면) {
+        // 저장소 위치-  세션. 그리고 result인지 res인지는 보면서..
+        // navigate('/');
+        // }
       });
   };
 
@@ -74,10 +73,15 @@ function Signup() {
   //   return /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(str);
   // }
 
-  const abc = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test();
+  const regExpId = inputId;
+  const regExpIdTest = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(regExpId);
   // const str = inputId.includes(re);
   // const re = '^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$'.test(str);
-  const checkId1 = inputId.includes(abc);
+  const checkId1 = () => {
+    if (regExpIdTest === true) {
+      return true;
+    }
+  };
 
   function inputPwValue(e) {
     setInputPw(e.target.value);
@@ -149,7 +153,7 @@ function Signup() {
                               checkId1 !== true ? 'guideText' : 'passSign'
                             }
                           >
-                            {console.log(please)}
+                            {console.log(checkId1)}
                             <span className="dotMark">●</span> 6자 이상의 영문
                             혹은 영문과 숫자를 조합
                           </div>
@@ -303,7 +307,9 @@ function Signup() {
               </table>
             </div>
             <div className="joinSection">
-              <button className="joinBtn">가입하기</button>
+              <button className="joinBtn" onClick={successSign} type="button">
+                가입하기
+              </button>
             </div>
           </form>
         </div>
