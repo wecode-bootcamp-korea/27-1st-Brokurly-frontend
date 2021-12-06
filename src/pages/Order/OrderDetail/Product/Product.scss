@@ -1,0 +1,36 @@
+@import '../../../../styles/variables.scss';
+
+.orderProduct {
+  display: flex;
+  padding: 20px 0;
+  border-bottom: 1px solid $border-gray;
+
+  img {
+    width: 70px;
+    height: 90px;
+    object-fit: cover;
+  }
+
+  .information {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .name {
+      font-weight: 600;
+    }
+
+    .detail {
+      font-size: 15px;
+
+      .totalPrice {
+        font-weight: 600;
+      }
+    }
+
+    .border {
+      margin: 0 5px;
+    }
+  }
+}

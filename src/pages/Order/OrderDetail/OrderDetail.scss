@@ -1,0 +1,36 @@
+@import '../../../styles/variables.scss';
+
+.orderDetail {
+  max-width: 600px;
+  width: 100%;
+  margin-top: 40px;
+
+  .orderHeader {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid black;
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .orderDetailContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 30px;
+    border: 1px solid $border-gray;
+    border-top: none;
+
+    .deleteOrder {
+      background: transparent;
+      padding: 20px 40px;
+      margin: 20px 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: $green;
+      border: 2px solid $green;
+      border-radius: 4px;
+    }
+  }
+}

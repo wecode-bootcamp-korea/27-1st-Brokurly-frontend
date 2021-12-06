@@ -1,0 +1,27 @@
+.orderWrapper {
+  display: flex;
+  justify-content: center;
+  min-width: 1050px;
+  padding: 0 20px;
+
+  .orderInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1010px;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .orderPageTitle {
+    margin-top: 70px;
+    margin-bottom: 40px;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .orders {
+    max-width: 600px;
+    width: 100%;
+  }
+}
