@@ -25,24 +25,24 @@ function Signup() {
   const successSignBtn = () => {
     // navigate('/');
     //fetch
-    fetch('API주소', {
+    fetch('http://10.58.1.7:8000/users/signup', {
       method: 'POST',
       body: JSON.stringify({
         username: inputId,
         password: inputPw,
-        name: inputName, // this.state.username
-        email: inputEmail, // this.state.email
-        contact: inputContact, // this.state.contact
-        address: inputAddress, // this.state.address
+        name: inputName,
+        email: inputEmail,
+        contact: inputContact,
+        address: inputAddress,
       }),
     })
       .then(res => res.json())
       .then(res => {
         // response.message "success"
-        if (res.message === 'success') {
+        if (res.message === 'SUCCESS') {
           navigate('/brokurly/products');
         } else {
-          alert('다시 시도해 주세요');
+          alert(res.message);
         }
         // if (조건이 맞으면) {
         // navigate('/');
@@ -51,7 +51,7 @@ function Signup() {
   };
 
   const isSuccessIdBtn = () => {
-    fetch('API주소', {
+    fetch('http://10.58.1.7:8000/users/username', {
       method: 'POST',
       body: JSON.stringify({
         username: inputId,
@@ -59,16 +59,16 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.message === 'success') {
-          navigate('/username');
+        if (res.message === 'SUCCESS') {
+          navigate('/brokurly/products');
         } else {
-          alert('아이디 입력을 다시 시도해 주세요');
+          alert('사용가능');
         }
       });
   };
 
   const isSuccessEmailBtn = () => {
-    fetch('API주소', {
+    fetch('http://10.58.1.7:8000/users/email', {
       method: 'POST',
       body: JSON.stringify({
         email: inputEmail,
@@ -76,10 +76,10 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.message === 'success') {
-          navigate('/email');
+        if (res.message === 'SUCCESS') {
+          navigate('/brokurly/products');
         } else {
-          alert('아이디 입력을 다시 시도해 주세요');
+          alert('사용가능');
         }
       });
   };
