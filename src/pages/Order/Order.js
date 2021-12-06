@@ -10,6 +10,7 @@ function Order() {
       .then(res => res.json())
       .then(res => setOrders(res));
   }, []);
+
   return (
     <div className="orderWrapper">
       <div className="orderInner">

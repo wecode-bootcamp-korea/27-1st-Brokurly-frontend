@@ -3,7 +3,12 @@ import Product from './Product/Product';
 import './OrderDetail.scss';
 
 function OrderDetail({ order }) {
-  const { order_number, order_status, products } = order;
+  const { id, order_number, order_status, products } = order;
+
+  const cancelOrder = id => {
+    alert('주문이 취소되었습니다.');
+  };
+
   return (
     <div className="orderDetail">
       <div className="orderHeader">
@@ -17,7 +22,9 @@ function OrderDetail({ order }) {
               <Product product={product} key={product.id} />
             ))}
         </ul>
-        <button className="deleteOrder">주문 취소</button>
+        <button className="deleteOrder" onClick={() => cancelOrder(id)}>
+          주문 취소
+        </button>
       </div>
     </div>
   );
