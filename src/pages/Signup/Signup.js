@@ -22,7 +22,7 @@ function Signup() {
   const [inputAddress, setInputAddress] = useState('');
 
   const goToMain = () => {
-    navigate('/');
+    // navigate('/');
     //fetch
     fetch('API주소', {
       method: 'POST',
@@ -36,7 +36,13 @@ function Signup() {
       }),
     })
       .then(res => res.json())
-      .then(res => {});
+      .then(res => {
+
+          // if (조건이 맞으면) {
+          // 저장소 위치-  세션. 그리고 result인지 res인지는 보면서..
+          navigate('/');
+        }
+      });
   };
 
   // input 클릭시 텍스트 등장(함수) - 시작 --------------------
@@ -84,7 +90,21 @@ function Signup() {
     setInputCorrectPw(e.target.value);
   };
 
-  const input
+  const inputNameValue = e => {
+    setInputName(e.target.value);
+  };
+
+  const inputEmailValue = e => {
+    setInputEmail(e.target.value);
+  };
+
+  const inputContactValue = e => {
+    setInputContact(e.target.value);
+  };
+
+  const inputAddressValue = e => {
+    setInputAddress(e.target.value);
+  };
 
   // 유효성 검사 - 끝 --------------------
 
@@ -144,7 +164,7 @@ function Signup() {
                     <button className="tableBtn" type="button">
                       중복확인
                     </button>
-                    {/* 중복확인 모달 (시작) */}
+                    {/* 중복확인 모달 (시작) ---아직 미구현 */}
 
                     <div className="askCorrectModal">
                       <div className="askCorrectMessage" />
@@ -226,6 +246,7 @@ function Signup() {
                   <td colspan="2">
                     <input
                       className="tableInput username"
+                      onChange={inputNameValue}
                       placeholder="이름을 입력해주세요"
                     />
                   </td>
@@ -238,6 +259,7 @@ function Signup() {
                   <td>
                     <input
                       className="tableInput email"
+                      onChange={inputEmailValue}
                       placeholder="예: brokurly@brokurly.com"
                     />
                   </td>
@@ -254,6 +276,7 @@ function Signup() {
                   <td>
                     <input
                       className="tableInput contact"
+                      onChanage={inputContactValue}
                       type="tel"
                       placeholder="숫자만 입력해주세요"
                     />
@@ -271,6 +294,7 @@ function Signup() {
                   <td colspan="2">
                     <input
                       className="tableInput address"
+                      onChange={inputAddressValue}
                       placeholder="주소를 입력해주세요"
                     />
                   </td>
