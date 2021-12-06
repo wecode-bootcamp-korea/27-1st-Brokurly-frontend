@@ -8,9 +8,15 @@ function Signin() {
   const [pwValue, setPwValue] = useState('');
 
   const navigate = useNavigate();
-  const successLogin = () => {
-    //activeLoginBtn ? navigate('/') : alert('아이디 또는 비밀번호 오류입니다');
+
+  const successLoginBtn = () => {
+    // console.log(activeLoginBtn);
+    activeLoginBtn
+      ? navigate('/brokurly/products')
+      : alert('아이디 또는 비밀번호 오류입니다');
     // 여기에 fetch
+
+    /*
     fetch('API주소/', {
       method: 'POST',
       body: JSON.stringify({
@@ -21,10 +27,11 @@ function Signin() {
       .then(res => res.json())
       .then(result => {
         const loginMessages = {
-          // const 이름도 백엔드로부터 받아야하는지?
+          // const 이름도 백엔드로부터 받아야하는지? -> 키, 밸류를 받아오는 것임
           // 로그인성공(공통키값?): `${res.username}님 환영합니다!`,
           // 아이디실패(공통키값?): `아이디를 다시 입력해주세요.`,
           // 패스워드실패(공통키값?): `비밀번호를 다시 입력해주세요.`,
+          // (삭제 예정! 그냥 예시) idIsNotValid: "아이디를 다시 입력해주세요"
         };
         alert(loginMessages[result.message]);
 
@@ -32,9 +39,14 @@ function Signin() {
           // 저장소 위치- 세션. 그리고 result인지 res인지는 보면서..
           sessionStorage.setItem('token', result.Token);
           sessionStorage.setItem('username', result.username);
-          navigate('/category/products');
+
+        if (res.message === 'success') {
+          navigate('/brokurly/products');
+        }
+
         }
       });
+      */
   };
 
   /*
@@ -44,16 +56,19 @@ function Signin() {
   */
 
   // 로그인 버튼 활성화
-  const activeLoginBtn =
-    idValue.length > 6 &&
-    idValue.includes('@') &&
-    pwValue.length > 10 &&
-    pwValue.includes('@');
 
   const inputIdValue = function (e) {
     setIdValue(e.target.value);
   };
+  const isIdValid = /^[a-zA-Z0-9]{6,16}$/.test(idValue);
+  // 대, 소문자, 숫자, 6자리 이상 16자리 이하
+
   const inputPwValue = e => setPwValue(e.target.value);
+  const isPwValid =
+    /^.(?=^.{8,15}$)(?=.\d)(?=.[a-zA-Z])(?=.[!@#$%^&+=]).*$/.test(pwValue);
+  // 대,소문자, 숫자 그리고 괄호를 제외한 1개 이상의 특수문자 필요, 8자리 이상, 15자리 이하 비밀번호
+
+  const activeLoginBtn = isIdValid && isPwValid;
 
   return (
     <div className="login">
@@ -104,7 +119,7 @@ function Signin() {
             <button
               className="loginBtn"
               // className={activeLoginBtn ? 'loginBtn' : 'loginBtn disabled'}
-              onClick={successLogin}
+              onClick={successLoginBtn}
               type="button"
             >
               로그인
