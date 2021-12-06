@@ -67,7 +67,7 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
         >
           {!notChecked ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
         </button>
-        <Link to={`/product/${id}`} className="linkToProduct">
+        <Link to={`/products/${id}`} className="linkToProduct">
           <img className="itemImg" src={`/images/${image}`} alt={name} />
           <span className="name">{name}</span>
         </Link>
