@@ -1,1 +1,14 @@
 @import '../../styles/variables.scss';
+
+.productDetail {
+  @include flexCenter;
+  min-width: 1050px;
+  padding: 20px 20px 10px 20px;
+  background-color: $bg-gray;
+
+  .articleContainer {
+    @include flexCenter;
+    width: 100%;
+    max-width: 1010px;
+  }
+}
