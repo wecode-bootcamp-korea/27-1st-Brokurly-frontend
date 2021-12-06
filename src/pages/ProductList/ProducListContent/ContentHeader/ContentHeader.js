@@ -1,15 +1,15 @@
 import React from 'react';
 import './ContentHeader.scss';
 
-function ContentHeader({ setCurrentSort, productTotal, currentSort }) {
+function ContentHeader({ changeSort, productTotal, currentSort }) {
   return (
     <div className="contentHeader">
       <span className="productsTotal">총 {productTotal}개</span>
       <div className="sortBtns">
-        {SORT_BTNS.map((name, i) => (
+        {SORT_KOREAN.map((name, i) => (
           <button
             className={`sortBtn ${currentSort === i ? 'sortBtnChecked' : ''}`}
-            onClick={() => setCurrentSort(i)}
+            onClick={() => changeSort(i, SORT_ENGLISH[i])}
             key={i}
           >
             {name}
@@ -22,4 +22,5 @@ function ContentHeader({ setCurrentSort, productTotal, currentSort }) {
 
 export default ContentHeader;
 
-const SORT_BTNS = ['신상품순', '낮은 가격순', '높은 가격순'];
+const SORT_KOREAN = ['신상품순', '낮은 가격순', '높은 가격순'];
+const SORT_ENGLISH = ['dateHigh', 'priceLow', 'priceHigh'];
