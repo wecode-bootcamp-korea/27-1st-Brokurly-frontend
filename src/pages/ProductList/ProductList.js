@@ -22,7 +22,7 @@ function ProductList() {
 
   useEffect(() => {
     // TODO 백엔드 완료되면 아래 URL 사용예정
-    // const menu = searchParams.get('menu') || 'vegetables';
+    const menu = searchParams.get('menu') || 'vegetables';
     // const category = searchParams.get('category') || 'all';
     // const sort = searchParams.get('sort') || 'date';
     // fetch(
@@ -34,7 +34,7 @@ function ProductList() {
     // )
     // 백엔드 테스트용
     // fetch(`http://10.58.3.112:8000/products?&category=쌈채소`)
-    fetch(`http://10.58.3.112:8000/products?&category=all`)
+    fetch(`http://10.58.3.112:8000/products?&category=간편채소`)
       .then(res => res.json())
       .then(res => {
         setProducts(res.result);
