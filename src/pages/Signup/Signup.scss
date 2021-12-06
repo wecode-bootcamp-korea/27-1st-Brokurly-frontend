@@ -24,10 +24,10 @@ $btnBorderRadius: 3px;
   width: 320px;
   height: 45px;
   padding-left: 14px;
-  font-size: $tableFontSize;
-  letter-spacing: $tableLetterSpacing;
   border: solid 1px #d4d8db;
   border-radius: 3px;
+  font-size: $tableFontSize;
+  letter-spacing: $tableLetterSpacing;
 }
 
 @mixin tableBtn {
@@ -49,106 +49,106 @@ $btnBorderRadius: 3px;
   margin: 0 auto;
   padding: 0px 20px;
   background-color: $bg-gray;
-}
 
-.signupWidth {
-  width: 1050px;
-}
+  .signupWidth {
+    width: 1050px;
 
-.signupHeaderName {
-  @include flexCenter;
-  padding: 50px 20px;
-  font-size: 26px;
-  font-weight: 600;
-}
+    .signupHeaderName {
+      @include flexCenter;
+      padding: 50px 20px;
+      font-size: 26px;
+      font-weight: 600;
+    }
 
-.signupBox {
-  display: flex;
-  justify-content: center;
-}
+    .signupBox {
+      display: flex;
+      justify-content: center;
 
-.signupForm {
-  width: 640px;
-}
-.essentialInput {
-  font-size: 12px;
-  text-align: right;
-  padding-bottom: 10px;
-}
+      .signupForm {
+        width: 640px;
 
-.starMark {
-  color: red;
-}
+        .essentialInput {
+          padding-bottom: 10px;
+          text-align: right;
+          font-size: 12px;
+        }
 
-.signSection {
-  display: flex;
-  justify-content: center;
-  width: 640px;
-  padding-top: 15px;
-  border-top: solid 2px black;
-  border-bottom: solid 2px black;
-}
+        .signSection {
+          display: flex;
+          justify-content: center;
+          width: 640px;
+          padding-top: 15px;
+          border-top: solid 2px black;
+          border-bottom: solid 2px black;
 
-.signTable {
-  width: 630px;
-}
+          .signTable {
+            width: 630px;
 
-.tableName {
-  @include tableName;
-  padding: 10px;
-}
+            .starMark {
+              color: red;
+            }
+          }
+        }
 
-.tableInput {
-  @include tableInput;
-  background-color: $bg-gray;
-  &::placeholder {
-    color: $color-gray;
+        .tableName {
+          @include tableName;
+          padding: 10px;
+        }
+
+        .tableInput {
+          @include tableInput;
+          background-color: $bg-gray;
+          &::placeholder {
+            color: $color-gray;
+          }
+        }
+
+        .guideTextBox {
+          padding: 10px 0px 20px 0px;
+
+          .guideText {
+            display: block;
+            padding-bottom: 3px;
+            font-size: 12px;
+            color: $color-gray;
+          }
+
+          .passSign {
+            color: $green;
+          }
+        }
+
+        .tableBtn {
+          @include tableBtn;
+        }
+
+        /* 중복확인 모달 (시작) */
+        // .askCorrectModal {
+        // }
+        /* 중복확인 모달 (끝) */
+
+        .verifiedCodeBtn {
+          border-color: $border-gray;
+          color: $color-gray;
+        }
+
+        .joinSection {
+          @include flexCenter;
+          padding-top: 30px;
+          padding-bottom: 60px;
+
+          .joinBtn {
+            width: 240px;
+            height: 56px;
+            border-style: none;
+            border-radius: $btnBorderRadius;
+            background-color: $green;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
-}
-
-.guideTextBox {
-  padding: 10px 0px 20px 0px;
-}
-
-.guideText {
-  display: block;
-  padding-bottom: 3px;
-  font-size: 12px;
-  color: $color-gray;
-}
-
-.passSign {
-  color: $green;
-}
-
-.tableBtn {
-  @include tableBtn;
-}
-
-/* 중복확인 모달 (시작) */
-.askCorrectModal {
-}
-/* 중복확인 모달 (끝) */
-.verifiedCodeBtn {
-  border-color: $border-gray;
-  color: $color-gray;
-}
-.joinSection {
-  @include flexCenter;
-}
-
-.joinSection {
-  padding-top: 30px;
-  padding-bottom: 60px;
-}
-
-.joinBtn {
-  width: 240px;
-  height: 56px;
-  border-style: none;
-  border-radius: $btnBorderRadius;
-  background-color: $green;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
 }
