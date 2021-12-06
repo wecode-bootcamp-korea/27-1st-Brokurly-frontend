@@ -22,8 +22,8 @@ function ProductList() {
 
   useEffect(() => {
     // TODO 백엔드 완료되면 아래 URL 사용예정
-    const menu = searchParams.get('menu') || '채소';
-    const category = searchParams.get('category') || '';
+    // const menu = searchParams.get('menu') || '채소';
+    // const category = searchParams.get('category') || '';
     // const sort = searchParams.get('sort') || 0;
     // fetch(
     //   `http://10.58.3.112:8000/products?menu=${menu}&category=${category}&sort=${sort}`
