@@ -21,7 +21,8 @@ function Signup() {
   const [inputContact, setInputContact] = useState('');
   const [inputAddress, setInputAddress] = useState('');
 
-  const successSign = () => {
+  // console.log('re-render');
+  const successSignBtn = () => {
     // navigate('/');
     //fetch
     fetch('API주소', {
@@ -37,12 +38,20 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
+        // response.message "success"
+        if (res.message === 'success') {
+          navigate('/category/products');
+        } else {
+          alert('다시 시도해 주세요');
+        }
         // if (조건이 맞으면) {
-        // 저장소 위치-  세션. 그리고 result인지 res인지는 보면서..
         // navigate('/');
         // }
       });
   };
+
+  const isSuccessIdBtn = () => {};
+  const isSuccessPwBtn = () => {};
 
   // input 클릭시 텍스트 등장(함수) - 시작 --------------------
   const openInputId = () => {
@@ -63,36 +72,28 @@ function Signup() {
     setInputId(e.target.value);
   };
 
-  // function checkId1(idValue) {
-  //  const regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/;
-  //  return regExp.test(idValue);
-  // }
-  // const checkId1 = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/;
-
-  // function abc(str) {
-  //   return /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(str);
-  // }
-
-  const regExpId = inputId;
-  const regExpIdTest = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(regExpId);
-  // const str = inputId.includes(re);
-  // const re = '^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$'.test(str);
-  const checkId1 = () => {
-    if (regExpIdTest === true) {
-      return true;
-    }
-  };
+  const isIdValid = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
 
   function inputPwValue(e) {
     setInputPw(e.target.value);
   }
 
-  const checkPw1 = inputPw.length > 10;
-  const checkPw2 = inputPw.length > 4;
+  const isPwValid1 = inputPw.length > 10;
+  //밑에 isPwValid2 정규식 오류 아닌가?? (id와 달리 반영이 안됨)
+  const isPwValid2 =
+    /^.(?=^.{8,15}$)(?=.\d)(?=.[a-zA-Z])(?=.[!@#$%^&+=]).*$/.test(inputPw);
 
   const inputCorrectPwValue = e => {
     setInputCorrectPw(e.target.value);
   };
+
+  function isInputCorrectPw() {
+    if (inputCorrectPw === inputPw) {
+      return true;
+    }
+  }
+
+  const isCorrectPwValid = isInputCorrectPw();
 
   const inputNameValue = e => {
     setInputName(e.target.value);
@@ -149,11 +150,8 @@ function Signup() {
                       <p className="guideTextBox">
                         <span className="guideText">
                           <div
-                            className={
-                              checkId1 !== true ? 'guideText' : 'passSign'
-                            }
+                            className={!isIdValid ? 'guideText' : 'passSign'}
                           >
-                            {console.log(checkId1)}
                             <span className="dotMark">●</span> 6자 이상의 영문
                             혹은 영문과 숫자를 조합
                           </div>
@@ -165,7 +163,11 @@ function Signup() {
                     )}
                   </td>
                   <td>
-                    <button className="tableBtn" type="button">
+                    <button
+                      className="tableBtn"
+                      onClick={isSuccessIdBtn}
+                      type="button"
+                    >
                       중복확인
                     </button>
                     {/* 중복확인 모달 (시작) ---아직 미구현 */}
@@ -193,18 +195,14 @@ function Signup() {
                       <p className="guideTextBox">
                         <span className="guideText">
                           <div
-                            className={
-                              checkPw1 !== true ? 'guideText' : 'passSign'
-                            }
+                            className={!isPwValid1 ? 'guideText' : 'passSign'}
                           >
                             <span className="dotMark">●</span> 10자 이상 입력
                           </div>
                         </span>
                         <span className="guideText">
                           <div
-                            className={
-                              checkPw2 !== true ? 'guideText' : 'passSign'
-                            }
+                            className={!isPwValid2 ? 'guideText' : 'passSign'}
                           >
                             <span className="dotMark">●</span>
                             영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상
@@ -230,13 +228,20 @@ function Signup() {
                       onChange={inputCorrectPwValue}
                       onClick={openCorrectPw}
                       type="password"
+                      a
                       placeholder="비밀번호를 한번 더 입력해주세요"
                     />
                     {isCorrectPwGuide && (
                       <p className="guideTextBox">
                         <span className="guideText">
-                          <span className="dotMark">●</span> 동일한 비밀번호를
-                          입력해주세요
+                          <div
+                            className={
+                              !isCorrectPwValid ? 'guideText' : 'passSign'
+                            }
+                          >
+                            <span className="dotMark">●</span> 동일한 비밀번호를
+                            입력해주세요
+                          </div>
                         </span>
                       </p>
                     )}
@@ -268,7 +273,11 @@ function Signup() {
                     />
                   </td>
                   <td>
-                    <button className="tableBtn" type="button">
+                    <button
+                      className="tableBtn"
+                      onClick={isSuccessPwBtn}
+                      type="button"
+                    >
                       중복확인
                     </button>
                   </td>
@@ -307,7 +316,11 @@ function Signup() {
               </table>
             </div>
             <div className="joinSection">
-              <button className="joinBtn" onClick={successSign} type="button">
+              <button
+                className="joinBtn"
+                onClick={successSignBtn}
+                type="button"
+              >
                 가입하기
               </button>
             </div>
