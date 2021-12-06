@@ -34,7 +34,7 @@ function Nav() {
             <ul className="categoryList">
               {CATEGORY_DATA.map(category => (
                 <li className="categoryName" key={category.id}>
-                  <Link className="focusLink" to="/vegetables">
+                  <Link className="focusLink" to={`/?menu=${category.menu}`}>
                     {category.name}
                   </Link>
                 </li>
