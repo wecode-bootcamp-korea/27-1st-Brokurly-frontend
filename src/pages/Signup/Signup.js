@@ -102,17 +102,16 @@ function Signup() {
   const inputIdValue = e => {
     setInputId(e.target.value);
   };
-
+  //id정규식: 대, 소문자, 숫자, 6자리 이상 16자리 이하
   const isIdValid = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
 
   function inputPwValue(e) {
     setInputPw(e.target.value);
   }
 
-  const isPwValid1 = inputPw.length > 10;
-  //밑에 isPwValid2 정규식 오류 아닌가?? (id와 달리 반영이 안됨)
-  const isPwValid2 =
-    /^.(?=^.{8,15}$)(?=.\d)(?=.[a-zA-Z])(?=.[!@#$%^&+=]).*$/.test(inputPw);
+  const isPwValid1 = inputPw.length >= 8;
+  //pw정규식: 대,소문자, 숫자 -를 제외한 1개 이상의 특수문자, 8자리 이상 필수 입력
+  const isPwValid2 = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(inputPw);
 
   const inputCorrectPwValue = e => {
     setInputCorrectPw(e.target.value);
@@ -228,7 +227,7 @@ function Signup() {
                           <div
                             className={!isPwValid1 ? 'guideText' : 'passSign'}
                           >
-                            <span className="dotMark">●</span> 10자 이상 입력
+                            <span className="dotMark">●</span> 8자 이상 입력
                           </div>
                         </span>
                         <span className="guideText">
@@ -236,13 +235,13 @@ function Signup() {
                             className={!isPwValid2 ? 'guideText' : 'passSign'}
                           >
                             <span className="dotMark">●</span>
-                            영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상
-                            조합
+                            영문/숫자/특수문자(공백 제외)만 허용 (단, -는
+                            사용불가)
                           </div>
                         </span>
                         <span className="guideText">
                           <span className="dotMark">●</span> 동일한 숫자 3개
-                          이상 연속 사용 불가
+                          이상 연속 사용불가
                         </span>
                       </p>
                     )}
