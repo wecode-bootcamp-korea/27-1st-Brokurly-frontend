@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import './ProductInformation.scss';
 
 function ProductInformation({
@@ -10,14 +11,39 @@ function ProductInformation({
   shipping,
   packages,
   origin,
+  productId,
 }) {
   const [count, setCount] = useState(1);
 
+  const navigate = useNavigate();
+
   const increaseCount = () => setCount(prevCount => prevCount + 1);
   const decreaseCount = () => setCount(prevCount => prevCount - 1);
-  const handleValue = e => setCount(Number(e.target.value));
+  const handleValue = e =>
+    isNaN(e.target.value)
+      ? alert('숫자를 입력해 주세요^^')
+      : setCount(Number(e.target.value));
 
   const setPrice = count * price;
+
+  const goToCart = () => {
+    fetch('http://10.58.4.142:8000/', {
+      method: 'POST',
+      headers: {
+        Authorization: '토큰',
+      },
+      body: JSON.stringify({
+        product_id: { productId },
+        quantity: count,
+      }),
+    })
+      .then(response => response.json())
+      .then(result =>
+        result.success
+          ? alert('ok')
+          : alert('id와 password를 다시 입력해주세요.')
+      );
+  };
 
   return (
     <article className="productInformation">
@@ -77,7 +103,14 @@ function ProductInformation({
         <span className="totalPrice">{setPrice.toLocaleString()}</span>
         <span className="totalPriceUnit">원</span>
       </div>
-      <button className="detailPurchase">구매하기</button>
+      <button
+        className="detailPurchase"
+        onClick={() =>
+          count > 0 ? navigate('/cart') : alert('수량을 선택해 주세요^^')
+        }
+      >
+        구매하기
+      </button>
     </article>
   );
 }
