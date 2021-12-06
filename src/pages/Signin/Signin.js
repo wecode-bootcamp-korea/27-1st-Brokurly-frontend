@@ -54,17 +54,12 @@ function Signin() {
           sessionStorage.setItem('username', result.username);
         }
         if (result.ACCESS_TOKEN === 'access_token') {
+          // 로그인 성공1
           alert(`${result.username}님 환영합니다!`);
           navigate('/brokurly/products');
         }
       });
   };
-
-  /*
-  // idValue, pwValue관련 정규식 (임시)
-  const putInId = /^[a-z|A-Z|0-9]+$/;
-  const putInPw = /^[a-z|A-Z|0-9|~!@#$%^&*()_+|<>?:{}]+$/;
-  */
 
   // 로그인 버튼 활성화
 
@@ -76,9 +71,10 @@ function Signin() {
 
   const inputPwValue = e => setPwValue(e.target.value);
   const isPwValid = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(pwValue);
-  // 대,소문자, 숫자 -를 제외한 1개 이상의 특수문자, 8자리 이상 필수 입력
+  // 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상
 
-  const activeLoginBtn = isIdValid && isPwValid;
+  // 밑에 activeLoginBtn는 추가적으로 구현할지 말지 고민중
+  // const activeLoginBtn = isIdValid && isPwValid;
 
   return (
     <div className="login">
@@ -125,7 +121,6 @@ function Signin() {
                 </a>
               </div>
             </div>
-            {/*  임시!!! */}
             <button
               className="loginBtn"
               // className={activeLoginBtn ? 'loginBtn' : 'loginBtn disabled'}

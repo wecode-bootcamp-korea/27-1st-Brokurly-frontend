@@ -14,11 +14,11 @@ $letterSpacing: -1.2px;
 @mixin loginIdPwStyle {
   width: 340px;
   height: 54px;
+  padding-right: 19px;
+  padding-left: 19px;
   border: solid 1px #cacaca;
   border-radius: $borderRadius;
   font-size: 14px;
-  padding-right: 19px;
-  padding-left: 19px;
 }
 
 @mixin BtnStyle {
@@ -30,96 +30,85 @@ $letterSpacing: -1.2px;
   color: $green;
   font-size: 16px;
   font-weight: 600;
-  cursor: pointer;
   letter-spacing: -1px;
+  cursor: pointer;
 }
 
 .login {
   @include flexCenter;
   @include stopMouseDrag;
   width: 100%;
-}
 
-.loginSection {
-  width: 340px;
-  padding-top: 90px;
-}
+  .loginSection {
+    width: 340px;
+    padding-top: 90px;
 
-.loginText {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: $letterSpacing;
-}
+    .loginText {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: $letterSpacing;
+    }
+    .loginForm {
+      padding-top: 36px;
 
-.loginForm {
-  padding-top: 36px;
-}
+      .loginId {
+        @include loginIdPwStyle;
+        &::placeholder {
+          color: $color-gray;
+        }
+      }
+      .loginPw {
+        @include loginIdPwStyle;
+        margin-top: 10px;
+        &::placeholder {
+          color: $color-gray;
+        }
+      }
+      .checkboxBar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 13px;
+        padding-bottom: 28px;
+        font-size: 13px;
+        letter-spacing: $letterSpacing;
 
-.loginId {
-  @include loginIdPwStyle;
-  &::placeholder {
-    color: $color-gray;
+        .CheckboxSection {
+          display: flex;
+          align-items: center;
+
+          .securityCheckbox[id='checkboxLabel'] {
+            width: 17px;
+            height: 16px;
+            // color: black;
+            // background-color: $green;
+          }
+        }
+
+        .serchSectionBar {
+          margin: 0px 5px;
+        }
+      }
+
+      .loginBtn {
+        @include BtnStyle;
+        background-color: $green;
+        border-color: $green;
+        color: $bg-white;
+      }
+
+      .joinBtn {
+        @include BtnStyle;
+        background-color: $bg-white;
+        border-color: $green;
+        color: $green;
+      }
+    }
   }
-}
-
-.loginId:hover {
-  color: $color-black;
-}
-
-.loginPw {
-  @include loginIdPwStyle;
-  margin-top: 10px;
-  &::placeholder {
-    color: $color-gray;
-  }
-}
-
-.checkboxBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  padding-top: 13px;
-  padding-bottom: 28px;
-}
-
-.CheckboxSection {
-  display: flex;
-  align-items: center;
-}
-
-.securityCheckbox[id='checkboxLabel'] {
-  width: 17px;
-  height: 16px;
-  // color: black;
-  // background-color: $green;
-}
-
-.checkboxBar {
-  letter-spacing: $letterSpacing;
-}
-.serchSectionBar {
-  margin-right: 5px;
-  margin-left: 5px;
-}
-
-.loginBtn {
-  @include BtnStyle;
-  background-color: $green;
-  color: $bg-white;
-  border-color: $green;
-}
-
-/*
+  /*
 .disabled {
   background-color: black;
 }
 */
-
-.joinBtn {
-  @include BtnStyle;
-  background-color: $bg-white;
-  color: $green;
-  border-color: $green;
 }
