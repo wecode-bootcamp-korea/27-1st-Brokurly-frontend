@@ -29,7 +29,7 @@ function Signin() {
         alert(loginMessages[result.message]);
 
         if (result.Token) {
-          // 저장소 위치-  세션. 그리고 result인지 res인지는 보면서..
+          // 저장소 위치- 세션. 그리고 result인지 res인지는 보면서..
           sessionStorage.setItem('token', result.Token);
           navigate('/');
         }
