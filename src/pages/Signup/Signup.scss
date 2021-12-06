@@ -95,7 +95,6 @@ $btnBorderRadius: 3px;
 
 .tableName {
   @include tableName;
-  $border-gray: #d4d8db;
   padding: 10px;
 }
 
@@ -113,9 +112,9 @@ $btnBorderRadius: 3px;
 
 .guideText {
   display: block;
-  // padding-bottom: 3px;
+  padding-bottom: 3px;
   font-size: 12px;
-  color: gray;
+  color: $color-gray;
 }
 
 .passSign {
@@ -130,7 +129,7 @@ $btnBorderRadius: 3px;
 .askCorrectModal {
 }
 /* 중복확인 모달 (끝) */
-.verifiedCode {
+.verifiedCodeBtn {
   border-color: $border-gray;
   color: $color-gray;
 }

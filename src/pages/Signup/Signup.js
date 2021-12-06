@@ -77,6 +77,9 @@ function Signup() {
         if (res.message !== 'SUCCESS') {
           alert('다시 시도해주세요');
         }
+        // else {
+        //  alert('다시 시도해주세요');
+        // }
       });
   };
 
@@ -95,6 +98,9 @@ function Signup() {
         if (res.message !== 'SUCCESS') {
           alert('다시 시도해주세요');
         }
+        // else {
+        //  alert('다시 시도해주세요');
+        // }
       });
   };
 
@@ -123,9 +129,16 @@ function Signup() {
     setInputPw(e.target.value);
   }
 
+  // const inputNum = string(inputPw);
+  // function numTest() {
+  //   [n, n + 1, n + 2];
+  // }
+
   const isPwValid1 = inputPw.length >= 8;
-  //pw정규식: 대,소문자, 숫자 -를 제외한 1개 이상의 특수문자, 8자리 이상 필수 입력
+  //pw정규식: 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상 입력
   const isPwValid2 = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(inputPw);
+  //pw조건: 동일한 숫자 3개 이상 연속 사용불가
+  //const isPwValid3 = numTest();
 
   const inputCorrectPwValue = e => {
     setInputCorrectPw(e.target.value);
@@ -254,8 +267,12 @@ function Signup() {
                           </div>
                         </span>
                         <span className="guideText">
-                          <span className="dotMark">●</span> 동일한 숫자 3개
-                          이상 연속 사용불가
+                          <div
+                          // className={!isPwValid3 ? 'guideText' : 'passSign'}
+                          >
+                            <span className="dotMark">●</span> 동일한 숫자 3개
+                            이상 연속 사용불가
+                          </div>
                         </span>
                       </p>
                     )}
@@ -339,7 +356,7 @@ function Signup() {
                     />
                   </td>
                   <td>
-                    <button className="tableBtn verifiedCode" type="button">
+                    <button className="tableBtn verifiedCodeBtn" type="button">
                       인증번호 받기
                     </button>
                   </td>
