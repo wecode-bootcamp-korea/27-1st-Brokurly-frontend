@@ -1,0 +1,35 @@
+@import '../../../styles/variables.scss';
+
+.bottomExplain {
+  margin: 50px 0;
+
+  .explainNav {
+    margin: 50px 0;
+    border: 1px solid $border-gray;
+
+    .explainList {
+      @include flexCenter;
+      font-size: 20px;
+
+      .explainButton {
+        padding: 15px;
+        width: 50%;
+        color: $green;
+        background-color: $bg-gray;
+        border-right: 1px solid $border-gray;
+        text-align: center;
+      }
+
+      .productReview {
+        padding: 15px;
+        width: 50%;
+        background-color: $bg-gray;
+        text-align: center;
+      }
+    }
+  }
+
+  .explainForUser {
+    text-align: center;
+  }
+}
