@@ -11,17 +11,21 @@ function Signin() {
 
   const successLoginBtn = () => {
     // console.log(activeLoginBtn);
+    /*
     if (activeLoginBtn) {
       alert(`로그인을 환영합니다!`);
       navigate('/brokurly/products');
     } else {
       alert('아이디 또는 비밀번호 오류입니다');
     }
-    // activeLoginBtn
-    //  ? navigate('/brokurly/products')
-    //  : alert('아이디 또는 비밀번호 오류입니다');
-    // 여기에 fetch
+    */
     /*
+    activeLoginBtn
+     ? navigate('/brokurly/products')
+     : alert('아이디 또는 비밀번호 오류입니다');
+    */
+    // 여기에 fetch
+
     fetch('http://10.58.1.7:8000/users/signin', {
       method: 'POST',
       body: JSON.stringify({
@@ -35,10 +39,12 @@ function Signin() {
           // const 이름도 백엔드로부터 받아야하는지? -> 키, 밸류를 받아오는 것임
           // 로그인성공(공통키값?): `${res.username}님 환영합니다!`,
           // 아이디실패(공통키값?): `아이디를 다시 입력해주세요.`,
-          USER_DOES_NOT_EXIST: `아이디를 다시 입력해주세요.`,
           // 패스워드실패(공통키값?): `비밀번호를 다시 입력해주세요.`,
-          INVALID_PASSWORD: `비밀번호를 다시 입력해주세요.`,
           // (삭제 예정! 그냥 예시) idIsNotValid: "아이디를 다시 입력해주세요"
+          // 로그인 실패1 (ID 오류)
+          USER_DOES_NOT_EXIST: `아이디를 다시 입력해주세요.`,
+          // 로그인 실패2 (PW 오류)
+          INVALID_PASSWORD: `비밀번호를 다시 입력해주세요.`,
         };
         alert(loginMessages[result.message]);
 
@@ -46,14 +52,12 @@ function Signin() {
           // 저장소 위치- 세션. 그리고 result인지 res인지는 보면서..
           sessionStorage.setItem('token', result.Token);
           sessionStorage.setItem('username', result.username);
-
-          if (result.ACCESS_TOKEN === 'access_token') {
-            alert(`${result.username}님 환영합니다!`);
-            navigate('/brokurly/products');
-          }
+        }
+        if (result.ACCESS_TOKEN === 'access_token') {
+          alert(`${result.username}님 환영합니다!`);
+          navigate('/brokurly/products');
         }
       });
-      */
   };
 
   /*
