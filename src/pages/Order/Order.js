@@ -6,9 +6,12 @@ function Order() {
   const [orders, setOrders] = useState(null);
 
   useEffect(() => {
-    fetch('/data/orderData.json')
+    fetch('http:10.58.0.187:8000/orders')
       .then(res => res.json())
-      .then(res => setOrders(res));
+      .then(res => {
+        console.log(res);
+        setOrders(res.result);
+      });
   }, []);
 
   return (
