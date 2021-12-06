@@ -5,23 +5,25 @@ import './Product.scss';
 function Product({ product }) {
   const { id, name, image, price, quantity } = product;
   return (
-    <Link to={`/prducts/${id}`}>
-      <li className="orderProduct">
-        {/* 백 image */}
-        {/* <img src={image} alt={name} /> */}
-        <img src={`/images/${image}`} alt={name} />
-        <div className="information">
+    <div className="orderProduct">
+      {/* 백 image */}
+      <Link to={`/products/${id}`}>
+        <img src={image} alt={name} />
+      </Link>
+      {/* <img src={`/images/${image}`} alt={name} /> */}
+      <div className="information">
+        <Link to={`/products/${id}`}>
           <span className="name">{name}</span>
-          <div className="detail">
-            <span className="totalPrice">
-              {Number(price * quantity).toLocaleString()}원
-            </span>
-            <span className="border">|</span>
-            <span className="quantity">{quantity}개</span>
-          </div>
+        </Link>
+        <div className="detail">
+          <span className="totalPrice">
+            {Number(price * quantity).toLocaleString()}원
+          </span>
+          <span className="border">|</span>
+          <span className="quantity">{quantity}개</span>
         </div>
-      </li>
-    </Link>
+      </div>
+    </div>
   );
 }
 
