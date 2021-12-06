@@ -11,12 +11,11 @@ function Signin() {
 
   const successLoginBtn = () => {
     // console.log(activeLoginBtn);
-    activeLoginBtn
-      ? navigate('/brokurly/products')
-      : alert('아이디 또는 비밀번호 오류입니다');
+    // activeLoginBtn
+    //   ? navigate('/brokurly/products')
+    //   : alert('아이디 또는 비밀번호 오류입니다');
     // 여기에 fetch
 
-    /*
     fetch('API주소/', {
       method: 'POST',
       body: JSON.stringify({
@@ -40,13 +39,13 @@ function Signin() {
           sessionStorage.setItem('token', result.Token);
           sessionStorage.setItem('username', result.username);
 
-        if (res.message === 'success') {
-          navigate('/brokurly/products');
-        }
-
+          if (result.message === 'success') {
+            navigate('/brokurly/products');
+          } else {
+            alert('아이디 또는 비밀번호 오류입니다');
+          }
         }
       });
-      */
   };
 
   /*
@@ -64,9 +63,8 @@ function Signin() {
   // 대, 소문자, 숫자, 6자리 이상 16자리 이하
 
   const inputPwValue = e => setPwValue(e.target.value);
-  const isPwValid =
-    /^.(?=^.{8,15}$)(?=.\d)(?=.[a-zA-Z])(?=.[!@#$%^&+=]).*$/.test(pwValue);
-  // 대,소문자, 숫자 그리고 괄호를 제외한 1개 이상의 특수문자 필요, 8자리 이상, 15자리 이하 비밀번호
+  const isPwValid = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(pwValue);
+  // 대,소문자, 숫자 -를 제외한 1개 이상의 특수문자, 8자리 이상 필수 입력
 
   const activeLoginBtn = isIdValid && isPwValid;
 
