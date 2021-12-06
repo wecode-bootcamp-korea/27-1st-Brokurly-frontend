@@ -31,6 +31,7 @@ function Signin() {
         if (result.Token) {
           // 저장소 위치- 세션. 그리고 result인지 res인지는 보면서..
           sessionStorage.setItem('token', result.Token);
+          sessionStorage.setItem('username', result.username);
           navigate('/');
         }
       });
