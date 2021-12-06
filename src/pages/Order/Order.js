@@ -6,12 +6,13 @@ function Order() {
   const [orders, setOrders] = useState(null);
 
   useEffect(() => {
-    fetch('http:10.58.0.187:8000/orders')
+    // 백통신 url
+    // fetch('http://10.58.0.187:8000/orders')
+    // Mock Data url
+    // setOrders(res.result);
+    fetch('/data/orderData.json')
       .then(res => res.json())
-      .then(res => {
-        console.log(res);
-        setOrders(res.result);
-      });
+      .then(res => setOrders(res));
   }, []);
 
   return (

@@ -7,6 +7,8 @@ function Product({ product }) {
   return (
     <Link to={`/prducts/${id}`}>
       <li className="orderProduct">
+        {/* 백 image */}
+        {/* <img src={image} alt={name} /> */}
         <img src={`/images/${image}`} alt={name} />
         <div className="information">
           <span className="name">{name}</span>
