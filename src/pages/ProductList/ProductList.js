@@ -37,7 +37,6 @@ function ProductList() {
     fetch(`http://10.58.3.112:8000/products?&category=all`)
       .then(res => res.json())
       .then(res => {
-        console.log(res.result);
         setProducts(res.result);
       });
   }, [searchParams]);
