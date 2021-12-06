@@ -38,11 +38,22 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
+        const signupMessages = {
+          // 회원가입 실패1 (ID 오류)
+          'Invalid Username': `아이디를 확인해 주세요`,
+          // 회원가입 실패2 (PW 오류)
+          'Invalid Password': `비밀번호를 확인해 주세요`,
+          // 회원가입 실패3 (email 오류)
+          'Invalid Email': `이메일을 확인해 주세요`,
+        };
+        alert(signupMessages[res.message]);
+
         // response.message "success"
         if (res.message === 'SUCCESS') {
+          // 회원가입 성공1
           navigate('/brokurly/products');
-        } else {
-          alert(res.message);
+          alert('가입을 축하합니다!');
+          // alert(res.message);
         }
         // if (조건이 맞으면) {
         // navigate('/');
@@ -61,8 +72,10 @@ function Signup() {
       .then(res => {
         if (res.message === 'SUCCESS') {
           navigate('/brokurly/products');
-        } else {
-          alert('사용가능');
+          alert('사용 가능한 아이디입니다');
+        }
+        if (res.message !== 'SUCCESS') {
+          alert('다시 시도해주세요');
         }
       });
   };
@@ -77,9 +90,10 @@ function Signup() {
       .then(res => res.json())
       .then(res => {
         if (res.message === 'SUCCESS') {
-          navigate('/brokurly/products');
-        } else {
-          alert('사용가능');
+          alert('사용 가능한 메일입니다');
+        }
+        if (res.message !== 'SUCCESS') {
+          alert('다시 시도해주세요');
         }
       });
   };
