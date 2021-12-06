@@ -8,8 +8,6 @@ import './ProductDetail.scss';
 function ProductDetail() {
   const [productData, setProductData] = useState([]);
 
-  // const { id } = useParams();
-
   useEffect(() => {
     fetch('/data/productDetail.json')
       .then(res => res.json())

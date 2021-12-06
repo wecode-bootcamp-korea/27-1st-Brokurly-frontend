@@ -1,0 +1,66 @@
+@import '../../../styles/variables.scss';
+
+.cartSummery {
+  flex: 4;
+  margin-top: 40px;
+  margin-left: 20px;
+
+  .cartSummeryContent {
+    border: 1px solid $border-gray;
+    border-radius: 2px;
+
+    .addressContainer {
+      padding: 20px;
+      font-size: 16px;
+      font-weight: 600;
+      .location {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .locationIcon {
+          margin-right: 10px;
+          font-size: 20px;
+        }
+      }
+
+      .address {
+        line-height: 1.5;
+      }
+    }
+
+    .totalPriceContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 20px;
+      background: #edeff0;
+      font-weight: 500;
+
+      .totalPrice {
+        display: block;
+        width: 140px;
+        font-size: 20px;
+        font-weight: 700;
+        text-align-last: right;
+
+        .unit {
+          font-size: 18px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .orderBtn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: $green;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+  }
+}
