@@ -29,18 +29,23 @@
       }
     }
 
-    .itemImg {
-      margin: 0 30px;
-      width: 60px;
-      height: 78px;
-      object-fit: cover;
-    }
+    .linkToProduct {
+      display: flex;
+      align-items: center;
 
-    .name {
-      display: block;
-      width: 200px;
-      font-weight: 600;
-      text-overflow: ellipsis;
+      .itemImg {
+        margin: 0 30px;
+        width: 60px;
+        height: 78px;
+        object-fit: cover;
+      }
+
+      .name {
+        display: block;
+        width: 200px;
+        font-weight: 600;
+        text-overflow: ellipsis;
+      }
     }
   }
 
