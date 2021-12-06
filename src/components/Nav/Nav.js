@@ -9,26 +9,7 @@ import './Nav.scss';
 function Nav() {
   return (
     <div className="nav">
-      <header className="navContainer">
-        <div className="moveHeader">
-          <div className="join">
-            <Link className="joinSignup" to="/signup">
-              회원가입
-            </Link>
-            <Link className="joinSignin" to="/signin">
-              로그인
-            </Link>
-          </div>
-          <div className="navLogo">
-            <Link className="clickToMain" to="/">
-              <img
-                className="mainLog"
-                src="http://localhost:3000/images/brokurlylog.png"
-                alt="logo"
-              />
-            </Link>
-          </div>
-        </div>
+      <nav className="navContainer">
         <div className="stickyNav">
           <div className="categoryBar">
             <ul className="categoryList">
@@ -60,7 +41,7 @@ function Nav() {
             </Link>
           </div>
         </div>
-      </header>
+      </nav>
     </div>
   );
 }

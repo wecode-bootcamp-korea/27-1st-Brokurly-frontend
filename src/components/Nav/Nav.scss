@@ -2,45 +2,16 @@
 
 .nav {
   @include flexCenter;
+  position: sticky;
+  top: 0;
+  z-index: 1;
   min-width: 1050px;
-  padding: 20px 20px 10px 20px;
+  padding: 10px 20px;
   background-color: $bg-white;
 
   .navContainer {
     width: 100%;
     max-width: 1010px;
-
-    .moveHeader {
-      .join {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-
-        .joinSignup {
-          padding: 0 10px;
-          color: $green;
-          border-right: 1px solid $border-gray;
-          font-weight: 600;
-        }
-
-        .joinSignin {
-          padding: 10px;
-          font-weight: 600;
-        }
-      }
-
-      .navLogo {
-        @include flexCenter;
-        padding: 10px;
-
-        .clickToMain {
-          .mainLog {
-            width: 100px;
-            height: 80px;
-          }
-        }
-      }
-    }
 
     .stickyNav {
       display: flex;
@@ -64,6 +35,7 @@
           }
         }
       }
+
       .navSearch {
         @include flexCenter;
         width: 25%;
@@ -74,6 +46,7 @@
           padding: 10px;
           font-size: 15px;
         }
+
         .searchButton {
           border: 0;
           padding: 10px;
@@ -81,6 +54,7 @@
           font-size: 15px;
         }
       }
+
       .navIcon {
         font-size: 30px;
 
