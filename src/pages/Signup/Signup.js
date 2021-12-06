@@ -15,6 +15,11 @@ function Signup() {
 
   const [inputId, setInputId] = useState('');
   const [inputPw, setInputPw] = useState('');
+  const [inputCorrectPw, setInputCorrectPw] = useState('');
+  const [inputName, setInputName] = useState('');
+  const [inputEmail, setInputEmail] = useState('');
+  const [inputContact, setInputContact] = useState('');
+  const [inputAddress, setInputAddress] = useState('');
 
   const goToMain = () => {
     navigate('/');
@@ -24,10 +29,10 @@ function Signup() {
       body: JSON.stringify({
         username: inputId,
         password: inputPw,
-        name: this.state.username, // username.value
-        email: this.state.email, //  email.value
-        contact: this.state.contact, //  contact.value
-        address: this.state.address, //  address.value
+        name: inputName, // this.state.username
+        email: inputEmail, // this.state.email
+        contact: inputContact, // this.state.contact
+        address: inputAddress, // this.state.address
       }),
     })
       .then(res => res.json())
@@ -46,25 +51,27 @@ function Signup() {
   };
   // input 클릭시 텍스트 등장(함수) - 끝 --------------------
 
-  // 정규식 - 시작 --------------------
+  // 유효성 검사 - 시작 --------------------
 
   //
   const inputIdValue = e => {
     setInputId(e.target.value);
   };
 
-  function please(idValue) {
-    const regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/;
-    return regExp.test(idValue);
-  }
+  // function checkId1(idValue) {
+  //  const regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/;
+  //  return regExp.test(idValue);
+  // }
+  // const checkId1 = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/;
+
   // function abc(str) {
   //   return /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(str);
   // }
 
-  // const abc = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test();
-  //const str = inputId.includes(re);
-  //const re = '^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$'.test(str);
-  // const checkId1 = inputId.includes(re);
+  const abc = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test();
+  // const str = inputId.includes(re);
+  // const re = '^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$'.test(str);
+  const checkId1 = inputId.includes(abc);
 
   function inputPwValue(e) {
     setInputPw(e.target.value);
@@ -73,7 +80,13 @@ function Signup() {
   const checkPw1 = inputPw.length > 10;
   const checkPw2 = inputPw.length > 4;
 
-  // 정규식 - 끝 --------------------
+  const inputCorrectPwValue = e => {
+    setInputCorrectPw(e.target.value);
+  };
+
+  const input
+
+  // 유효성 검사 - 끝 --------------------
 
   return (
     <div className="signup">
@@ -113,7 +126,7 @@ function Signup() {
                         <span className="guideText">
                           <div
                             className={
-                              please !== true ? 'guideText' : 'passSign'
+                              checkId1 !== true ? 'guideText' : 'passSign'
                             }
                           >
                             {console.log(please)}
@@ -190,7 +203,7 @@ function Signup() {
                   <td colspan="2">
                     <input
                       className="tableInput"
-                      // onChange={correctPwValue}
+                      onChange={inputCorrectPwValue}
                       onClick={openCorrectPw}
                       type="password"
                       placeholder="비밀번호를 한번 더 입력해주세요"
