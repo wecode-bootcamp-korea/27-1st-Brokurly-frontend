@@ -26,7 +26,7 @@ function CartModal({ product, closeModal }) {
     <div className="cartModal">
       <div className="top">
         <div className="productName">{name}</div>
-        <div className="productDetail">
+        <div className="productCartDetail">
           <div className="price">{Number(price).toLocaleString()}원</div>
           <div className="quantityContainer">
             <button className="down" onClick={removeQuantity}>
