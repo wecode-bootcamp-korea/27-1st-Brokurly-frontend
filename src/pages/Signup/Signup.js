@@ -40,7 +40,7 @@ function Signup() {
       .then(res => {
         // response.message "success"
         if (res.message === 'success') {
-          navigate('/category/products');
+          navigate('/brokurly/products');
         } else {
           alert('다시 시도해 주세요');
         }
@@ -50,8 +50,39 @@ function Signup() {
       });
   };
 
-  const isSuccessIdBtn = () => {};
-  const isSuccessPwBtn = () => {};
+  const isSuccessIdBtn = () => {
+    fetch('API주소', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: inputId,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'success') {
+          navigate('/username');
+        } else {
+          alert('아이디 입력을 다시 시도해 주세요');
+        }
+      });
+  };
+
+  const isSuccessEmailBtn = () => {
+    fetch('API주소', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: inputEmail,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'success') {
+          navigate('/email');
+        } else {
+          alert('아이디 입력을 다시 시도해 주세요');
+        }
+      });
+  };
 
   // input 클릭시 텍스트 등장(함수) - 시작 --------------------
   const openInputId = () => {
@@ -275,7 +306,7 @@ function Signup() {
                   <td>
                     <button
                       className="tableBtn"
-                      onClick={isSuccessPwBtn}
+                      onClick={isSuccessEmailBtn}
                       type="button"
                     >
                       중복확인
