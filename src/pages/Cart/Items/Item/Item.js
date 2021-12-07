@@ -5,7 +5,6 @@ import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import './Item.scss';
 
 function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
-  // const { id, image, name, quantity, price, notChecked, itemPackage } = item;
   const {
     cart_id,
     product_id,
@@ -14,10 +13,8 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
     quantity,
     product_price,
     notChecked,
-    product_package,
   } = item;
   const [inputValue, setInputValue] = useState(1);
-
   useEffect(() => setInputValue(quantity), [quantity]);
 
   const addQuantity = () => {
@@ -25,7 +22,6 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
       alert('최대 주문 수량은 100개 입니다.');
     }
 
-    // Todo fetch
     changeItemQuantity(cart_id, Number(quantity) + 1);
   };
 
@@ -35,7 +31,6 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
       return;
     }
 
-    // Todo fetch
     changeItemQuantity(cart_id, Number(quantity) - 1);
   };
 
@@ -45,7 +40,6 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
 
     if (value === '0') {
       alert('최소 주문 수량은 1개 입니다.');
-      // Todo fetch - 1 or quantity
       changeItemQuantity(cart_id, 1);
       setInputValue(1);
       return;
@@ -56,14 +50,12 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
       return;
     }
 
-    // Todo fetch
     changeItemQuantity(cart_id, value);
     setInputValue(value);
   };
 
   const checkMinmumQuantity = e => {
     if (!e.target.value) {
-      // Todo fetch - 1 or quantity
       changeItemQuantity(cart_id, 1);
       setInputValue(1);
       alert('최소 주문 수량은 1개 입니다.');
@@ -83,7 +75,6 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
         </button>
         <Link to={`/products/${product_id}`} className="linkToProduct">
           <img className="itemImg" src={product_image} alt={product_name} />
-          {/* <img className="itemImg" src={`/images/${image}`} alt={name} /> */}
           <span className="name">{product_name}</span>
         </Link>
       </div>

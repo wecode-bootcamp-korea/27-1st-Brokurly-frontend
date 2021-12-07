@@ -9,12 +9,9 @@ function Cart() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // fetch(`/data/cartItemsData.json`)
-    // Authorization: '토큰',
     fetch('http://10.58.4.106:8000/cart')
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         setIsLoaded(true);
         setItems(res.result);
       });
@@ -24,9 +21,8 @@ function Cart() {
   let boxItems = [];
 
   isLoaded &&
+    items.length &&
     items.forEach(item => {
-      // console.log(item);
-      // console.log(item.product_package);
       if (item.product_package === '냉장/종이포장') {
         coldItems.push(item);
       } else {
@@ -44,11 +40,7 @@ function Cart() {
         cart_id: cart_id,
         quantity: changedQuantity,
       }),
-    }).then(res =>
-      res.json().then(res => {
-        console.log(res);
-      })
-    );
+    }).then(res => res.json().then(res => res));
     setItems(
       items.map(item =>
         item.cart_id !== cart_id ? item : { ...item, quantity: changedQuantity }
@@ -57,24 +49,19 @@ function Cart() {
   };
 
   const deleteItem = cart_id => {
-    console.log(cart_id);
     fetch('http://10.58.4.106:8000/cart', {
       method: 'DELETE',
       headers: { cart_id: cart_id },
     })
       .then(res => res.json())
-      .then(res => {
-        console.log(res);
-      });
+      .then(res => res);
     setItems(items.filter(item => item.cart_id !== cart_id));
   };
 
   const deleteAllCheckedItem = () => {
-    // TODO fetch
     const deleteItems = items
       .filter(item => !item.notChecked)
       .map(item => item.cart_id);
-    console.log(deleteItems);
 
     fetch('http://10.58.4.106:8000/cart', {
       method: 'DELETE',
@@ -82,7 +69,7 @@ function Cart() {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        alert('주문이 완료되었습니다.');
       });
 
     setItems(items.filter(item => item.notChecked));
@@ -116,7 +103,6 @@ function Cart() {
     }
 
     deleteAllCheckedItem();
-    alert('주문이 완료되었습니다.');
   };
 
   return (
