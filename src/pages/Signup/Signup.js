@@ -25,7 +25,7 @@ function Signup() {
   const successSignBtn = () => {
     // navigate('/');
     //fetch
-    fetch('http://10.58.1.7:8000/users/signup', {
+    fetch('http://10.58.4.106:8000/users/signup', {
       method: 'POST',
       body: JSON.stringify({
         username: inputId,
@@ -38,15 +38,15 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
-        const signupMessages = {
-          // 회원가입 실패1 (ID 오류)
-          'Invalid Username': `아이디를 확인해 주세요`,
-          // 회원가입 실패2 (PW 오류)
-          'Invalid Password': `비밀번호를 확인해 주세요`,
-          // 회원가입 실패3 (email 오류)
-          'Invalid Email': `이메일을 확인해 주세요`,
-        };
-        alert(signupMessages[res.message]);
+        // const signupMessages = {
+        // 회원가입 실패1 (ID 오류)
+        // value: `아이디를 확인해 주세요`,
+        // 회원가입 실패2 (PW 오류)
+        // value: `비밀번호를 확인해 주세요`,
+        // 회원가입 실패3 (email 오류)
+        // value: `이메일을 확인해 주세요`,
+        // };
+        // alert(signupMessages[res.message]);
 
         // response.message "success"
         if (res.message === 'SUCCESS') {
@@ -54,6 +54,8 @@ function Signup() {
           navigate('/brokurly/products');
           alert('가입을 축하합니다!');
           // alert(res.message);
+        } else {
+          alert('다시 시도해주세요');
         }
         // if (조건이 맞으면) {
         // navigate('/');
@@ -62,7 +64,7 @@ function Signup() {
   };
 
   const isSuccessIdBtn = () => {
-    fetch('http://10.58.1.7:8000/users/username', {
+    fetch('http://10.58.4.106:8000/users/username', {
       method: 'POST',
       body: JSON.stringify({
         username: inputId,
@@ -70,12 +72,12 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.message === 'SUCCESS') {
-          navigate('/brokurly/products');
+        if (res.message === 'USERNAME_NOT_EXISTS') {
           alert('사용 가능한 아이디입니다');
         }
-        if (res.message !== 'SUCCESS') {
-          alert('다시 시도해주세요');
+        if (res.message === 'USERNAME_ALREADY_EXISTS') {
+          alert('이미 존재하는 아이디입니다');
+          // alert(res.message);
         }
         // else {
         //  alert('다시 시도해주세요');
@@ -84,7 +86,7 @@ function Signup() {
   };
 
   const isSuccessEmailBtn = () => {
-    fetch('http://10.58.1.7:8000/users/email', {
+    fetch('http://10.58.4.106:8000/users/email', {
       method: 'POST',
       body: JSON.stringify({
         email: inputEmail,
@@ -92,11 +94,13 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.message === 'SUCCESS') {
+        if (res.message === 'EMAIL_NOT_EXISTS') {
           alert('사용 가능한 메일입니다');
+          //  alert(res.message);
         }
-        if (res.message !== 'SUCCESS') {
-          alert('다시 시도해주세요');
+        if (res.message === 'EMAIL_ALREADY_EXISTS') {
+          alert('이미 존재하는 메일입니다');
+          //  alert(res.message);
         }
         // else {
         //  alert('다시 시도해주세요');
