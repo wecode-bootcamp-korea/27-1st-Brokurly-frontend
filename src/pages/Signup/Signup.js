@@ -23,65 +23,65 @@ function Signup() {
   const [inputContact, setInputContact] = useState('');
   const [inputAddress, setInputAddress] = useState('');
 
-  // const successSignBtn = () => {
-  //   fetch('http://10.58.4.106:8000/users/signup', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       username: inputId,
-  //       password: inputPw,
-  //       name: inputName,
-  //       email: inputEmail,
-  //       contact: inputContact,
-  //       address: inputAddress,
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       if (res.message === 'SUCCESS') {
-  //         navigate('/brokurly/products');
-  //         alert('가입을 환영합니다!');
-  //       } else {
-  //         alert('다시 시도해주세요');
-  //       }
-  //     });
-  // };
+  const successSignBtn = () => {
+    fetch('http://10.58.3.112:8000/users/signup', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: inputId,
+        password: inputPw,
+        name: inputName,
+        email: inputEmail,
+        contact: inputContact,
+        address: inputAddress,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'SUCCESS') {
+          navigate('/brokurly/products');
+          alert('가입을 환영합니다!');
+        } else {
+          alert('다시 시도해주세요');
+        }
+      });
+  };
 
-  // const isValidIdBtn = () => {
-  //   fetch('http://10.58.4.106:8000/users/username', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       username: inputId,
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       if (res.message === 'USERNAME_NOT_EXISTS') {
-  //         setIsIdValid2(true);
-  //         alert('사용 가능한 아이디입니다');
-  //       }
-  //       if (res.message === 'USERNAME_ALREADY_EXISTS') {
-  //         alert('이미 존재하는 아이디입니다');
-  //         // alert(res.message);
-  //       }
-  //     });
-  // };
+  const isValidIdBtn = () => {
+    fetch('http://10.58.3.112:8000/users/username', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: inputId,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'USERNAME_NOT_EXISTS') {
+          setIsIdValid2(true);
+          alert('사용 가능한 아이디입니다');
+        }
+        if (res.message === 'USERNAME_ALREADY_EXISTS') {
+          alert('이미 존재하는 아이디입니다');
+          // alert(res.message);
+        }
+      });
+  };
 
-  // const isValidEmailBtn = () => {
-  //   fetch('http://10.58.4.106:8000/users/email', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       email: inputEmail,
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       const isValidEmailMessges = {
-  //         EMAIL_NOT_EXISTS: '사용 가능한 메일입니다',
-  //         EMAIL_ALREADY_EXISTS: '이미 존재하는 메일입니다',
-  //       };
-  //       alert(isValidEmailMessges[res.message]);
-  //     });
-  // };
+  const isValidEmailBtn = () => {
+    fetch('http://10.58.3.112:8000/users/email', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: inputEmail,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        const isValidEmailMessges = {
+          EMAIL_NOT_EXISTS: '사용 가능한 메일입니다',
+          EMAIL_ALREADY_EXISTS: '이미 존재하는 메일입니다',
+        };
+        alert(isValidEmailMessges[res.message]);
+      });
+  };
 
   // input 클릭시 텍스트 등장(함수) - 시작 --------------------
   const openInputId = () => {
@@ -196,7 +196,7 @@ function Signup() {
                   <td>
                     <button
                       className="tableBtn"
-                      // onClick={isValidIdBtn}
+                      onClick={isValidIdBtn}
                       type="button"
                     >
                       중복확인
@@ -305,7 +305,7 @@ function Signup() {
                   <td>
                     <button
                       className="tableBtn"
-                      // onClick={isValidEmailBtn}
+                      onClick={isValidEmailBtn}
                       type="button"
                     >
                       중복확인
@@ -348,7 +348,7 @@ function Signup() {
             <div className="joinSection">
               <button
                 className="joinBtn"
-                // onClick={successSignBtn}
+                onClick={successSignBtn}
                 type="button"
               >
                 가입하기
