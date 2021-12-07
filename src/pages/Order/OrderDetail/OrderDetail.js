@@ -4,7 +4,7 @@ import './OrderDetail.scss';
 
 function OrderDetail({ order }) {
   const { order_id, order_number, order_status, products } = order;
-
+  console.log('order_status', order_status);
   const cancelOrder = order_id => {
     fetch('http://10.58.0.187:8000/orders', {
       method: 'PATCH',
@@ -29,7 +29,13 @@ function OrderDetail({ order }) {
               <Product product={product} key={product.id} />
             ))}
         </div>
-        <button className="deleteOrder" onClick={() => cancelOrder(order_id)}>
+        <button
+          className={`deleteOrder ${
+            order_status === '주문취소' ? 'deleted' : ''
+          }`}
+          disabled={order_status === '주문취소'}
+          onClick={() => cancelOrder(order_id)}
+        >
           주문 취소
         </button>
       </div>
