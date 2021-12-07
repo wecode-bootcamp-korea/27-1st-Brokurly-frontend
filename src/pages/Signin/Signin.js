@@ -1,4 +1,4 @@
-import React, { useState, Link } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import './Signin.scss';
@@ -10,34 +10,41 @@ function Signin() {
   const navigate = useNavigate();
 
   const successLoginBtn = () => {
-    // 여기에 fetch
-    //   fetch('http://10.58.4.106:8000/users/signin', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       username: idValue,
-    //       password: pwValue,
-    //     }),
-    //   })
-    //     .then(res => res.json())
-    //     .then(result => {
-    //       if (result.ACCESS_TOKEN === 'access_token') {
-    //         // 로그인 성공1
-    //         alert(`${result.username}님 환영합니다!`);
-    //         navigate('/brokurly/products');
-    //       }
-    //     });
+    fetch('http://10.58.4.106:8000/users/signin', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: idValue,
+        password: pwValue,
+      }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.ACCESS_TOKEN === 'access_token') {
+          // 로그인 성공
+          sessionStorage.setItem('token', result.ACCESS_TOKEN);
+          sessionStorage.setItem('username', result.username);
+          alert(`${result.username}님 환영합니다!`);
+          navigate('/brokurly/products');
+        } else {
+          alert('아이디 또는 비밀번호 오류입니다');
+        }
+      });
   };
+
+  // 로그인 버튼 활성화
 
   const inputIdValue = function (e) {
     setIdValue(e.target.value);
   };
-
-  // 대, 소문자, 숫자, 6자리 이상 16자리 이하
   const isIdValid = /^[a-zA-Z0-9]{6,16}$/.test(idValue);
+  // 대, 소문자, 숫자, 6자리 이상 16자리 이하
 
   const inputPwValue = e => setPwValue(e.target.value);
-  // 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상
   const isPwValid = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(pwValue);
+  // 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상
+
+  // 밑에 activeLoginBtn는 추가적으로 구현할지 말지 고민중
+  // const activeLoginBtn = isIdValid && isPwValid;
 
   return (
     <div className="login">
@@ -75,25 +82,28 @@ function Signin() {
                 </label>
               </div>
               <div className="searchSection">
-                <Link to="/signup">아이디 찾기</Link>
+                <a className="forgotId" href="https://www.kurly.com/">
+                  아이디 찾기
+                </a>
                 <span className="serchSectionBar">|</span>
-                <Link to="/signup">비밀번호 찾기</Link>
+                <a className="forgotPw" href="https://www.kurly.com/">
+                  비밀번호 찾기
+                </a>
               </div>
             </div>
-
             <button
               className="loginBtn"
+              // className={activeLoginBtn ? 'loginBtn' : 'loginBtn disabled'}
               onClick={successLoginBtn}
               type="button"
             >
               로그인
             </button>
-
-            <Link to="/signup">
+            <a className="joinLink" href="http://localhost:3000/signup">
               <button className="joinBtn" type="button">
                 회원가입
               </button>
-            </Link>
+            </a>
           </form>
         </div>
       </div>
