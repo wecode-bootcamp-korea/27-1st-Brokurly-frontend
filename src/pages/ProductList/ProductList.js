@@ -43,7 +43,7 @@ function ProductList() {
   };
 
   const changeCategoty = (id, category) => {
-    let newSearchParams = new URLSearchParams(searchParams);
+    const newSearchParams = new URLSearchParams(searchParams);
     if (category === '전체보기') {
       newSearchParams.set('category', '');
     } else {
@@ -54,7 +54,7 @@ function ProductList() {
   };
 
   const changeSort = (id, sortName) => {
-    let newSearchParams = new URLSearchParams(searchParams);
+    const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set('sort', sortName);
     setSearchParams(newSearchParams);
     setCurrentSort(id);
