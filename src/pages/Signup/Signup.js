@@ -11,8 +11,9 @@ function Signup() {
   const [isInputIdGuide, setIsInputIdGuide] = useState(false);
   const [isInputPwGuide, setIsInputPwGuide] = useState(false);
   const [isCorrectPwGuide, setIsCorrectPwGuide] = useState(false);
-  const [isIdValid, setIsIdValid] = useState(false);
   // input 클릭시 텍스트 등장(set, setState) - 끝 --------------------
+
+  const [isIdValid2, setIsIdValid2] = useState(false);
 
   const [inputId, setInputId] = useState('');
   const [inputPw, setInputPw] = useState('');
@@ -37,21 +38,12 @@ function Signup() {
       .then(res => res.json())
       .then(res => {
         // const signupMessages = {
-        // 회원가입 실패1 (ID 오류)
-        // value: `아이디를 확인해 주세요`,
-        // 회원가입 실패2 (PW 오류)
-        // value: `비밀번호를 확인해 주세요`,
-        // 회원가입 실패3 (email 오류)
-        // value: `이메일을 확인해 주세요`,
+        //   value: `아이디를 확인해 주세요`,
+        //   value: `비밀번호를 확인해 주세요`,
+        //   value: `이메일을 확인해 주세요`,
         // };
-        // alert(signupMessages[res.message]);
-        // response.message "success"
-        // const isValidIdMessges = {
-        //   USERNAME_NOT_EXISTS: '사용 가능한 아이디입니다',
-        //   USERNAME_ALREADY_EXISTS: '이미 존재하는 아이디입니다',
-        // };
+        //  alert(signupMessages[res.message]);
         if (res.message === 'SUCCESS') {
-          // 회원가입 성공1
           navigate('/brokurly/products');
           alert('가입을 축하합니다!');
           // alert(res.message);
@@ -71,7 +63,7 @@ function Signup() {
       .then(res => res.json())
       .then(res => {
         if (res.message === 'USERNAME_NOT_EXISTS') {
-          setIsIdValid(true);
+          setIsIdValid2(true);
           alert('사용 가능한 아이디입니다');
         }
         if (res.message === 'USERNAME_ALREADY_EXISTS') {
@@ -90,13 +82,18 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
+        // const isValidEmailMessges = {
+        //   EMAIL_NOT_EXISTS: '사용 가능한 메일입니다',
+        //   EMAIL_ALREADY_EXISTS: '이미 존재하는 메일입니다',
+        // };
+        // alert(isValidEmailMessges[res.message]);
         if (res.message === 'EMAIL_NOT_EXISTS') {
           alert('사용 가능한 메일입니다');
-          //  alert(res.message);
+          // alert(res.message);
         }
         if (res.message === 'EMAIL_ALREADY_EXISTS') {
           alert('이미 존재하는 메일입니다');
-          //  alert(res.message);
+          // alert(res.message);
         }
       });
   };
@@ -115,14 +112,11 @@ function Signup() {
 
   // 유효성 검사 - 시작 --------------------
 
-  //
   const inputIdValue = e => {
     setInputId(e.target.value);
   };
   //id정규식: 대, 소문자, 숫자, 6자리 이상 16자리 이하
   const isIdValid1 = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
-
-  // const isIdValid2 = ;
 
   function inputPwValue(e) {
     setInputPw(e.target.value);
@@ -132,7 +126,18 @@ function Signup() {
   //pw정규식: 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상 입력
   const isPwValid2 = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(inputPw);
   //pw조건: 동일한 숫자 3개 이상 연속 사용불가
-  //const isPwValid3 = numTest();
+  //const isPwValid3 = /(\w)\1\1/.test(inputPw);
+  const isPwValid3Function = () => {
+    if (inputPw.length === 0) {
+      return false;
+    }
+    const isPwValid3Regex = /(\w)\1\1/.test(inputPw);
+    if (isPwValid3Regex === false) {
+      return true;
+    }
+  };
+  const isPwValid3 = isPwValid3Function();
+
   const isCorrectPwValid = inputCorrectPw === inputPw;
 
   const inputCorrectPwValue = e => {
@@ -195,7 +200,7 @@ function Signup() {
                         <span
                           // className={`guideText${isIdValid ? ' passSign' : ''}`
                           className={
-                            isIdValid ? 'guideText passSign' : 'guideText'
+                            isIdValid2 ? 'guideText passSign' : 'guideText'
                           }
                         >
                           <span className="dotMark">●</span> 아이디 중복확인
@@ -245,10 +250,10 @@ function Signup() {
                         </span>
                         <span className="guideText">
                           <div
-                          // className={!isPwValid3 ? 'guideText' : 'passSign'}
+                            className={!isPwValid3 ? 'guideText' : 'passSign'}
                           >
-                            <span className="dotMark">●</span> 동일한 숫자 3개
-                            이상 연속 사용불가
+                            <span className="dotMark">●</span> 동일한 숫자 및
+                            문자 3개 이상 연속 사용불가
                           </div>
                         </span>
                       </p>
