@@ -25,18 +25,10 @@ function ProductList() {
     // const menu = searchParams.get('menu') || '채소';
     // const category = searchParams.get('category') || '';
     // const sort = searchParams.get('sort') || 0;
-    // fetch(
-    //   `http://10.58.3.112:8000/products?menu=${menu}&category=${category}&sort=${sort}`
-    // )
-    // MockData용
-    // 백엔드 테스트용
-    // fetch(`http://10.58.3.112:8000/products?&category=쌈채소`)
-    // fetch(`http://10.58.3.112:8000/products?&category=''`)
     fetch(`/data/productListData00.json`)
       .then(res => res.json())
       .then(res => {
         setProducts(res);
-        // setProducts(res.result);
       });
   }, [searchParams]);
 
