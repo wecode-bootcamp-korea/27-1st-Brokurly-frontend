@@ -4,15 +4,16 @@
   @include flexCenter;
   width: 100%;
   min-width: 1050px;
-  padding: 0 20px;
+  padding: 0px 20px;
   background-color: $bg-gray;
+  border-top: solid 1px $border-gray;
 
   .footerSection {
     display: flex;
     justify-content: space-between;
     max-width: 1050px;
-    padding-top: 30px;
-    padding-bottom: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 
     .footerLeftSection {
       width: 505px;

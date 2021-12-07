@@ -58,20 +58,20 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
 
   return (
     <div className="item">
-      <Link to={`/product/${id}`}>
-        <div className="left">
-          <button
-            className={`checkBtn ${
-              !notChecked ? 'checkBtn-green' : 'checkBtn-gray'
-            }`}
-            onClick={() => changeItemCheck(id, itemPackage)}
-          >
-            {!notChecked ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
-          </button>
+      <div className="left">
+        <button
+          className={`checkBtn ${
+            !notChecked ? 'checkBtn-green' : 'checkBtn-gray'
+          }`}
+          onClick={() => changeItemCheck(id, itemPackage)}
+        >
+          {!notChecked ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
+        </button>
+        <Link to={`/products/${id}`} className="linkToProduct">
           <img className="itemImg" src={`/images/${image}`} alt={name} />
           <span className="name">{name}</span>
-        </div>
-      </Link>
+        </Link>
+      </div>
       <div className="right">
         <div className="changeAmountContainer">
           <button className="changeBtn" onClick={removeQuantity}>
