@@ -26,7 +26,7 @@ function Signin() {
     */
     // 여기에 fetch
 
-    fetch('http://10.58.1.7:8000/users/signin', {
+    fetch('http://10.58.4.106:8000/users/signin', {
       method: 'POST',
       body: JSON.stringify({
         username: idValue, //왼쪽이 백앤드와 공통 키값
