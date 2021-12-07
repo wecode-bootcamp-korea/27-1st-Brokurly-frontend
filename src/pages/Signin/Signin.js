@@ -25,35 +25,34 @@ function Signin() {
      : alert('아이디 또는 비밀번호 오류입니다');
     */
     // 여기에 fetch
-
-    fetch('http://10.58.4.106:8000/users/signin', {
-      method: 'POST',
-      body: JSON.stringify({
-        username: idValue, //왼쪽이 백앤드와 공통 키값
-        password: pwValue, //왼쪽이 백앤드와 공통 키값
-      }),
-    })
-      .then(res => res.json())
-      .then(result => {
-        const loginMessages = {
-          // 로그인 실패1 (ID 오류)
-          USER_DOES_NOT_EXIST: `아이디를 다시 입력해주세요.`,
-          // 로그인 실패2 (PW 오류)
-          INVALID_PASSWORD: `비밀번호를 다시 입력해주세요.`,
-        };
-        alert(loginMessages[result.message]);
-
-        if (result.Token) {
-          // 저장소 위치- 세션. 그리고 result인지 res인지는 보면서..
-          sessionStorage.setItem('token', result.Token);
-          sessionStorage.setItem('username', result.username);
-        }
-        if (result.ACCESS_TOKEN === 'access_token') {
-          // 로그인 성공1
-          alert(`${result.username}님 환영합니다!`);
-          navigate('/brokurly/products');
-        }
-      });
+    //   fetch('http://10.58.4.106:8000/users/signin', {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //       username: idValue, //왼쪽이 백앤드와 공통 키값
+    //       password: pwValue, //왼쪽이 백앤드와 공통 키값
+    //     }),
+    //   })
+    //     .then(res => res.json())
+    //     .then(result => {
+    //       // const loginMessages = {
+    //       //   // 로그인 실패1 (ID 오류)
+    //       //   USER_DOES_NOT_EXIST: `아이디를 다시 입력해주세요.`,
+    //       //   // 로그인 실패2 (PW 오류)
+    //       //   INVALID_PASSWORD: `비밀번호를 다시 입력해주세요.`,
+    //       // };
+    //       // alert(loginMessages[result.message]);
+    //       console.log(result);
+    //       if (result.Token) {
+    //         // 저장소 위치- 세션. 그리고 result인지 res인지는 보면서..
+    //         sessionStorage.setItem('token', result.Token);
+    //         sessionStorage.setItem('username', result.username);
+    //       }
+    //       if (result.ACCESS_TOKEN === 'access_token') {
+    //         // 로그인 성공1
+    //         alert(`${result.username}님 환영합니다!`);
+    //         navigate('/brokurly/products');
+    //       }
+    //     });
   };
 
   // 로그인 버튼 활성화
