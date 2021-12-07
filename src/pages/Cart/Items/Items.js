@@ -15,7 +15,7 @@ function Items({
   const [isItemsOpen, setIsItemsOpen] = useState(true);
 
   const openItems = () => {
-    setIsItemsOpen(!isItemsOpen);
+    setIsItemsOpen(preIsItemsOpen => !preIsItemsOpen);
   };
 
   return (
