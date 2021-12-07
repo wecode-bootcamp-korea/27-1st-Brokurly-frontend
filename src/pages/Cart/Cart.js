@@ -119,11 +119,7 @@ function Cart() {
                   deleteAllCheckedItem={deleteAllCheckedItem}
                 />
               </div>
-              <CartSummary
-                coldItems={coldItems}
-                boxItems={boxItems}
-                orderItems={orderItems}
-              />
+              <CartSummary items={items} orderItems={orderItems} />
             </main>
           </>
         )}

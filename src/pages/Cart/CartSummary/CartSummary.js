@@ -3,21 +3,13 @@ import { GrLocation } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import './CartSummary.scss';
 
-function CartSummary({ coldItems, boxItems, orderItems }) {
-  const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    setTotal(
-      coldItems.reduce((a, c) => {
-        if (c.notChecked) return a;
-        return a + c.quantity * c.price;
-      }, 0) +
-        boxItems.reduce((a, c) => {
-          if (c.notChecked) return a;
-          return a + c.quantity * c.price;
-        }, 0)
-    );
-  }, [coldItems, boxItems]);
+function CartSummary({ items, orderItems }) {
+  const total = items.reduce((previousTotal, currentItem) => {
+    if (currentItem.notChecked) {
+      return previousTotal;
+    }
+    return previousTotal + currentItem.quantity * currentItem.price;
+  }, 0);
 
   return (
     <div className="cartSummery">
