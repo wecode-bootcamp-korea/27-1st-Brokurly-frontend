@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './CartSummary.scss';
 import { GrLocation } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
 
 function CartSummary({ coldItems, boxItems, orderItems }) {
   const [total, setTotal] = useState(0);
@@ -39,6 +40,9 @@ function CartSummary({ coldItems, boxItems, orderItems }) {
       <button className="orderBtn" onClick={orderItems}>
         주문하기
       </button>
+      <Link to="/order">
+        <button className="toOrderPageBtn">주문 내역</button>
+      </Link>
     </div>
   );
 }
