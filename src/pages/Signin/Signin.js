@@ -36,11 +36,6 @@ function Signin() {
       .then(res => res.json())
       .then(result => {
         const loginMessages = {
-          // const 이름도 백엔드로부터 받아야하는지? -> 키, 밸류를 받아오는 것임
-          // 로그인성공(공통키값?): `${res.username}님 환영합니다!`,
-          // 아이디실패(공통키값?): `아이디를 다시 입력해주세요.`,
-          // 패스워드실패(공통키값?): `비밀번호를 다시 입력해주세요.`,
-          // (삭제 예정! 그냥 예시) idIsNotValid: "아이디를 다시 입력해주세요"
           // 로그인 실패1 (ID 오류)
           USER_DOES_NOT_EXIST: `아이디를 다시 입력해주세요.`,
           // 로그인 실패2 (PW 오류)
