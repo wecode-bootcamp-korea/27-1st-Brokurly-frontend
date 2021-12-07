@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import SignupChild from '../Signup/SignupChild';
@@ -227,13 +227,13 @@ function Signup() {
                     >
                       중복확인
                     </button>
-                    {/* 중복확인 모달 (시작) ---아직 미구현 */}
+                    {/* 중복확인 (시작) ---아직 미구현 */}
 
                     <div className="askCorrectModal">
                       <div className="askCorrectMessage" />
                     </div>
 
-                    {/* 중복확인 모달 (끝) */}
+                    {/* 중복확인 (끝) */}
                   </td>
                 </tr>
                 <tr>
