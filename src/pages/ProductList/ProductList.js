@@ -10,10 +10,11 @@ function ProductList() {
   const [currentCategory, setCurrentCategory] = useState(0);
   const [currentSort, setCurrentSort] = useState(0);
   const [productMenu, setProductMenu] = useState(null);
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
   const [cartInfo, setCartInfo] = useState({});
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const menu = searchParams.get('menu') || '채소';
@@ -25,11 +26,16 @@ function ProductList() {
     // const menu = searchParams.get('menu') || '채소';
     // const category = searchParams.get('category') || '';
     // const sort = searchParams.get('sort') || 0;
-    fetch(`/data/productListData00.json`)
+    fetch('http://10.58.10.2:8000/products')
       .then(res => res.json())
       .then(res => {
         setProducts(res);
-      });
+      })
+      .catch(e => {
+        // eslint-disable-next-line no-console
+        console.log(e);
+      })
+      .finally(setLoaded(true));
   }, [searchParams]);
 
   const putInfoIntoModal = product => {
@@ -70,7 +76,10 @@ function ProductList() {
             changeCategoty={changeCategoty}
           />
         )}
-        {!!products && (
+        {!loaded && <h2 className="loading">로딩중...</h2>}
+        {loaded && !products.length ? (
+          <h2 className="loading">상품 없음</h2>
+        ) : (
           <ProducListContent
             products={products}
             changeSort={changeSort}

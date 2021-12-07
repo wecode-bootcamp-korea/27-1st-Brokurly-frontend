@@ -14,6 +14,14 @@
     cursor: pointer;
   }
 
+  .loading {
+    margin: 50px 0;
+    font-size: 24px;
+    font-weight: 400;
+    color: $color-gray;
+    text-align: center;
+  }
+
   .productListContent {
     width: 100%;
     max-width: 1010px;
