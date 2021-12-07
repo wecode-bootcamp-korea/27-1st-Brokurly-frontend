@@ -44,7 +44,13 @@ function Cart() {
         cart_id: cart_id,
         quantity: changedQuantity,
       }),
-    }).then(res => res.json().then(res => res));
+    })
+      .then(res => res.json().then(res => res))
+      .catch(e => {
+        // eslint-disable-next-line no-console
+        console.log(e);
+      });
+
     setItems(
       items.map(item =>
         item.cart_id !== cart_id ? item : { ...item, quantity: changedQuantity }
