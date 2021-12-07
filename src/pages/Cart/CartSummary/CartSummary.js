@@ -8,7 +8,7 @@ function CartSummary({ items, orderItems }) {
     if (currentItem.notChecked) {
       return previousTotal;
     }
-    return previousTotal + currentItem.quantity * currentItem.price;
+    return previousTotal + currentItem.quantity * currentItem.product_price;
   }, 0);
 
   return (

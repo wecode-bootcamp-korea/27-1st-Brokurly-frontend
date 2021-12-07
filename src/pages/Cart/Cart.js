@@ -9,44 +9,82 @@ function Cart() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch(`/data/cartItemsData.json`)
+    // fetch(`/data/cartItemsData.json`)
+    // Authorization: '토큰',
+    fetch('http://10.58.4.106:8000/cart')
       .then(res => res.json())
-      .then(items => {
+      .then(res => {
+        console.log(res);
         setIsLoaded(true);
-        setItems(items);
+        setItems(res.result);
       });
   }, []);
 
   let coldItems = [];
   let boxItems = [];
 
-  items.forEach(item => {
-    if (item.itemPackage === 'cold') {
-      coldItems.push(item);
-    } else {
-      boxItems.push(item);
-    }
-  });
+  isLoaded &&
+    items.forEach(item => {
+      // console.log(item);
+      // console.log(item.product_package);
+      if (item.product_package === '냉장/종이포장') {
+        coldItems.push(item);
+      } else {
+        boxItems.push(item);
+      }
+    });
 
   const checkedItemsLength =
     items.length - items.filter(item => item.notChecked).length;
 
-  const changeItemQuantity = (id, changedQuantity) => {
-    // TODO fetch
+  const changeItemQuantity = (cart_id, changedQuantity) => {
+    fetch('http://10.58.4.106:8000/cart', {
+      method: 'PATCH',
+      body: JSON.stringify({
+        cart_id: cart_id,
+        quantity: changedQuantity,
+      }),
+    }).then(res =>
+      res.json().then(res => {
+        console.log(res);
+      })
+    );
     setItems(
       items.map(item =>
-        item.id !== id ? item : { ...item, quantity: changedQuantity }
+        item.cart_id !== cart_id ? item : { ...item, quantity: changedQuantity }
       )
     );
   };
 
-  const deleteItem = id => {
-    // TODO fetch
-    setItems(items.filter(item => item.id !== id));
+  const deleteItem = cart_id => {
+    console.log(cart_id);
+    fetch('http://10.58.4.106:8000/cart', {
+      method: 'DELETE',
+      headers: { cart_id: cart_id },
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      });
+    setItems(items.filter(item => item.cart_id !== cart_id));
   };
 
   const deleteAllCheckedItem = () => {
     // TODO fetch
+    const deleteItems = items
+      .filter(item => !item.notChecked)
+      .map(item => item.cart_id);
+    console.log(deleteItems);
+
+    fetch('http://10.58.4.106:8000/cart', {
+      method: 'DELETE',
+      headers: { cart_id: deleteItems },
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      });
+
     setItems(items.filter(item => item.notChecked));
   };
 
@@ -66,7 +104,7 @@ function Cart() {
   const changeItemCheck = id => {
     setItems(
       items.map(item =>
-        item.id !== id ? item : { ...item, notChecked: !item.notChecked }
+        item.cart_id !== id ? item : { ...item, notChecked: !item.notChecked }
       )
     );
   };
@@ -76,6 +114,7 @@ function Cart() {
       alert('주문하실 상품을 선택해주세요');
       return;
     }
+
     deleteAllCheckedItem();
     alert('주문이 완료되었습니다.');
   };

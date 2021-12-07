@@ -38,7 +38,7 @@ function Items({
       {isItemsOpen &&
         items.map(item => (
           <Item
-            key={item.id}
+            key={item.cart_id}
             item={item}
             changeItemQuantity={changeItemQuantity}
             deleteItem={deleteItem}
