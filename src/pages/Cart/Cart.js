@@ -12,9 +12,13 @@ function Cart() {
     fetch('http://10.58.4.106:8000/cart')
       .then(res => res.json())
       .then(res => {
-        setIsLoaded(true);
         setItems(res.result);
-      });
+      })
+      .catch(e => {
+        // eslint-disable-next-line no-console
+        console.log(e);
+      })
+      .finally(setIsLoaded(true));
   }, []);
 
   let coldItems = [];
@@ -54,22 +58,31 @@ function Cart() {
       headers: { cart_id: cart_id },
     })
       .then(res => res.json())
-      .then(res => res);
+      .then(res => res)
+      .catch(e => {
+        // eslint-disable-next-line no-console
+        console.log(e);
+      });
+
     setItems(items.filter(item => item.cart_id !== cart_id));
   };
 
   const deleteAllCheckedItem = () => {
-    const deleteItems = items
+    const deleteItemsCartIdArray = items
       .filter(item => !item.notChecked)
       .map(item => item.cart_id);
 
     fetch('http://10.58.4.106:8000/cart', {
       method: 'DELETE',
-      headers: { cart_id: deleteItems },
+      headers: { cart_id: deleteItemsCartIdArray },
     })
       .then(res => res.json())
       .then(res => {
         alert('주문이 완료되었습니다.');
+      })
+      .catch(e => {
+        // eslint-disable-next-line no-console
+        console.log(e);
       });
 
     setItems(items.filter(item => item.notChecked));
@@ -101,8 +114,9 @@ function Cart() {
       alert('주문하실 상품을 선택해주세요');
       return;
     }
-
-    deleteAllCheckedItem();
+    // TODO : 주문 fetch
+    setItems(items.filter(item => item.notChecked));
+    alert('주문이 완료되었습니다.');
   };
 
   return (

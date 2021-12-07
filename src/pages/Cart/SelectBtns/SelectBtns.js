@@ -13,8 +13,16 @@ function SelectBtns({
   return (
     <div className="selectBtns">
       <button onClick={checkAllItems} className="selectAllBtn">
-        <span className={`icon ${isAllChecked ? 'icon-green' : 'icon-gray'}`}>
-          {isAllChecked ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
+        <span
+          className={`icon ${
+            !!itemsLength && isAllChecked ? 'icon-green' : 'icon-gray'
+          }`}
+        >
+          {!!itemsLength && isAllChecked ? (
+            <AiFillCheckCircle />
+          ) : (
+            <AiOutlineCheckCircle />
+          )}
         </span>
         <span className="selectAll">
           전체선택({checkedItemsLength}/{itemsLength})
