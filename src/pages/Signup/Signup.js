@@ -196,7 +196,7 @@ function Signup() {
                   <td>
                     <button
                       className="tableBtn"
-                      onClick={isValidIdBtn}
+                      // onClick={isValidIdBtn}
                       type="button"
                     >
                       중복확인
@@ -305,7 +305,7 @@ function Signup() {
                   <td>
                     <button
                       className="tableBtn"
-                      onClick={isValidEmailBtn}
+                      // onClick={isValidEmailBtn}
                       type="button"
                     >
                       중복확인
@@ -348,7 +348,7 @@ function Signup() {
             <div className="joinSection">
               <button
                 className="joinBtn"
-                onClick={successSignBtn}
+                // onClick={successSignBtn}
                 type="button"
               >
                 가입하기
