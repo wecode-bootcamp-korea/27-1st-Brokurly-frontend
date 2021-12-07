@@ -4,7 +4,7 @@ import './OrderDetail.scss';
 
 function OrderDetail({ order }) {
   const { order_id, order_number, order_status, products } = order;
-  console.log('order_status', order_status);
+
   const cancelOrder = order_id => {
     fetch('http://10.58.0.187:8000/orders', {
       method: 'PATCH',

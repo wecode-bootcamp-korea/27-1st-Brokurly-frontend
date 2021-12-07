@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './CartSummary.scss';
 import { GrLocation } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
+import './CartSummary.scss';
 
 function CartSummary({ coldItems, boxItems, orderItems }) {
   const [total, setTotal] = useState(0);
@@ -18,6 +18,7 @@ function CartSummary({ coldItems, boxItems, orderItems }) {
         }, 0)
     );
   }, [coldItems, boxItems]);
+
   return (
     <div className="cartSummery">
       <div className="cartSummeryContent">
