@@ -2,7 +2,7 @@
   {
     "id": 1,
     "order_number": 123456,
-    "order_status": "배송 완료",
+    "order_status": "주문취소",
     "products": [
       {
         "id": 1,

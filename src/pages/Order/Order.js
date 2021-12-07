@@ -9,10 +9,10 @@ function Order() {
     // 백통신 url
     // Mock Data url
     // setOrders(res.result);
-    // fetch('/data/orderData.json')
-    fetch('http://10.58.0.187:8000/orders')
+    // fetch('http://10.58.0.187:8000/orders')
+    fetch('/data/orderData.json')
       .then(res => res.json())
-      .then(res => setOrders(res.result));
+      .then(res => setOrders(res));
     // .then(res => setOrders(res.result));
   }, []);
 
