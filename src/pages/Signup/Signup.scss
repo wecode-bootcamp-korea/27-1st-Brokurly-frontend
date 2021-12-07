@@ -73,6 +73,10 @@ $btnBorderRadius: 3px;
           font-size: 12px;
         }
 
+        .starMark {
+          color: red;
+        }
+
         .signSection {
           display: flex;
           justify-content: center;
@@ -83,10 +87,6 @@ $btnBorderRadius: 3px;
 
           .signTable {
             width: 630px;
-
-            .starMark {
-              color: red;
-            }
           }
         }
 
