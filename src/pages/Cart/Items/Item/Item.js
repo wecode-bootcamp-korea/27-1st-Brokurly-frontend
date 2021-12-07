@@ -15,6 +15,7 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
       alert('최대 주문 수량은 100개 입니다.');
     }
 
+    // Todo fetch
     changeItemQuantity(id, Number(quantity) + 1);
   };
 
@@ -24,6 +25,7 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
       return;
     }
 
+    // Todo fetch
     changeItemQuantity(id, Number(quantity) - 1);
   };
 
@@ -33,6 +35,7 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
 
     if (value === '0') {
       alert('최소 주문 수량은 1개 입니다.');
+      // Todo fetch - 1 or quantity
       changeItemQuantity(id, 1);
       setInputValue(1);
       return;
@@ -43,15 +46,17 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
       return;
     }
 
+    // Todo fetch
     changeItemQuantity(id, value);
     setInputValue(value);
   };
 
   const checkMinmumQuantity = e => {
     if (!e.target.value) {
-      alert('최소 주문 수량은 1개 입니다.');
+      // Todo fetch - 1 or quantity
       changeItemQuantity(id, 1);
       setInputValue(1);
+      alert('최소 주문 수량은 1개 입니다.');
     }
   };
 
