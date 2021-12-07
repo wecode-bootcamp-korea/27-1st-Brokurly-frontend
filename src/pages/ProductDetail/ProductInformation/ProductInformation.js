@@ -24,27 +24,26 @@ function ProductInformation({
       ? alert('숫자를 입력해 주세요^^')
       : setCount(Number(e.target.value));
 
-  const setPrice = count * price;
+  const totalPrice = count * price;
 
-  // 통신시 이용c
-  // const goToCart = () => {
-  //   fetch('http://10.58.4.142:8000/', {
-  //     method: 'POST',
-  //     headers: {
-  //       Authorization: '토큰',
-  //     },
-  //     body: JSON.stringify({
-  //       product_id: { productId },
-  //       quantity: count,
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(result =>
-  //       result.success
-  //         ? alert('ok')
-  //         : alert('id와 password를 다시 입력해주세요.')
-  //     );
-  // };
+  const goToCart = () => {
+    fetch('http://10.58.4.142:8000/cart', {
+      method: 'POST',
+      headers: {
+        Authorization: '토큰',
+      },
+      body: JSON.stringify({
+        product_id: { productId },
+        quantity: count,
+      }),
+    })
+      .then(response => response.json())
+      .then(result =>
+        result.success
+          ? navigate('/cart')
+          : alert('로그인해주세요^^') && navigate('/signin')
+      );
+  };
 
   return (
     <article className="productInformation">
@@ -101,13 +100,13 @@ function ProductInformation({
       </div>
       <div className="totalPriceBox">
         <span className="totalPriceTitle">총 상품금액 : </span>
-        <span className="totalPrice">{setPrice.toLocaleString()}</span>
+        <span className="totalPriceNumber">{totalPrice.toLocaleString()}</span>
         <span className="totalPriceUnit">원</span>
       </div>
       <button
         className="detailPurchase"
         onClick={() =>
-          count > 0 ? navigate('/cart') : alert('수량을 선택해 주세요^^')
+          count > 0 ? { goToCart } : alert('수량을 선택해 주세요^^')
         }
       >
         구매하기
