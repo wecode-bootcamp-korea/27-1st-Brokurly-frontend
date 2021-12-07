@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
-import SignupChild from '../Signup/SignupChild';
+import SignupModal from '../Signup/SignupModal';
 import './Signup.scss';
 
 function Signup() {
@@ -11,6 +11,7 @@ function Signup() {
   const [isInputIdGuide, setIsInputIdGuide] = useState(false);
   const [isInputPwGuide, setIsInputPwGuide] = useState(false);
   const [isCorrectPwGuide, setIsCorrectPwGuide] = useState(false);
+  const [isIdValid, setIsIdValid] = useState(false);
   // input 클릭시 텍스트 등장(set, setState) - 끝 --------------------
 
   const [inputId, setInputId] = useState('');
@@ -21,10 +22,7 @@ function Signup() {
   const [inputContact, setInputContact] = useState('');
   const [inputAddress, setInputAddress] = useState('');
 
-  // console.log('re-render');
   const successSignBtn = () => {
-    // navigate('/');
-    //fetch
     fetch('http://10.58.4.106:8000/users/signup', {
       method: 'POST',
       body: JSON.stringify({
@@ -47,8 +45,11 @@ function Signup() {
         // value: `이메일을 확인해 주세요`,
         // };
         // alert(signupMessages[res.message]);
-
         // response.message "success"
+        // const isValidIdMessges = {
+        //   USERNAME_NOT_EXISTS: '사용 가능한 아이디입니다',
+        //   USERNAME_ALREADY_EXISTS: '이미 존재하는 아이디입니다',
+        // };
         if (res.message === 'SUCCESS') {
           // 회원가입 성공1
           navigate('/brokurly/products');
@@ -57,13 +58,10 @@ function Signup() {
         } else {
           alert('다시 시도해주세요');
         }
-        // if (조건이 맞으면) {
-        // navigate('/');
-        // }
       });
   };
 
-  const isSuccessIdBtn = () => {
+  const isValidIdBtn = () => {
     fetch('http://10.58.4.106:8000/users/username', {
       method: 'POST',
       body: JSON.stringify({
@@ -73,19 +71,17 @@ function Signup() {
       .then(res => res.json())
       .then(res => {
         if (res.message === 'USERNAME_NOT_EXISTS') {
+          setIsIdValid(true);
           alert('사용 가능한 아이디입니다');
         }
         if (res.message === 'USERNAME_ALREADY_EXISTS') {
           alert('이미 존재하는 아이디입니다');
           // alert(res.message);
         }
-        // else {
-        //  alert('다시 시도해주세요');
-        // }
       });
   };
 
-  const isSuccessEmailBtn = () => {
+  const isValidEmailBtn = () => {
     fetch('http://10.58.4.106:8000/users/email', {
       method: 'POST',
       body: JSON.stringify({
@@ -102,9 +98,6 @@ function Signup() {
           alert('이미 존재하는 메일입니다');
           //  alert(res.message);
         }
-        // else {
-        //  alert('다시 시도해주세요');
-        // }
       });
   };
 
@@ -127,34 +120,24 @@ function Signup() {
     setInputId(e.target.value);
   };
   //id정규식: 대, 소문자, 숫자, 6자리 이상 16자리 이하
-  const isIdValid = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
+  const isIdValid1 = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
+
+  // const isIdValid2 = ;
 
   function inputPwValue(e) {
     setInputPw(e.target.value);
   }
-
-  // const inputNum = string(inputPw);
-  // function numTest() {
-  //   [n, n + 1, n + 2];
-  // }
 
   const isPwValid1 = inputPw.length >= 8;
   //pw정규식: 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상 입력
   const isPwValid2 = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(inputPw);
   //pw조건: 동일한 숫자 3개 이상 연속 사용불가
   //const isPwValid3 = numTest();
+  const isCorrectPwValid = inputCorrectPw === inputPw;
 
   const inputCorrectPwValue = e => {
     setInputCorrectPw(e.target.value);
   };
-
-  function isInputCorrectPw() {
-    if (inputCorrectPw === inputPw) {
-      return true;
-    }
-  }
-
-  const isCorrectPwValid = isInputCorrectPw();
 
   const inputNameValue = e => {
     setInputName(e.target.value);
@@ -179,14 +162,6 @@ function Signup() {
       <div className="signupWidth">
         <header className="signupHeader">
           <h2 className="signupHeaderName">회원가입</h2>
-          {/* props관련
-           <SignupChild
-            openInputIdChild={setIsInputIdGuide}
-            // test={false}
-            //color="red"
-            //  titleColor={colorsssssss}
-            name="홍길동"
-          <SignupChild /> */}
         </header>
         <div className="signupBox">
           <form className="signupForm">
@@ -211,13 +186,18 @@ function Signup() {
                       <p className="guideTextBox">
                         <span className="guideText">
                           <div
-                            className={!isIdValid ? 'guideText' : 'passSign'}
+                            className={!isIdValid1 ? 'guideText' : 'passSign'}
                           >
                             <span className="dotMark">●</span> 6자 이상의 영문
                             혹은 영문과 숫자를 조합
                           </div>
                         </span>
-                        <span className="guideText">
+                        <span
+                          // className={`guideText${isIdValid ? ' passSign' : ''}`
+                          className={
+                            isIdValid ? 'guideText passSign' : 'guideText'
+                          }
+                        >
                           <span className="dotMark">●</span> 아이디 중복확인
                         </span>
                       </p>
@@ -226,18 +206,11 @@ function Signup() {
                   <td>
                     <button
                       className="tableBtn"
-                      onClick={isSuccessIdBtn}
+                      onClick={isValidIdBtn}
                       type="button"
                     >
                       중복확인
                     </button>
-                    {/* 중복확인 (시작) ---아직 미구현 */}
-
-                    <div className="askCorrectModal">
-                      <div className="askCorrectMessage" />
-                    </div>
-
-                    {/* 중복확인 (끝) */}
                   </td>
                 </tr>
                 <tr>
@@ -265,7 +238,7 @@ function Signup() {
                           <div
                             className={!isPwValid2 ? 'guideText' : 'passSign'}
                           >
-                            <span className="dotMark">●</span>
+                            <span className="dotMark">●</span>{' '}
                             영문/숫자/특수문자(공백 제외)만 허용 (단, -는
                             사용불가)
                           </div>
@@ -301,7 +274,9 @@ function Signup() {
                         <span className="guideText">
                           <div
                             className={
-                              !isCorrectPwValid ? 'guideText' : 'passSign'
+                              inputCorrectPw.length !== 0 && isCorrectPwValid
+                                ? 'passSign'
+                                : 'guideText'
                             }
                           >
                             <span className="dotMark">●</span> 동일한 비밀번호를
@@ -340,7 +315,7 @@ function Signup() {
                   <td>
                     <button
                       className="tableBtn"
-                      onClick={isSuccessEmailBtn}
+                      onClick={isValidEmailBtn}
                       type="button"
                     >
                       중복확인
