@@ -37,7 +37,6 @@ function ProductList() {
   }, [category, menu, searchParams, setSearchParams, sort]);
 
   useEffect(() => {
-    // fetch(`${API.product}?&sort=${sort}`)
     fetch(
       `${API.product}?menu=${menu}${
         !category.length ? '' : `&category=${category}`

@@ -35,6 +35,7 @@ function CartModal({ product, closeModal }) {
         .then(res => {
           switch (res.message) {
             case 'SUCCESS':
+            case 'update':
               alert('장바구니에 상품이 추가 되었습니다.');
               closeModal();
               break;
