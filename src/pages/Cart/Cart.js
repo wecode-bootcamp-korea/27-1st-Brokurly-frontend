@@ -121,7 +121,7 @@ function Cart() {
       alert('주문하실 상품을 선택해주세요');
       return;
     }
-    // TODO : 주문 fetch
+
     const orderItems = items
       .filter(item => !item.notChecked)
       .map(item => item.cart_id);
