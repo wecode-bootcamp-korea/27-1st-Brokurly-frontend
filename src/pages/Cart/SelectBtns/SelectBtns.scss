@@ -1,0 +1,49 @@
+@import '../../../styles/variables.scss';
+
+.selectBtns {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+
+  .selectAllBtn {
+    @include flexCenter;
+    padding: 0;
+    margin-right: 10px;
+    font-size: 28px;
+
+    .icon {
+      display: flex;
+      justify-content: center;
+
+      &-green {
+        path {
+          color: $green;
+        }
+      }
+      &-gray {
+        path {
+          color: $color-gray;
+        }
+      }
+    }
+
+    .selectAll {
+      margin-left: 15px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+
+  .selectText {
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .wordBorder {
+    margin: 0px 20px;
+    color: $color-gray;
+    font-size: 13px;
+    font-weight: 400;
+  }
+}

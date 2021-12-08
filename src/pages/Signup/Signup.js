@@ -2,7 +2,7 @@ import React from 'react';
 import './Signup.scss';
 
 function Signup() {
-  return <div></div>;
+  return <div />;
 }
 
 export default Signup;
