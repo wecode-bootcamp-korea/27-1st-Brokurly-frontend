@@ -122,11 +122,6 @@ $btnBorderRadius: 3px;
           @include tableBtn;
         }
 
-        /* 중복확인 (시작) */
-        // .askCorrectModal {
-        // }
-        /* 중복확인 (끝) */
-
         .verifiedCodeBtn {
           border-color: $border-gray;
           color: $color-gray;

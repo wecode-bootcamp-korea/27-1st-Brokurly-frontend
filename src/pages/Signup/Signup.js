@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
-import SignupModal from '../Signup/SignupModal';
+import SignupModal from './SignupModal/SignupModal';
 import './Signup.scss';
 
 function Signup() {
@@ -83,6 +83,26 @@ function Signup() {
       });
   };
 
+  // 모달창
+
+  const [signUpModal, setSignUpModal] = useState(false);
+
+  const openModal = () => {
+    setSignUpModal(true);
+    return <SignupModal />;
+  };
+  const closeModal = e => {
+    e.preventDefault();
+    setSignUpModal(false);
+  };
+
+  function test() {
+    if (signUpModal === true) {
+      return <SignupModal />;
+    }
+  }
+  const testtest = test();
+
   // input 클릭시 텍스트 등장(함수) - 시작 --------------------
   const openInputId = () => {
     setIsInputIdGuide(true);
@@ -97,15 +117,12 @@ function Signup() {
 
   // 유효성 검사 - 시작 --------------------
 
-  const inputIdValue = e => {
-    setInputId(e.target.value);
-  };
   //id정규식: 대, 소문자, 숫자, 6자리 이상 16자리 이하
   const isIdValid1 = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
 
-  function inputPwValue(e) {
-    setInputPw(e.target.value);
-  }
+  const inputIdValue = e => {
+    setInputId(e.target.value);
+  };
 
   const isPwValid1 = inputPw.length >= 8;
   //pw정규식: 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상 입력
@@ -123,6 +140,10 @@ function Signup() {
   };
   const isPwValid3 = isPwValid3Function();
 
+  function inputPwValue(e) {
+    setInputPw(e.target.value);
+  }
+
   const isCorrectPwValid = inputCorrectPw === inputPw;
 
   const inputCorrectPwValue = e => {
@@ -136,6 +157,13 @@ function Signup() {
   const inputEmailValue = e => {
     setInputEmail(e.target.value);
   };
+
+  // function isContactNum() {
+  //   if (isNaN(inputContact) === true) {
+  //     return true;
+  //   }
+  // }
+  // const isContact = isContactNum();
 
   const inputContactValue = e => {
     setInputContact(e.target.value);
@@ -152,6 +180,10 @@ function Signup() {
       <div className="signupWidth">
         <header className="signupHeader">
           <h2 className="signupHeaderName">회원가입</h2>
+          <button onClick={signUpModal ? openModal : null}>모달버튼</button>
+
+          {console.log(openModal)}
+          {console.log(<SignupModal />)}
         </header>
         <div className="signupBox">
           <form className="signupForm">
@@ -229,8 +261,7 @@ function Signup() {
                             className={!isPwValid2 ? 'guideText' : 'passSign'}
                           >
                             <span className="dotMark">●</span>{' '}
-                            영문/숫자/특수문자(공백 제외)만 허용 (단, -는
-                            사용불가)
+                            영문/숫자/특수문자(-, 공백 제외)만 허용
                           </div>
                         </span>
                         <span className="guideText">
@@ -320,7 +351,8 @@ function Signup() {
                     <input
                       className="tableInput contact"
                       onChanage={inputContactValue}
-                      type="tel"
+                      // disabled={isContact ? true : false}
+                      type="text"
                       placeholder="숫자만 입력해주세요"
                     />
                   </td>
