@@ -18,21 +18,10 @@ function Signup() {
 
   const [isIdValid2, setIsIdValid2] = useState(false);
 
-  const [isIdValidMessage, setIsIdValidMessage] = useState(false);
   const [msg, setMessage] = useState('');
 
   // UI 를 만들때 사용해야하면서 변해야하는 값 -> state
   // UI를 만들때 사용해야 되는 값인데 내가 결정하는게 아니라 나를 사용하는 입장에서 결정해야한다. => props로 전달받기
-
-  const setExistUser = () => {
-    if (setIsIdValidMessage === true) {
-      <SignupModal message="사용 가능한 아이디입니다" />;
-    }
-    if (setIsIdValidMessage === false) {
-      <SignupModal message="이미 존재하는 아이디입니다" />;
-    }
-  };
-
   const [inputId, setInputId] = useState('');
   const [inputPw, setInputPw] = useState('');
   const [inputCorrectPw, setInputCorrectPw] = useState('');
@@ -42,7 +31,7 @@ function Signup() {
   const [inputAddress, setInputAddress] = useState('');
 
   const successSignBtn = () => {
-    fetch(`${API}/users/signup`, {
+    fetch(API.signup, {
       method: 'POST',
       body: JSON.stringify({
         username: inputId,
@@ -65,7 +54,7 @@ function Signup() {
   };
 
   const isValidIdBtn = () => {
-    fetch(`${API}/users/username`, {
+    fetch(API.signUsername, {
       method: 'POST',
       body: JSON.stringify({
         username: inputId,
@@ -99,7 +88,7 @@ function Signup() {
   };
 
   const isValidEmailBtn = () => {
-    fetch(`${API}/users/email`, {
+    fetch(API.signEmail, {
       method: 'POST',
       body: JSON.stringify({
         email: inputEmail,
@@ -190,9 +179,7 @@ function Signup() {
 
   //console.log('aa', signUpModal);
 
-  const b = signUpModal && <SignupModal />;
-
-  const userNameExist = false;
+  // const b = signUpModal && <SignupModal />;
 
   return (
     <div className="signup">
@@ -200,7 +187,7 @@ function Signup() {
         <header className="signupHeader">
           <h2 className="signupHeaderName">회원가입</h2>
           <button onClick={openModal}>모달버튼</button>
-          {signUpModal && <SignupModal message={msg} />}
+          {signUpModal && <SignupModal modalMessage={msg} />}
         </header>
         <div className="signupBox">
           <form className="signupForm">

@@ -1,10 +1,10 @@
 import React from 'react';
 import '../SignupModal/SignupModal.scss';
 
-function SignupModal({ message }) {
+function SignupModal({ modalMessage }) {
   return (
     <div className="modalBackground">
-      <div className="modalBox">{message}</div>
+      <div className="modalBox">{modalMessage}</div>
     </div>
   );
 }
