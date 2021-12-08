@@ -5,23 +5,17 @@ import SignupModal from './SignupModal/SignupModal';
 import './Signup.scss';
 
 function Signup() {
-  // custom hook
-  // UI + LOGIC
-
   const navigate = useNavigate();
 
-  // input 클릭시 텍스트 등장(set, setState) - 시작 --------------------
+  // MEMO: input 클릭시 텍스트 등장(set, setState)
   const [isInputIdGuide, setIsInputIdGuide] = useState(false);
   const [isInputPwGuide, setIsInputPwGuide] = useState(false);
   const [isCorrectPwGuide, setIsCorrectPwGuide] = useState(false);
-  // input 클릭시 텍스트 등장(set, setState) - 끝 --------------------
 
   const [isIdValid2, setIsIdValid2] = useState(false);
 
   const [msg, setMessage] = useState('');
 
-  // UI 를 만들때 사용해야하면서 변해야하는 값 -> state
-  // UI를 만들때 사용해야 되는 값인데 내가 결정하는게 아니라 나를 사용하는 입장에서 결정해야한다. => props로 전달받기
   const [inputId, setInputId] = useState('');
   const [inputPw, setInputPw] = useState('');
   const [inputCorrectPw, setInputCorrectPw] = useState('');
@@ -45,14 +39,25 @@ function Signup() {
       .then(res => res.json())
       .then(res => {
         if (res.message === 'SUCCESS') {
-          navigate('/brokurly/products');
+          navigate('/');
           openModal();
           setMessage('가입을 환영합니다!');
-          // alert('가입을 환영합니다!');
+        }
+        // MEMO: 이하 else를 제외한 if부분은 테스트 결과에 따라 삭제 가능성 있음
+        if (res.message === 'Invalid Username') {
+          openModal();
+          setMessage('아이디를 다시 입력해주세요');
+        }
+        if (res.message === 'Invalid Password') {
+          openModal();
+          setMessage('비밀번호를 다시 입력해주세요');
+        }
+        if (res.message === 'Invalid Email') {
+          openModal();
+          setMessage('메일을 다시 입력해주세요');
         } else {
           openModal();
           setMessage('다시 시도해주세요');
-          // alert('다시 시도해주세요');
         }
       });
   };
@@ -68,24 +73,13 @@ function Signup() {
       .then(res => {
         if (res.message === 'USERNAME_NOT_EXISTS') {
           setIsIdValid2(true);
-          // setExistUser(false);
-          // openModal();
-          // 1. modal open
-          // 2. message = "사용가능한 아이디입니다"
+
           openModal();
           setMessage('사용 가능한 아이디입니다');
-          // setExistUser();
-          // alert('사용 가능한 아이디입니다');
         }
         if (res.message === 'USERNAME_ALREADY_EXISTS') {
-          // setExistUser;
-          // openModal2();
-          // 1.modal open
-          // 2. message = "이미 존재하는 아이디입니다"
           openModal();
           setMessage('이미 존재하는 아이디입니다');
-          // setExistUser(false);
-          // alert('이미 존재하는 아이디입니다');
         }
       });
   };
@@ -99,34 +93,22 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
-        // const isValidEmailMessges = {
-        //   EMAIL_NOT_EXISTS: '사용 가능한 메일입니다',
-        //   EMAIL_ALREADY_EXISTS: '이미 존재하는 메일입니다',
-        // };
         openModal();
         setMessage('사용 가능한 메일입니다');
-        // alert(isValidEmailMessges[res.message]);
       });
   };
 
-  // 모달창
+  // MEMO: 모달
   const [signUpModal, setSignUpModal] = useState(false);
-
   const openModal = () => {
     setSignUpModal(true);
   };
-
   const closeModal = e => {
     e.preventDefault();
     setSignUpModal(false);
   };
 
-  const [stopScroll, setStopScroll] = useState(true);
-  const activeStopScroll = () => {
-    setStopScroll(false);
-  };
-
-  // input 클릭시 텍스트 등장(함수) - 시작 --------------------
+  // MEMO: input 클릭시 텍스트 등장(함수)
   const openInputId = () => {
     setIsInputIdGuide(true);
   };
@@ -136,10 +118,9 @@ function Signup() {
   const openCorrectPw = () => {
     setIsCorrectPwGuide(true);
   };
-  // input 클릭시 텍스트 등장(함수) - 끝 --------------------
 
-  // 유효성 검사 - 시작 --------------------
-  //id정규식: 대, 소문자, 숫자, 6자리 이상 16자리 이하
+  // MEMO: 유효성 검사
+  // MEMO: id조건: 대, 소문자, 숫자, 6자리 이상 16자리 이하
   const isIdValid1 = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
 
   const inputIdValue = e => {
@@ -147,9 +128,9 @@ function Signup() {
   };
 
   const isPwValid1 = inputPw.length >= 8;
-  //pw정규식: 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상 입력
+  // MEMO: pw조건1: 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상 입력
   const isPwValid2 = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(inputPw);
-  //pw조건: 동일한 숫자 3개 이상 연속 사용불가
+  // MEMO: pw조건2: 동일한 숫자 3개 이상 연속 사용불가
   const isPwValid3Function = () => {
     if (inputPw.length === 0) {
       return false;
@@ -187,16 +168,13 @@ function Signup() {
     setInputAddress(e.target.value);
   };
 
-  //console.log('aa', signUpModal);
-
-  // const b = signUpModal && <SignupModal />;
-
   return (
     <div className="signup">
       <div className="signupWidth">
         <header className="signupHeader">
           <h2 className="signupHeaderName">회원가입</h2>
-          <button onClick={openModal}>모달버튼</button>
+          {/* MEMO: 모달 테스트용 버튼
+          <button onClick={openModal}>모달버튼</button> */}
           {signUpModal && (
             <SignupModal modalMessage={msg} closeModalBtn={closeModal} />
           )}
@@ -232,7 +210,6 @@ function Signup() {
                             </div>
                           </span>
                           <span
-                            // className={`guideText${isIdValid ? ' passSign' : ''}`
                             className={
                               isIdValid2 ? 'guideText passSign' : 'guideText'
                             }
@@ -304,7 +281,6 @@ function Signup() {
                         onChange={inputCorrectPwValue}
                         onClick={openCorrectPw}
                         type="password"
-                        a
                         placeholder="비밀번호를 한번 더 입력해주세요"
                       />
                       {isCorrectPwGuide && (
@@ -367,7 +343,7 @@ function Signup() {
                     <td>
                       <input
                         className="tableInput contact"
-                        onChanage={inputContactValue}
+                        onChange={inputContactValue}
                         type="text"
                         placeholder="숫자만 입력해주세요"
                       />
