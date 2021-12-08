@@ -38,12 +38,24 @@ function ProductList() {
     fetch(API.products)
       .then(res => res.json())
       .then(res => {
-        // setProducts(res.result);
-        setProducts(res);
+        if (!!res.result) {
+          setProducts(res.result);
+        }
+
+        switch (res.message) {
+          case 'AttributeError':
+          case 'KeyError':
+          case 'TypeError':
+          case 'DoesNotExits':
+            alert('에러입니다.');
+            break;
+          default:
+            break;
+        }
       })
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.log(e);
+        console.error(e);
       })
       .finally(setLoaded(true));
   }, [searchParams]);
