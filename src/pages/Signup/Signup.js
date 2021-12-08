@@ -31,7 +31,7 @@ function Signup() {
   const [inputAddress, setInputAddress] = useState('');
 
   const successSignBtn = () => {
-    fetch(API.signup, {
+    fetch(`${API.signup}`, {
       method: 'POST',
       body: JSON.stringify({
         username: inputId,
@@ -46,49 +46,52 @@ function Signup() {
       .then(res => {
         if (res.message === 'SUCCESS') {
           navigate('/brokurly/products');
-          alert('가입을 환영합니다!');
+          openModal();
+          setMessage('가입을 환영합니다!');
+          // alert('가입을 환영합니다!');
         } else {
-          alert('다시 시도해주세요');
+          openModal();
+          setMessage('다시 시도해주세요');
+          // alert('다시 시도해주세요');
         }
       });
   };
 
   const isValidIdBtn = () => {
-    fetch(API.signUsername, {
-      method: 'POST',
-      body: JSON.stringify({
-        username: inputId,
-      }),
-    })
-      .then(res => res.json())
-      .then(res => {
-        if (res.message === 'USERNAME_NOT_EXISTS') {
-          setIsIdValid2(true);
-          // setExistUser(false);
-          // openModal();
-          // 1. modal open
-          // 2. message = "사용가능한 아이디입니다"
-          openModal();
-          setMessage('사용 가능한 아이디입니다');
-
-          // setExistUser();
-          // alert('사용 가능한 아이디입니다');
-        }
-        if (res.message === 'USERNAME_ALREADY_EXISTS') {
-          // setExistUser;
-          // openModal2();
-          // 1.modal open
-          // 2. message = "이미 존재하는 아이디입니다"
-          openModal();
-          setMessage('이미 존재하는 아이디입니다');
-          // setExistUser(false);
-          // alert('이미 존재하는 아이디입니다');
-        }
-      });
+    // fetch(`${API.signUsername}`, {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     username: inputId,
+    //   }),
+    // })
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     if (res.message === 'USERNAME_NOT_EXISTS') {
+    //       setIsIdValid2(true);
+    //       // setExistUser(false);
+    //       // openModal();
+    //       // 1. modal open
+    //       // 2. message = "사용가능한 아이디입니다"
+    //       openModal();
+    //       setMessage('사용 가능한 아이디입니다');
+    //       // setExistUser();
+    //       // alert('사용 가능한 아이디입니다');
+    //     }
+    //     if (res.message === 'USERNAME_ALREADY_EXISTS') {
+    //       // setExistUser;
+    //       // openModal2();
+    //       // 1.modal open
+    //       // 2. message = "이미 존재하는 아이디입니다"
+    //       openModal();
+    //       setMessage('이미 존재하는 아이디입니다');
+    //       // setExistUser(false);
+    //       // alert('이미 존재하는 아이디입니다');
+    //     }
+    //   });
   };
 
   const isValidEmailBtn = () => {
-    fetch(API.signEmail, {
+    fetch(`${API.signEmail}`, {
       method: 'POST',
       body: JSON.stringify({
         email: inputEmail,
@@ -187,7 +190,9 @@ function Signup() {
         <header className="signupHeader">
           <h2 className="signupHeaderName">회원가입</h2>
           <button onClick={openModal}>모달버튼</button>
-          {signUpModal && <SignupModal modalMessage={msg} />}
+          {signUpModal && (
+            <SignupModal modalMessage={msg} closeModalBtn={closeModal} />
+          )}
         </header>
         <div className="signupBox">
           <form className="signupForm">
