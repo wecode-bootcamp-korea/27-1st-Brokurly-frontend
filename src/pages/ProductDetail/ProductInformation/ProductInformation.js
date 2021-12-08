@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import './ProductInformation.scss';
 
@@ -26,23 +26,34 @@ function ProductInformation({
 
   const totalPrice = count * price;
 
+  const isLogin = useRef();
+  const userName = useRef();
+
+  useEffect(() => {
+    isLogin.current = sessionStorage.getItem('token');
+    userName.current = sessionStorage.getItem('username');
+  });
+
   const goToCart = () => {
-    fetch('http://10.58.4.142:8000/cart', {
-      method: 'POST',
-      headers: {
-        Authorization: '토큰',
-      },
-      body: JSON.stringify({
-        product_id: { productId },
-        quantity: count,
-      }),
-    })
-      .then(response => response.json())
-      .then(result =>
-        result.success
-          ? navigate('/cart')
-          : alert('로그인해주세요^^') && navigate('/signin')
-      );
+    if (isLogin.current) {
+      fetch('http://10.58.4.142:8000/cart', {
+        method: 'POST',
+        headers: {
+          Authorization: '토큰',
+        },
+        body: JSON.stringify({
+          product_id: { productId },
+          quantity: count,
+        }),
+      })
+        .then(response => response.json())
+        .then(result =>
+          result.success
+            ? navigate('/cart')
+            : alert('로그인해주세요^^') && navigate('/signin')
+        );
+    } else {
+    }
   };
 
   return (
