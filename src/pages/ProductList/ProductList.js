@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import Modal from '../../components/Modal/Modal';
+import API from '../../config';
 import ProductListHeader from './ProductListHeader/ProductListHeader';
 import ProducListContent from './ProducListContent/ProducListContent';
-import './ProductList.scss';
 import CartModal from './CartModal/CartModal';
-import Modal from '../../components/Modal/Modal';
-import { useSearchParams } from 'react-router-dom';
+import './ProductList.scss';
 
 function ProductList() {
   const [currentCategory, setCurrentCategory] = useState(0);
@@ -31,13 +32,13 @@ function ProductList() {
     // const menu = searchParams.get('menu') || '채소';
     // const category = searchParams.get('category') || '';
     // const sort = searchParams.get('sort') || 0;
-    fetch('http://10.58.10.2:8000/products', {
-      headers: {
-        token: token.current,
-      },
-    })
+    // fetch('/data/productListData00.json')
+
+    // url 아마도 고쳐야함
+    fetch(API.products)
       .then(res => res.json())
       .then(res => {
+        // setProducts(res.result);
         setProducts(res);
       })
       .catch(e => {

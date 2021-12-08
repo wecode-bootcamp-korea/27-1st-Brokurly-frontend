@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import API from '../../config';
 import Items from './Items/Items';
 import SelectBtns from './SelectBtns/SelectBtns';
 import CartSummary from './CartSummary/CartSummary';
@@ -9,7 +10,7 @@ function Cart() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('http://10.58.4.106:8000/cart')
+    fetch(API.cart)
       .then(res => res.json())
       .then(res => {
         setItems(res.result);
