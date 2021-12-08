@@ -21,11 +21,11 @@ function ProductList() {
   const sort = searchParams.get('sort') || '-created_at';
 
   useEffect(() => {
+    setProductMenu(PRODUCT_MENU[menu]);
     if (!searchParams.get('menu')) {
       return;
     }
 
-    setProductMenu(PRODUCT_MENU[menu]);
     if (category === '' && sort === '-created_at') {
       const newSearchParams = new URLSearchParams(searchParams);
       newSearchParams.set('category', '');
@@ -37,6 +37,7 @@ function ProductList() {
   }, [category, menu, searchParams, setSearchParams, sort]);
 
   useEffect(() => {
+    // fetch(`${API.product}?&sort=${sort}`)
     fetch(
       `${API.product}?menu=${menu}${
         !category.length ? '' : `&category=${category}`
@@ -125,7 +126,6 @@ function ProductList() {
 }
 
 export default ProductList;
-
 const PRODUCT_MENU = {
   채소: {
     id: 0,
