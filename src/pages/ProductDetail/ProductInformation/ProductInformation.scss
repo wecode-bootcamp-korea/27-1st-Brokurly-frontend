@@ -29,11 +29,13 @@
   }
 
   .productWrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     padding: 20px;
     border-bottom: 1px solid $border-gray;
 
     .listTitle {
-      float: left;
       padding-right: 20px;
       width: 150px;
       color: #666666;
@@ -70,12 +72,12 @@
       font-size: 16px;
     }
 
-    .totalPrice {
+    .totalPriceNumber {
       font-size: 32px;
     }
 
     .totalPriceUnit {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 
@@ -87,5 +89,6 @@
     background-color: $green;
     color: #ffffff;
     font-size: 16px;
+    cursor: pointer;
   }
 }
