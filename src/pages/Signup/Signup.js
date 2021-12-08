@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SignupModal from './SignupModal/SignupModal';
 import './Signup.scss';
 
 function Signup() {
@@ -77,13 +76,6 @@ function Signup() {
         };
         alert(isValidEmailMessges[res.message]);
       });
-  };
-
-  const [signUpModal, setSignUpModal] = useState(false);
-
-  const openModal = () => {
-    setSignUpModal(true);
-    return <SignupModal />;
   };
 
   const openInputId = () => {

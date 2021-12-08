@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import '../SignupModal/SignupModal.scss';
 
 function SignupModal(props) {
-  console.log(props);
+  // console.log(props);
 
   // const [signUpModal, setSignUpModal] = useState(false);
   // const openModal = () => {
