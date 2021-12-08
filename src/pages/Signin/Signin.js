@@ -35,47 +35,38 @@ function Signin() {
 
   const inputPwValue = e => setPwValue(e.target.value);
 
-  // keyDown event
-  // const [pressEnter, setPressEnter] = useState(false);
-
-  // const activeEnter = e => {
-  //   setPressEnter(e.key.enter);
-  //   return true;
-  // };
-
-  function activeEnter() {
-    if (window.event.key === '13') {
-      successLoginBtn();
+  const pressEnter = e => {
+    if (e.key === 'Enter') {
+      return successLoginBtn();
     }
-  }
-  const test = activeEnter();
+  };
 
   return (
     <div className="login">
       <div className="loginSection">
         <div className="loginText">로그인</div>
-        {test}
+
         <div className="loginJoinSection">
           <form className="loginForm">
             <div className="loginIdForm">
               <input
                 className="loginId"
                 onChange={inputIdValue}
-                autocomplete="username"
+                onKeyPress={pressEnter}
+                autoComplete="username"
                 type="text"
                 placeholder="아이디를 입력해주세요"
               />
             </div>
-
             <div className="loginPwForm">
               <input
                 className="loginPw"
                 onChange={inputPwValue}
+                onKeyPress={pressEnter}
                 type="password"
                 placeholder="비밀번호를 입력해주세요"
               />
             </div>
-
             <div className="checkboxBar">
               <div className="CheckboxSection">
                 <input
@@ -83,7 +74,7 @@ function Signin() {
                   id="checkboxLabel"
                   type="checkbox"
                 />
-                <label for="checkboxLabel">
+                <label htmlFor="checkboxLabel">
                   <span className="securityText">보안접속</span>
                 </label>
               </div>
@@ -93,15 +84,13 @@ function Signin() {
                 <Link to="/">비밀번호 찾기</Link>
               </div>
             </div>
-            {activeEnter() && (
-              <button
-                className="loginBtn"
-                onClick={successLoginBtn}
-                type="button"
-              >
-                로그인
-              </button>
-            )}
+            <button
+              className="loginBtn"
+              onClick={successLoginBtn}
+              type="button"
+            >
+              로그인
+            </button>
             <Link to="/signup">
               <button className="joinBtn" type="button">
                 회원가입
