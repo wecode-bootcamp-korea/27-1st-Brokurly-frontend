@@ -3,6 +3,7 @@ import './Cart.scss';
 import Items from './Items/Items';
 import SelectBtns from './SelectBtns/SelectBtns';
 import CartSummary from './CartSummary/CartSummary';
+import API from '../../config';
 
 function Cart() {
   const [items, setItems] = useState(null);
@@ -123,6 +124,7 @@ function Cart() {
   };
 
   const orderItems = () => {
+    fetch(API.orders);
     if (checkedItems < 1) {
       alert('주문하실 상품을 선택해주세요');
       return;
