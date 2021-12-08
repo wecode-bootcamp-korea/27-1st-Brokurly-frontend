@@ -25,11 +25,12 @@ function Signin() {
         // alert(loginMessages[result.message]);
 
         if (result.ACCESS_TOKEN) {
-          console.log(result);
-          sessionStorage.setItem('Authorization', result.ACCESS_TOKEN);
+          sessionStorage.setItem('token', result.ACCESS_TOKEN);
+          //'token' ->내가 지정한 저장한 토큰의 이름
+          //ACCESS_TOKEN ->백엔드로부터 가져온 토큰 키값 (이걸 'token'으로 이름을 바꿔 가져온 것임)
           sessionStorage.setItem('username', idValue);
           // alert(`${idValue}님 환영합니다!`);
-          navigate('/product');
+          navigate('/');
         } else if (result.message === 'USER_DOES_NOT_EXIST') {
           alert('아이디 또는 비밀번호 오류입니다');
         }
@@ -78,9 +79,9 @@ function Signin() {
                 </label>
               </div>
               <div className="searchSection">
-                <Link to="/brokurly/products">아이디 찾기</Link>
+                <Link to="/">아이디 찾기</Link>
                 <span className="serchSectionBar">|</span>
-                <Link to="/brokurly/products">비밀번호 찾기</Link>
+                <Link to="/">비밀번호 찾기</Link>
               </div>
             </div>
             <button
