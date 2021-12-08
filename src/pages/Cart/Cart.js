@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Items from './Items/Items';
 import SelectBtns from './SelectBtns/SelectBtns';
 import CartSummary from './CartSummary/CartSummary';
@@ -8,6 +8,11 @@ import API from '../../config';
 function Cart() {
   const [items, setItems] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const token = useRef();
+
+  useEffect(() => {
+    token.current = sessionStorage.getItem('token');
+  });
 
   useEffect(() => {
     fetch(API.cart)
@@ -122,13 +127,13 @@ function Cart() {
       return;
     }
 
-    const orderItems = items
+    const orderItemsCartId = items
       .filter(item => !item.notChecked)
       .map(item => item.cart_id);
 
-    fetch(API.order, {
+    fetch(API.orders, {
       method: 'POST',
-      body: JSON.stringify(orderItems),
+      body: JSON.stringify({ cart_ids: orderItemsCartId }),
     })
       .then(res => res.json())
       .then(res => {
