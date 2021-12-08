@@ -25,7 +25,7 @@ function Signin() {
         // alert(loginMessages[result.message]);
 
         if (result.ACCESS_TOKEN) {
-          sessionStorage.setItem('token', result.access_token);
+          sessionStorage.setItem('authorization', result.access_token);
           sessionStorage.setItem('username', idValue);
           // alert(`${idValue}님 환영합니다!`);
           navigate('/brokurly/products');
