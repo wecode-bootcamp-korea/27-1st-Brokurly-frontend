@@ -37,18 +37,6 @@ function ProductList() {
   }, [category, menu, searchParams, setSearchParams, sort]);
 
   useEffect(() => {
-    console.log('fetch EFFECT');
-    console.log('menu', menu);
-    console.log('category', category);
-    console.log('sort', sort);
-
-    console.log(
-      'fetch',
-      `${API.product}?menu=${menu}${
-        !category.length ? '' : `&category=${category}`
-      }&sort=${sort}`
-    );
-
     fetch(
       `${API.product}?menu=${menu}${
         !category.length ? '' : `&category=${category}`
