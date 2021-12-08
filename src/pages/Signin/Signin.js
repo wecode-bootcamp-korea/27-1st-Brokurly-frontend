@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import API from '../../config';
 import './Signin.scss';
 
 function Signin() {
@@ -9,7 +10,7 @@ function Signin() {
   const navigate = useNavigate();
 
   const successLoginBtn = () => {
-    fetch('http://10.58.3.112:8000/users/signin', {
+    fetch(API.signin, {
       method: 'POST',
       body: JSON.stringify({
         username: idValue,
@@ -18,12 +19,17 @@ function Signin() {
     })
       .then(res => res.json())
       .then(result => {
+        // const loginMessages = {
+        //   'Token not Exist': '아이디 또는 비밀번호 오류입니다',
+        // };
+        // alert(loginMessages[result.message]);
+
         if (result.ACCESS_TOKEN) {
           sessionStorage.setItem('token', result.access_token);
           sessionStorage.setItem('username', idValue);
-          alert(`${idValue}님 환영합니다!`);
+          // alert(`${idValue}님 환영합니다!`);
           navigate('/brokurly/products');
-        } else {
+        } else if (result.message['Token not Exist']) {
           alert('아이디 또는 비밀번호 오류입니다');
         }
       });
