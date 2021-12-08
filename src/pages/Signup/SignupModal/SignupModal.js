@@ -6,7 +6,8 @@ function SignupModal({ modalMessage, closeModalBtn }) {
     <div className="modalBackground" onClick={closeModalBtn}>
       <div className="modalContainer">
         <div className="textBox">
-          <div className="modalText">{modalMessage}</div>
+          {/* <span className="xMark">X</span> */}
+          <div className="modalText">테스트 메세지입니다{modalMessage}</div>
           <button className="closeBtn" onClick={closeModalBtn}>
             확인
           </button>

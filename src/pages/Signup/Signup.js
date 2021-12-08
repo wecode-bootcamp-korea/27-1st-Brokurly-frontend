@@ -121,6 +121,11 @@ function Signup() {
     setSignUpModal(false);
   };
 
+  const [stopScroll, setStopScroll] = useState(true);
+  const activeStopScroll = () => {
+    setStopScroll(false);
+  };
+
   // input 클릭시 텍스트 등장(함수) - 시작 --------------------
   const openInputId = () => {
     setIsInputIdGuide(true);
