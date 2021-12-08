@@ -20,7 +20,6 @@ function CartModal({ product, closeModal }) {
   };
 
   const addProductToCart = () => {
-    console.log('token', token);
     if (!!token) {
       fetch(API.cart, {
         method: 'POST',
@@ -34,7 +33,6 @@ function CartModal({ product, closeModal }) {
       })
         .then(res => res.json())
         .then(res => {
-          console.log('res', res);
           switch (res.message) {
             case 'SUCCESS':
               alert('장바구니에 상품이 추가 되었습니다.');
