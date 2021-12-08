@@ -227,7 +227,7 @@ function Signup() {
                             <div
                               className={!isIdValid1 ? 'guideText' : 'passSign'}
                             >
-                              <span className="dotMark">●</span> 6자 이상의 영문
+                              <span className="dotMark">·</span> 6자 이상의 영문
                               혹은 영문과 숫자를 조합
                             </div>
                           </span>
@@ -237,7 +237,7 @@ function Signup() {
                               isIdValid2 ? 'guideText passSign' : 'guideText'
                             }
                           >
-                            <span className="dotMark">●</span> 아이디 중복확인
+                            <span className="dotMark">·</span> 아이디 중복확인
                           </span>
                         </p>
                       )}
@@ -270,14 +270,14 @@ function Signup() {
                             <div
                               className={!isPwValid1 ? 'guideText' : 'passSign'}
                             >
-                              <span className="dotMark">●</span> 8자 이상 입력
+                              <span className="dotMark">·</span> 8자 이상 입력
                             </div>
                           </span>
                           <span className="guideText">
                             <div
                               className={!isPwValid2 ? 'guideText' : 'passSign'}
                             >
-                              <span className="dotMark">●</span>{' '}
+                              <span className="dotMark">·</span>{' '}
                               영문/숫자/특수문자(-, 공백 제외)만 허용
                             </div>
                           </span>
@@ -285,7 +285,7 @@ function Signup() {
                             <div
                               className={!isPwValid3 ? 'guideText' : 'passSign'}
                             >
-                              <span className="dotMark">●</span> 동일한 숫자 및
+                              <span className="dotMark">·</span> 동일한 숫자 및
                               문자 3개 이상 연속 사용불가
                             </div>
                           </span>
@@ -317,7 +317,7 @@ function Signup() {
                                   : 'guideText'
                               }
                             >
-                              <span className="dotMark">●</span> 동일한
+                              <span className="dotMark">·</span> 동일한
                               비밀번호를 입력해주세요
                             </div>
                           </span>
