@@ -17,20 +17,14 @@ function ProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [loaded, setLoaded] = useState(false);
   const menu = searchParams.get('menu') || '채소';
-  let category = searchParams.get('category') || '';
+  const category = searchParams.get('category') || '';
   const sort = searchParams.get('sort') || '-created_at';
 
-  // useEffect(() => {
-  //   const newSearchParams = new URLSearchParams(searchParams);
-  //   newSearchParams.set('category', '');
-  //   newSearchParams.set('sort', '-created_at');
-  //   setSearchParams(newSearchParams);
-  //   setCurrentCategory(0);
-  //   setCurrentSort(0);
-  //   category = '';
-  // }, [menu]);
-
   useEffect(() => {
+    if (!searchParams.get('menu')) {
+      return;
+    }
+
     setProductMenu(PRODUCT_MENU[menu]);
     if (category === '' && sort === '-created_at') {
       const newSearchParams = new URLSearchParams(searchParams);
@@ -43,15 +37,11 @@ function ProductList() {
   }, [category, menu, searchParams, setSearchParams, sort]);
 
   useEffect(() => {
-    // console.log('menu', menu);
-    // console.log('category', category);
-    // console.log('sort', sort);
-    // console.log(
-    //   'final URL',
-    //   `menu=${menu}${
-    //     !category.length ? '' : `&category=${category}`
-    //   }&sort=${sort}`
-    // );
+    console.log('fetch EFFECT');
+    console.log('menu', menu);
+    console.log('category', category);
+    console.log('sort', sort);
+
     console.log(
       'fetch',
       `${API.product}?menu=${menu}${
