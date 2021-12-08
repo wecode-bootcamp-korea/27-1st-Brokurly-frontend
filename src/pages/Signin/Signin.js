@@ -92,7 +92,6 @@ function Signin() {
           </form>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

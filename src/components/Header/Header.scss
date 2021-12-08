@@ -1,0 +1,25 @@
+@import '../../styles/variables.scss';
+
+.header {
+  @include flexCenter;
+  min-width: 1050px;
+  padding: 20px 20px 0 20px;
+  background-color: $bg-white;
+
+  .headerContainer {
+    width: 100%;
+    max-width: 1010px;
+
+    .navLogo {
+      @include flexCenter;
+      padding: 0 10px;
+
+      .clickToMain {
+        .mainLog {
+          width: 100px;
+          height: 80px;
+        }
+      }
+    }
+  }
+}

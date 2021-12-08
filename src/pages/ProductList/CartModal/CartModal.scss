@@ -1,0 +1,93 @@
+@import '../../../styles/variables.scss';
+
+.cartModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 500px;
+  height: 300px;
+  padding: 30px;
+  border-radius: 15px;
+
+  .productName {
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 17px;
+  }
+
+  .productCartDetail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+
+    .price {
+      font-weight: 800;
+    }
+
+    .quantityContainer {
+      @include flexCenter;
+      border: 1px solid $border-gray;
+      border-radius: 5px;
+      padding: 4px;
+
+      .down,
+      .up {
+        font-weight: 700;
+        font-size: 20px;
+      }
+
+      .quantity {
+        @include flexCenter;
+        width: 35px;
+        font-size: 17px;
+      }
+    }
+  }
+
+  .totalContainer {
+    display: flex;
+    justify-content: space-between;
+
+    .totalText {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .total {
+      display: flex;
+      align-items: center;
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .unit {
+      margin-left: 5px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+  .btns {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+
+    .btn {
+      width: 49%;
+      padding: 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .cancel {
+      border: 1px solid $color-gray;
+    }
+
+    .addToCart {
+      background-color: $green;
+      color: #fff;
+    }
+  }
+}
