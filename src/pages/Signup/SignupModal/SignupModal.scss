@@ -8,7 +8,7 @@
   bottom: 0px;
   left: 0px;
   background: rgb(0, 0, 0);
-  z-index: 0;
+  // z-index: 0;
 }
 
 .modalBox {
@@ -20,6 +20,6 @@
   height: 250px;
   padding: 16px;
   background: gray;
-  border-radius: 10px;
   text-align: center;
+  z-index: 1;
 }

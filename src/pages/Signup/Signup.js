@@ -1,15 +1,37 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../../../src/config';
+import SignupModal from './SignupModal/SignupModal';
 import './Signup.scss';
 
 function Signup() {
+  // custom hook
+  // UI + LOGIC
+
   const navigate = useNavigate();
 
+  // input 클릭시 텍스트 등장(set, setState) - 시작 --------------------
   const [isInputIdGuide, setIsInputIdGuide] = useState(false);
   const [isInputPwGuide, setIsInputPwGuide] = useState(false);
   const [isCorrectPwGuide, setIsCorrectPwGuide] = useState(false);
+  // input 클릭시 텍스트 등장(set, setState) - 끝 --------------------
 
   const [isIdValid2, setIsIdValid2] = useState(false);
+
+  const [isIdValidMessage, setIsIdValidMessage] = useState(false);
+  const [msg, setMessage] = useState('');
+
+  // UI 를 만들때 사용해야하면서 변해야하는 값 -> state
+  // UI를 만들때 사용해야 되는 값인데 내가 결정하는게 아니라 나를 사용하는 입장에서 결정해야한다. => props로 전달받기
+
+  const setExistUser = () => {
+    if (setIsIdValidMessage === true) {
+      <SignupModal message="사용 가능한 아이디입니다" />;
+    }
+    if (setIsIdValidMessage === false) {
+      <SignupModal message="이미 존재하는 아이디입니다" />;
+    }
+  };
 
   const [inputId, setInputId] = useState('');
   const [inputPw, setInputPw] = useState('');
@@ -20,7 +42,7 @@ function Signup() {
   const [inputAddress, setInputAddress] = useState('');
 
   const successSignBtn = () => {
-    fetch('http://10.58.3.112:8000/users/signup', {
+    fetch(`${API}/users/signup`, {
       method: 'POST',
       body: JSON.stringify({
         username: inputId,
@@ -43,7 +65,7 @@ function Signup() {
   };
 
   const isValidIdBtn = () => {
-    fetch('http://10.58.3.112:8000/users/username', {
+    fetch(`${API}/users/username`, {
       method: 'POST',
       body: JSON.stringify({
         username: inputId,
@@ -53,16 +75,31 @@ function Signup() {
       .then(res => {
         if (res.message === 'USERNAME_NOT_EXISTS') {
           setIsIdValid2(true);
-          alert('사용 가능한 아이디입니다');
+          // setExistUser(false);
+          // openModal();
+          // 1. modal open
+          // 2. message = "사용가능한 아이디입니다"
+          openModal();
+          setMessage('사용 가능한 아이디입니다');
+
+          // setExistUser();
+          // alert('사용 가능한 아이디입니다');
         }
         if (res.message === 'USERNAME_ALREADY_EXISTS') {
-          alert('이미 존재하는 아이디입니다');
+          // setExistUser;
+          // openModal2();
+          // 1.modal open
+          // 2. message = "이미 존재하는 아이디입니다"
+          openModal();
+          setMessage('이미 존재하는 아이디입니다');
+          // setExistUser(false);
+          // alert('이미 존재하는 아이디입니다');
         }
       });
   };
 
   const isValidEmailBtn = () => {
-    fetch('http://10.58.3.112:8000/users/email', {
+    fetch(`${API}/users/email`, {
       method: 'POST',
       body: JSON.stringify({
         email: inputEmail,
@@ -78,6 +115,19 @@ function Signup() {
       });
   };
 
+  // 모달창
+  const [signUpModal, setSignUpModal] = useState(false);
+
+  const openModal = () => {
+    setSignUpModal(true);
+  };
+
+  const closeModal = e => {
+    e.preventDefault();
+    setSignUpModal(false);
+  };
+
+  // input 클릭시 텍스트 등장(함수) - 시작 --------------------
   const openInputId = () => {
     setIsInputIdGuide(true);
   };
@@ -87,7 +137,9 @@ function Signup() {
   const openCorrectPw = () => {
     setIsCorrectPwGuide(true);
   };
+  // input 클릭시 텍스트 등장(함수) - 끝 --------------------
 
+  // 유효성 검사 - 시작 --------------------
   //id정규식: 대, 소문자, 숫자, 6자리 이상 16자리 이하
   const isIdValid1 = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
 
@@ -136,11 +188,19 @@ function Signup() {
     setInputAddress(e.target.value);
   };
 
+  //console.log('aa', signUpModal);
+
+  const b = signUpModal && <SignupModal />;
+
+  const userNameExist = false;
+
   return (
     <div className="signup">
       <div className="signupWidth">
         <header className="signupHeader">
           <h2 className="signupHeaderName">회원가입</h2>
+          <button onClick={openModal}>모달버튼</button>
+          {signUpModal && <SignupModal message={msg} />}
         </header>
         <div className="signupBox">
           <form className="signupForm">
@@ -172,6 +232,7 @@ function Signup() {
                           </div>
                         </span>
                         <span
+                          // className={`guideText${isIdValid ? ' passSign' : ''}`
                           className={
                             isIdValid2 ? 'guideText passSign' : 'guideText'
                           }
