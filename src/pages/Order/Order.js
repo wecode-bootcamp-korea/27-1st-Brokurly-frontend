@@ -10,7 +10,7 @@ function Order() {
     // fetch('http://10.58.0.187:8000/orders')
     fetch('/data/orderData.json')
       .then(res => res.json())
-      .then(res => setOrders(res))
+      .then(res => setOrders(res.result))
       .catch(e => {
         // eslint-disable-next-line no-console
         console.log(e);

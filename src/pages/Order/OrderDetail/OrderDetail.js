@@ -11,8 +11,21 @@ function OrderDetail({ order }) {
       body: JSON.stringify({
         order_id: order_id,
       }),
-    }).then(res => res.json());
-
+    })
+      .then(res => res.json())
+      .then(res => {
+        switch (res.message) {
+          case 'INVALID_ORDER_STATUS':
+            break;
+          case 'INVALID_ORDER_ITEMS_STATUS':
+            break;
+          case 'KEY_ERROR':
+            break;
+          default:
+            break;
+        }
+      });
+    // SUCCESS 는 없는가?
     alert('주문이 취소되었습니다.');
   };
 

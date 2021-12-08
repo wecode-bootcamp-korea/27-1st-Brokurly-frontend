@@ -3,6 +3,7 @@ import Items from './Items/Items';
 import SelectBtns from './SelectBtns/SelectBtns';
 import CartSummary from './CartSummary/CartSummary';
 import './Cart.scss';
+import API from '../../config';
 
 function Cart() {
   const [items, setItems] = useState([]);
@@ -121,8 +122,48 @@ function Cart() {
       return;
     }
     // TODO : 주문 fetch
-    setItems(items.filter(item => item.notChecked));
-    alert('주문이 완료되었습니다.');
+    const orderItems = items
+      .filter(item => !item.notChecked)
+      .map(item => item.cart_id);
+
+    fetch(API.order, {
+      method: 'POST',
+      body: JSON.stringify(orderItems),
+    })
+      .then(res => res.json())
+      .then(res => {
+        switch (res.message) {
+          case 'INVALID_ORDER_STATUS':
+            alert('');
+            break;
+          case 'INVALID_ORDER_ITEMS_STATUS':
+            alert('');
+            break;
+          case 'DATA_ERROR':
+            alert('');
+            break;
+          case 'TRANSACTION_ERROR':
+            alert('');
+            break;
+          case 'KEY_ERROR':
+            alert('');
+            break;
+          case 'INVALID_CART':
+            alert('');
+            break;
+          case 'CREATE':
+            setItems(items.filter(item => item.notChecked));
+            alert('주문이 완료되었습니다.');
+            break;
+
+          default:
+            break;
+        }
+      })
+      .catch(e => {
+        // eslint-disable-next-line no-console
+        console.log(e);
+      });
   };
 
   return (
