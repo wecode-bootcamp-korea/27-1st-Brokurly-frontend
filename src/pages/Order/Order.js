@@ -14,7 +14,7 @@ function Order() {
       .then(res => setOrders(res.result))
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.log(e);
+        console.error(e);
       })
       .finally(setLoaded(true));
   }, []);
