@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Items from './Items/Items';
 import SelectBtns from './SelectBtns/SelectBtns';
 import CartSummary from './CartSummary/CartSummary';
 import './Cart.scss';
+import API from '../../config';
 
 function Cart() {
   const [items, setItems] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const token = useRef();
 
   useEffect(() => {
-    fetch('http://10.58.4.106:8000/cart')
+    token.current = sessionStorage.getItem('token');
+  });
+
+  useEffect(() => {
+    fetch(API.cart)
       .then(res => res.json())
       .then(res => {
         setItems(res.result);
@@ -120,9 +126,49 @@ function Cart() {
       alert('주문하실 상품을 선택해주세요');
       return;
     }
-    // TODO : 주문 fetch
-    setItems(items.filter(item => item.notChecked));
-    alert('주문이 완료되었습니다.');
+
+    const orderItemsCartId = items
+      .filter(item => !item.notChecked)
+      .map(item => item.cart_id);
+
+    fetch(API.orders, {
+      method: 'POST',
+      body: JSON.stringify({ cart_ids: orderItemsCartId }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        switch (res.message) {
+          case 'INVALID_ORDER_STATUS':
+            alert('');
+            break;
+          case 'INVALID_ORDER_ITEMS_STATUS':
+            alert('');
+            break;
+          case 'DATA_ERROR':
+            alert('');
+            break;
+          case 'TRANSACTION_ERROR':
+            alert('');
+            break;
+          case 'KEY_ERROR':
+            alert('');
+            break;
+          case 'INVALID_CART':
+            alert('');
+            break;
+          case 'CREATE':
+            setItems(items.filter(item => item.notChecked));
+            alert('주문이 완료되었습니다.');
+            break;
+
+          default:
+            break;
+        }
+      })
+      .catch(e => {
+        // eslint-disable-next-line no-console
+        console.log(e);
+      });
   };
 
   return (

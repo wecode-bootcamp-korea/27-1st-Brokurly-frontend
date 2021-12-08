@@ -8,8 +8,8 @@ function Product({ product }) {
     <div className="orderProduct">
       <Link to={`/products/${id}`}>
         {/* 백 image */}
-        {/* <img src={image} alt={name} /> */}
-        <img src={`/images/${image}`} alt={name} />
+        <img src={image} alt={name} />
+        {/* <img src={`/images/${image}`} alt={name} /> */}
       </Link>
       <div className="information">
         <Link to={`/products/${id}`}>
