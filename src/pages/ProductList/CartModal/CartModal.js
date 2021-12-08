@@ -3,7 +3,7 @@ import './CartModal.scss';
 
 function CartModal({ product, closeModal }) {
   const [quantity, setQuantity] = useState(1);
-  const { name, price } = product;
+  const { name, price, id } = product;
 
   const addQuantity = () => {
     setQuantity(quantity + 1);
@@ -17,8 +17,18 @@ function CartModal({ product, closeModal }) {
     setQuantity(quantity - 1);
   };
 
-  // TODO : 장바구니 추가 시 fetch 하기
   const addProductToCart = () => {
+    fetch('http://10.58.4.106:8000/cart', {
+      method: 'POST',
+      body: JSON.stringify({
+        product_id: id,
+        quantity: quantity,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        alert('장바구니에 상품이 추가 되었습니다.');
+      });
     closeModal();
   };
 
