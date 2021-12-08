@@ -13,6 +13,10 @@ function ProductList() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 
   useEffect(() => {
+    // fetch('http://10.58.4.106:8000/cart', {
+    //   method: 'POST',
+    //   body: JSON.stringify(),
+    // })
     fetch(`/data/productListData${currentCategory}${currentSort}.json`)
       .then(res => res.json())
       .then(res => setProducts(res));

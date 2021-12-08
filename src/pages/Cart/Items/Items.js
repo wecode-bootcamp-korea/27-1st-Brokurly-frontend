@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Item from './Item/Item';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 import { IoWaterOutline } from 'react-icons/io5';
 import { MdOutlineWbSunny } from 'react-icons/md';
+import Item from './Item/Item';
 import './Items.scss';
 
 function Items({
@@ -15,7 +15,7 @@ function Items({
   const [isItemsOpen, setIsItemsOpen] = useState(true);
 
   const openItems = () => {
-    setIsItemsOpen(!isItemsOpen);
+    setIsItemsOpen(preIsItemsOpen => !preIsItemsOpen);
   };
 
   return (
@@ -38,7 +38,7 @@ function Items({
       {isItemsOpen &&
         items.map(item => (
           <Item
-            key={item.id}
+            key={item.cart_id}
             item={item}
             changeItemQuantity={changeItemQuantity}
             deleteItem={deleteItem}
