@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from '../../../config';
 import './CartModal.scss';
 
 function CartModal({ product, closeModal }) {
@@ -19,11 +20,12 @@ function CartModal({ product, closeModal }) {
   };
 
   const addProductToCart = () => {
+    console.log('token', token);
     if (!!token) {
-      fetch('http://10.58.4.106:8000/cart', {
+      fetch(API.cart, {
         method: 'POST',
         headers: {
-          token: token,
+          Authorization: token,
         },
         body: JSON.stringify({
           product_id: id,
@@ -32,20 +34,22 @@ function CartModal({ product, closeModal }) {
       })
         .then(res => res.json())
         .then(res => {
+          console.log('res', res);
           switch (res.message) {
-            case 'UPDATE':
-            case 'CREATED':
+            case 'SUCCESS':
               alert('장바구니에 상품이 추가 되었습니다.');
               closeModal();
               break;
-            // TODO 에러 메세지 처리하기
+            case 'DoesNotExist':
+              alert('로그인 해주세요');
+              break;
             default:
               break;
           }
         })
         .catch(e => {
           // eslint-disable-next-line no-console
-          console.log(e);
+          console.error(e);
         });
     } else {
       alert('로그인해주세요^^');

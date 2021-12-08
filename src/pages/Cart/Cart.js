@@ -13,20 +13,14 @@ function Cart() {
   useEffect(() => {
     fetch(API.cart, {
       headers: {
-        authorization: token,
+        Authorization: token,
       },
     })
       .then(res => res.json())
       .then(res => {
-        switch (res.message) {
-          case 'Token not Exist':
-            alert('로그인을 해주세요');
-            break;
-          // 에러 성공 분기 처리
-          default:
-            break;
+        if (!!res.result) {
+          setItems(res.result);
         }
-        setItems(res.result);
       })
       .catch(e => {
         // eslint-disable-next-line no-console
@@ -55,7 +49,7 @@ function Cart() {
     fetch(API.cart, {
       method: 'PATCH',
       headers: {
-        authorization: token,
+        Authorization: token,
       },
       body: JSON.stringify({
         cart_id: cart_id,
@@ -77,7 +71,9 @@ function Cart() {
                 )
               );
               break;
-            // TODO 에러 처리하기
+            case 'KEY_ERROR':
+              alert('에러입니다!');
+              break;
             default:
               break;
           }
@@ -92,7 +88,7 @@ function Cart() {
   const deleteItem = cart_id => {
     fetch(API.cart, {
       method: 'DELETE',
-      headers: { authorization: token },
+      headers: { Authorization: token },
       body: JSON.stringify({
         cart_id: cart_id,
       }),
@@ -105,8 +101,14 @@ function Cart() {
             alert('로그인을 해주세요');
             break;
           case 'SUCCESS':
+            setItems(items.filter(item => item.cart_id !== cart_id));
             break;
-
+          case 'INVALID_CART':
+            alert('삭제할 상품이 없습니다');
+            break;
+          case 'KEY_ERROR':
+            alert('에러 입니다');
+            break;
           default:
             break;
         }
@@ -115,8 +117,6 @@ function Cart() {
         // eslint-disable-next-line no-console
         console.error(e);
       });
-
-    setItems(items.filter(item => item.cart_id !== cart_id));
   };
 
   const deleteAllCheckedItem = () => {
@@ -126,7 +126,7 @@ function Cart() {
 
     fetch(API.cart, {
       method: 'DELETE',
-      headers: { authorization: token },
+      headers: { Authorization: token },
       body: {
         cart_ids: deleteItemsCartIdArray,
       },
@@ -134,13 +134,17 @@ function Cart() {
       .then(res => res.json())
       .then(res => {
         switch (res.message) {
-          // TODO 백 message 정해지만 분기처리
+          case 'SUCCESS':
+            setItems(items.filter(item => item.notChecked));
+            break;
           case 'Token not Exist':
             alert('로그인을 해주세요');
             break;
-          case 'SUCCESS':
-            alert('선택한 상품들을 삭제했습니다.');
-            setItems(items.filter(item => item.notChecked));
+          case 'INVALID_CART':
+            alert('삭제할 상품이 없습니다');
+            break;
+          case 'KEY_ERROR':
+            alert('에러 입니다');
             break;
 
           default:
@@ -187,7 +191,7 @@ function Cart() {
     fetch(API.orders, {
       method: 'POST',
       headers: {
-        authorization: token,
+        Authorization: token,
       },
       body: JSON.stringify({ cart_ids: orderItemsCartId }),
     })
