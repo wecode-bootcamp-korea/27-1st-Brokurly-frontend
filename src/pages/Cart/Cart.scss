@@ -1,1 +1,50 @@
-@import '../../styles/common.scss';
+@import '../../styles/variables.scss';
+.cart {
+  display: flex;
+  justify-content: center;
+  min-width: 1050px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .loading {
+    margin: 50px 0;
+    font-size: 30px;
+    font-weight: 500;
+    color: $color-gray;
+  }
+
+  .cartWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1010px;
+    width: 100%;
+
+    .cartTitle {
+      padding: 70px 0;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .main {
+      display: flex;
+      width: 100%;
+      margin-bottom: 70px;
+
+      .cartContent {
+        flex: 10;
+
+        .itemsWrapper {
+          margin-bottom: 20px;
+          border-bottom: 1px solid $color-gray;
+        }
+      }
+    }
+  }
+}

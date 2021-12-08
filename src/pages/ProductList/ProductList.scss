@@ -1,1 +1,21 @@
-@import '../../styles/common.scss';
+@import '../../styles/variables.scss';
+
+.productList {
+  @include flexCenter;
+  position: relative;
+  background-color: $bg-gray;
+  min-width: 1050px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .productListContent {
+    width: 100%;
+    max-width: 1010px;
+  }
+}
