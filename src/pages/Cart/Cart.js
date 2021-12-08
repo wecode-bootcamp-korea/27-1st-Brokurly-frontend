@@ -46,6 +46,10 @@ function Cart() {
     items.length - items.filter(item => item.notChecked).length;
 
   const changeItemQuantity = (cart_id, changedQuantity) => {
+    if (!changedQuantity.toString()) {
+      return;
+    }
+
     fetch(API.cart, {
       method: 'PATCH',
       headers: {
@@ -90,13 +94,12 @@ function Cart() {
       method: 'DELETE',
       headers: { Authorization: token },
       body: JSON.stringify({
-        cart_id: cart_id,
+        cart_id: [cart_id],
       }),
     })
       .then(res => res.json())
-      .then(res => res => {
+      .then(res => {
         switch (res.message) {
-          // TODO 에러메세지 정해지면 분기 처리
           case 'Token not Exist':
             alert('로그인을 해주세요');
             break;
@@ -127,9 +130,9 @@ function Cart() {
     fetch(API.cart, {
       method: 'DELETE',
       headers: { Authorization: token },
-      body: {
-        cart_ids: deleteItemsCartIdArray,
-      },
+      body: JSON.stringify({
+        cart_id: deleteItemsCartIdArray,
+      }),
     })
       .then(res => res.json())
       .then(res => {
