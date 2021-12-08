@@ -10,7 +10,7 @@ function Signin() {
   const navigate = useNavigate();
 
   const successLoginBtn = () => {
-    fetch(API.signin, {
+    fetch(`${API.signin}`, {
       method: 'POST',
       body: JSON.stringify({
         username: idValue,
@@ -25,11 +25,12 @@ function Signin() {
         // alert(loginMessages[result.message]);
 
         if (result.ACCESS_TOKEN) {
-          sessionStorage.setItem('authorization', result.access_token);
+          console.log(result);
+          sessionStorage.setItem('Authorization', result.ACCESS_TOKEN);
           sessionStorage.setItem('username', idValue);
           // alert(`${idValue}님 환영합니다!`);
-          navigate('/brokurly/products');
-        } else if (result.message['Token not Exist']) {
+          navigate('/product');
+        } else if (result.message === 'USER_DOES_NOT_EXIST') {
           alert('아이디 또는 비밀번호 오류입니다');
         }
       });
