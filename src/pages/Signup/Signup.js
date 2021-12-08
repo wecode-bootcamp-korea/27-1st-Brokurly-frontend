@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../../components/Footer/Footer';
 import SignupModal from './SignupModal/SignupModal';
 import './Signup.scss';
 
 function Signup() {
   const navigate = useNavigate();
 
-  // input 클릭시 텍스트 등장(set, setState) - 시작 --------------------
   const [isInputIdGuide, setIsInputIdGuide] = useState(false);
   const [isInputPwGuide, setIsInputPwGuide] = useState(false);
   const [isCorrectPwGuide, setIsCorrectPwGuide] = useState(false);
-  // input 클릭시 텍스트 등장(set, setState) - 끝 --------------------
 
   const [isIdValid2, setIsIdValid2] = useState(false);
 
@@ -61,7 +58,6 @@ function Signup() {
         }
         if (res.message === 'USERNAME_ALREADY_EXISTS') {
           alert('이미 존재하는 아이디입니다');
-          // alert(res.message);
         }
       });
   };
@@ -83,27 +79,13 @@ function Signup() {
       });
   };
 
-  // 모달창
-
   const [signUpModal, setSignUpModal] = useState(false);
 
   const openModal = () => {
     setSignUpModal(true);
     return <SignupModal />;
   };
-  const closeModal = e => {
-    e.preventDefault();
-    setSignUpModal(false);
-  };
 
-  function test() {
-    if (signUpModal === true) {
-      return <SignupModal />;
-    }
-  }
-  const testtest = test();
-
-  // input 클릭시 텍스트 등장(함수) - 시작 --------------------
   const openInputId = () => {
     setIsInputIdGuide(true);
   };
@@ -113,9 +95,6 @@ function Signup() {
   const openCorrectPw = () => {
     setIsCorrectPwGuide(true);
   };
-  // input 클릭시 텍스트 등장(함수) - 끝 --------------------
-
-  // 유효성 검사 - 시작 --------------------
 
   //id정규식: 대, 소문자, 숫자, 6자리 이상 16자리 이하
   const isIdValid1 = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
@@ -128,7 +107,6 @@ function Signup() {
   //pw정규식: 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상 입력
   const isPwValid2 = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(inputPw);
   //pw조건: 동일한 숫자 3개 이상 연속 사용불가
-  //const isPwValid3 = /(\w)\1\1/.test(inputPw);
   const isPwValid3Function = () => {
     if (inputPw.length === 0) {
       return false;
@@ -158,13 +136,6 @@ function Signup() {
     setInputEmail(e.target.value);
   };
 
-  // function isContactNum() {
-  //   if (isNaN(inputContact) === true) {
-  //     return true;
-  //   }
-  // }
-  // const isContact = isContactNum();
-
   const inputContactValue = e => {
     setInputContact(e.target.value);
   };
@@ -173,17 +144,11 @@ function Signup() {
     setInputAddress(e.target.value);
   };
 
-  // 유효성 검사 - 끝 --------------------
-
   return (
     <div className="signup">
       <div className="signupWidth">
         <header className="signupHeader">
           <h2 className="signupHeaderName">회원가입</h2>
-          <button onClick={signUpModal ? openModal : null}>모달버튼</button>
-
-          {console.log(openModal)}
-          {console.log(<SignupModal />)}
         </header>
         <div className="signupBox">
           <form className="signupForm">
@@ -192,7 +157,7 @@ function Signup() {
             </div>
             <div className="signSection">
               <table className="signTable">
-                <tr>
+                <tr className="tableTr">
                   <th className="tableName">
                     아이디<span className="starMark">*</span>
                   </th>
@@ -215,7 +180,6 @@ function Signup() {
                           </div>
                         </span>
                         <span
-                          // className={`guideText${isIdValid ? ' passSign' : ''}`
                           className={
                             isIdValid2 ? 'guideText passSign' : 'guideText'
                           }
@@ -351,7 +315,6 @@ function Signup() {
                     <input
                       className="tableInput contact"
                       onChanage={inputContactValue}
-                      // disabled={isContact ? true : false}
                       type="text"
                       placeholder="숫자만 입력해주세요"
                     />
@@ -388,7 +351,6 @@ function Signup() {
             </div>
           </form>
         </div>
-        <Footer />
       </div>
     </div>
   );

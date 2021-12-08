@@ -1,7 +1,7 @@
 @import '../../styles/common.scss';
 
 $tableFontSize: 13.5px;
-$tableLetterSpacing: -0.3pt;
+$tableLetterSpacing: -0.2pt;
 $btnBorderRadius: 3px;
 
 @mixin stopMouseDrag {
@@ -55,7 +55,7 @@ $btnBorderRadius: 3px;
 
     .signupHeaderName {
       @include flexCenter;
-      padding: 50px 20px;
+      padding: 60px 20px;
       font-size: 26px;
       font-weight: 600;
     }
@@ -97,6 +97,7 @@ $btnBorderRadius: 3px;
 
         .tableInput {
           @include tableInput;
+          margin-bottom: 15px;
           background-color: $bg-gray;
           &::placeholder {
             color: $color-gray;
