@@ -58,36 +58,36 @@ function Signup() {
   };
 
   const isValidIdBtn = () => {
-    // fetch(`${API.signUsername}`, {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     username: inputId,
-    //   }),
-    // })
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     if (res.message === 'USERNAME_NOT_EXISTS') {
-    //       setIsIdValid2(true);
-    //       // setExistUser(false);
-    //       // openModal();
-    //       // 1. modal open
-    //       // 2. message = "사용가능한 아이디입니다"
-    //       openModal();
-    //       setMessage('사용 가능한 아이디입니다');
-    //       // setExistUser();
-    //       // alert('사용 가능한 아이디입니다');
-    //     }
-    //     if (res.message === 'USERNAME_ALREADY_EXISTS') {
-    //       // setExistUser;
-    //       // openModal2();
-    //       // 1.modal open
-    //       // 2. message = "이미 존재하는 아이디입니다"
-    //       openModal();
-    //       setMessage('이미 존재하는 아이디입니다');
-    //       // setExistUser(false);
-    //       // alert('이미 존재하는 아이디입니다');
-    //     }
-    //   });
+    fetch(`${API.signUsername}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        username: inputId,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'USERNAME_NOT_EXISTS') {
+          setIsIdValid2(true);
+          // setExistUser(false);
+          // openModal();
+          // 1. modal open
+          // 2. message = "사용가능한 아이디입니다"
+          openModal();
+          setMessage('사용 가능한 아이디입니다');
+          // setExistUser();
+          // alert('사용 가능한 아이디입니다');
+        }
+        if (res.message === 'USERNAME_ALREADY_EXISTS') {
+          // setExistUser;
+          // openModal2();
+          // 1.modal open
+          // 2. message = "이미 존재하는 아이디입니다"
+          openModal();
+          setMessage('이미 존재하는 아이디입니다');
+          // setExistUser(false);
+          // alert('이미 존재하는 아이디입니다');
+        }
+      });
   };
 
   const isValidEmailBtn = () => {
@@ -99,11 +99,13 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
-        const isValidEmailMessges = {
-          EMAIL_NOT_EXISTS: '사용 가능한 메일입니다',
-          EMAIL_ALREADY_EXISTS: '이미 존재하는 메일입니다',
-        };
-        alert(isValidEmailMessges[res.message]);
+        // const isValidEmailMessges = {
+        //   EMAIL_NOT_EXISTS: '사용 가능한 메일입니다',
+        //   EMAIL_ALREADY_EXISTS: '이미 존재하는 메일입니다',
+        // };
+        openModal();
+        setMessage('사용 가능한 메일입니다');
+        // alert(isValidEmailMessges[res.message]);
       });
   };
 

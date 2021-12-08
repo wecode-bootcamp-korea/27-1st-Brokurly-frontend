@@ -1,6 +1,6 @@
-const BASE_URL_SEYONG = 'http://';
-const BASE_URL_JONGHO = 'http://10.58.7.146:8000';
-const BASE_URL_CHANGMIN = 'http://';
+const BASE_URL_SEYONG = 'http://10.58.3.112:8000';
+const BASE_URL_JONGHO = 'http://10.58.3.112:8000';
+const BASE_URL_CHANGMIN = 'http://10.58.3.112:8000';
 
 const API = {
   signin: `${BASE_URL_SEYONG}/users/signin`,
