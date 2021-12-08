@@ -4,11 +4,7 @@ import './CartModal.scss';
 function CartModal({ product, closeModal }) {
   const [quantity, setQuantity] = useState(1);
   const { name, price, id } = product;
-  const token = useRef('');
-
-  useEffect(() => {
-    token.current = sessionStorage.getItem('token');
-  });
+  const token = sessionStorage.getItem('token');
 
   const addQuantity = () => {
     setQuantity(quantity + 1);

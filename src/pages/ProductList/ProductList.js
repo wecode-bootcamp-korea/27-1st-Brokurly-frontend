@@ -16,26 +16,54 @@ function ProductList() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [loaded, setLoaded] = useState(false);
-  const token = useRef('');
+  const menu = searchParams.get('menu') || '채소';
+  let category = searchParams.get('category') || '';
+  const sort = searchParams.get('sort') || '-created_at';
+
+  // useEffect(() => {
+  //   const newSearchParams = new URLSearchParams(searchParams);
+  //   newSearchParams.set('category', '');
+  //   newSearchParams.set('sort', '-created_at');
+  //   setSearchParams(newSearchParams);
+  //   setCurrentCategory(0);
+  //   setCurrentSort(0);
+  //   category = '';
+  // }, [menu]);
 
   useEffect(() => {
-    token.current = sessionStorage.getItem('token');
-  });
-
-  useEffect(() => {
-    const menu = searchParams.get('menu') || '채소';
     setProductMenu(PRODUCT_MENU[menu]);
-  }, [searchParams]);
+    if (category === '' && sort === '-created_at') {
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.set('category', '');
+      newSearchParams.set('sort', '-created_at');
+      setSearchParams(newSearchParams);
+      setCurrentCategory(0);
+      setCurrentSort(0);
+    }
+  }, [category, menu, searchParams, setSearchParams, sort]);
 
   useEffect(() => {
-    // TODO 백엔드 완료되면 아래 URL 사용예정
-    // const menu = searchParams.get('menu') || '채소';
-    // const category = searchParams.get('category') || '';
-    // const sort = searchParams.get('sort') || 0;
-    // fetch('/data/productListData00.json')
+    // console.log('menu', menu);
+    // console.log('category', category);
+    // console.log('sort', sort);
+    // console.log(
+    //   'final URL',
+    //   `menu=${menu}${
+    //     !category.length ? '' : `&category=${category}`
+    //   }&sort=${sort}`
+    // );
+    console.log(
+      'fetch',
+      `${API.product}?menu=${menu}${
+        !category.length ? '' : `&category=${category}`
+      }&sort=${sort}`
+    );
 
-    // url 아마도 고쳐야함
-    fetch(API.products)
+    fetch(
+      `${API.product}?menu=${menu}${
+        !category.length ? '' : `&category=${category}`
+      }&sort=${sort}`
+    )
       .then(res => res.json())
       .then(res => {
         if (!!res.result) {
@@ -58,7 +86,7 @@ function ProductList() {
         console.error(e);
       })
       .finally(setLoaded(true));
-  }, [searchParams]);
+  }, [category, menu, searchParams, sort]);
 
   const putInfoIntoModal = product => {
     setCartInfo(product);
@@ -99,16 +127,17 @@ function ProductList() {
           />
         )}
         {!loaded && <h2 className="loading">로딩중...</h2>}
-        {loaded && !products.length ? (
+        {/* {loaded && !products.length ? (
           <h2 className="loading">상품 없음</h2>
-        ) : (
+        ) : ( */}
+        {
           <ProducListContent
             products={products}
             changeSort={changeSort}
             currentSort={currentSort}
             putInfoIntoModal={putInfoIntoModal}
           />
-        )}
+        }
       </div>
       {isCartModalOpen && (
         <Modal closeModal={closeModal}>
