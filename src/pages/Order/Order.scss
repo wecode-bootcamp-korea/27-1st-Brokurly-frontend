@@ -1,8 +1,18 @@
+@import '../../styles/variables.scss';
+
 .orderWrapper {
   display: flex;
   justify-content: center;
   min-width: 1050px;
   padding: 0 20px;
+
+  .loading {
+    margin: 50px 0;
+    font-size: 24px;
+    font-weight: 400;
+    color: $color-gray;
+    text-align: center;
+  }
 
   .orderInner {
     display: flex;
