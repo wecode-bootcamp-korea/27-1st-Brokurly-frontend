@@ -1,12 +1,13 @@
 import React from 'react';
 import Product from './Product/Product';
 import './OrderDetail.scss';
+import API from '../../../config';
 
 function OrderDetail({ order }) {
   const { order_id, order_number, order_status, products } = order;
 
   const cancelOrder = order_id => {
-    fetch('http://10.58.0.187:8000/orders', {
+    fetch(API.orders, {
       method: 'PATCH',
       body: JSON.stringify({
         order_id: order_id,

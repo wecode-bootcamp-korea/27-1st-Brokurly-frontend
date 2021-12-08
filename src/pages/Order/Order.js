@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import OrderDetail from './OrderDetail/OrderDetail';
 import './Order.scss';
+import API from '../../config';
 
 function Order() {
   const [orders, setOrders] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // fetch('http://10.58.0.187:8000/orders')
-    fetch('/data/orderData.json')
+    // fetch('/data/orderData.json')
+    fetch(API.orders)
       .then(res => res.json())
-      .then(res => setOrders(res))
+      .then(res => setOrders(res.result))
       .catch(e => {
         // eslint-disable-next-line no-console
         console.log(e);

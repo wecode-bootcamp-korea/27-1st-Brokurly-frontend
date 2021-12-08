@@ -11,7 +11,7 @@ function Cart() {
   const token = useRef();
 
   useEffect(() => {
-    token.current = sessionStorage.get('token');
+    token.current = sessionStorage.getItem('token');
   });
 
   useEffect(() => {
@@ -128,12 +128,16 @@ function Cart() {
 
     console.log('orderItemsCartIdo', orderItemsCartId);
 
-    fetch(API.orders, {
-      headers: {
-        token: token,
-        body: JSON.stringify({ cart_id: orderItemsCartId }),
-      },
-    }).then(res => res.json());
+    // token: token,
+    // body: JSON.stringify({ cart_ids: orderItemsCartId }),
+    fetch('http://10.58.7.146:8000/orders', {
+      method: 'POST',
+      body: JSON.stringify({ cart_ids: [9, 11] }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      });
 
     if (checkedItemsLength < 1) {
       alert('주문하실 상품을 선택해주세요');

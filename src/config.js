@@ -1,5 +1,5 @@
-const BASE_URL_SEYONG = 'http://10.58.7.146:8000';
-const BASE_URL_JONGHO = 'http://';
+const BASE_URL_SEYONG = '';
+const BASE_URL_JONGHO = 'http://10.58.7.146:8000';
 const BASE_URL_CHANGMIN = 'http://';
 
 const API = {
