@@ -1,12 +1,13 @@
 import React from 'react';
 import Product from './Product/Product';
 import './OrderDetail.scss';
+import API from '../../../config';
 
-function OrderDetail({ order }) {
+function OrderDetail({ order, changeOrderState }) {
   const { order_id, order_number, order_status, products } = order;
 
   const cancelOrder = order_id => {
-    fetch('http://10.58.0.187:8000/orders', {
+    fetch(API.orders, {
       method: 'PATCH',
       body: JSON.stringify({
         order_id: order_id,
@@ -16,17 +17,24 @@ function OrderDetail({ order }) {
       .then(res => {
         switch (res.message) {
           case 'INVALID_ORDER_STATUS':
-            break;
           case 'INVALID_ORDER_ITEMS_STATUS':
-            break;
           case 'KEY_ERROR':
+            // eslint-disable-next-line no-console
+            console.log('ERROR', res.message);
+            alert('에러입니다!');
+            break;
+          case 'SUCCESS':
+            changeOrderState(order_id);
+            alert('주문이 취소되었습니다.');
             break;
           default:
             break;
         }
+      })
+      .catch(e => {
+        // eslint-disable-next-line no-console
+        console.log('catch', e);
       });
-    // SUCCESS 는 없는가?
-    alert('주문이 취소되었습니다.');
   };
 
   return (

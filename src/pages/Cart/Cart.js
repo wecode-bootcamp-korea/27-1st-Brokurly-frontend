@@ -10,7 +10,7 @@ function Cart() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('http://10.58.4.106:8000/cart')
+    fetch(API.cart)
       .then(res => res.json())
       .then(res => {
         setItems(res.result);

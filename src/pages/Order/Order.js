@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import OrderDetail from './OrderDetail/OrderDetail';
 import './Order.scss';
+import API from '../../config';
 
 function Order() {
   const [orders, setOrders] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // fetch('http://10.58.0.187:8000/orders')
-    fetch('/data/orderData.json')
+    // fetch('/data/orderData.json')
+    fetch(API.orders)
       .then(res => res.json())
       .then(res => setOrders(res.result))
       .catch(e => {
@@ -17,6 +18,16 @@ function Order() {
       })
       .finally(setLoaded(true));
   }, []);
+
+  const changeOrderState = order_id => {
+    setOrders(
+      orders.map(order =>
+        order.order_id === order_id
+          ? { ...order, order_status: '주문취소' }
+          : order
+      )
+    );
+  };
 
   return (
     <div className="orderWrapper">
@@ -28,7 +39,13 @@ function Order() {
           {loaded && !orders.length ? (
             <h2 className="loading">주문 내역이 없습니다</h2>
           ) : (
-            orders.map(order => <OrderDetail order={order} key={order.id} />)
+            orders.map(order => (
+              <OrderDetail
+                order={order}
+                key={order.id}
+                changeOrderState={changeOrderState}
+              />
+            ))
           )}
         </div>
       </div>
