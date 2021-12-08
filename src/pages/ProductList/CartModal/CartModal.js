@@ -55,6 +55,31 @@ function CartModal({ product, closeModal }) {
     }
   };
 
+  const changeQuantityByInput = e => {
+    const value = e.target.value;
+    if (isNaN(value)) return;
+
+    if (value === '0') {
+      setQuantity(1);
+      alert('최소 주문 수량은 1개 입니다.');
+      return;
+    }
+
+    if (value > 100) {
+      alert('최대 주문 수량은 100개 입니다.');
+      return;
+    }
+
+    setQuantity(value);
+  };
+
+  const checkMinmumQuantity = e => {
+    if (!e.target.value) {
+      setQuantity(1);
+      alert('최소 주문 수량은 1개 입니다.');
+    }
+  };
+
   return (
     <div className="cartModal">
       <div className="top">
@@ -65,7 +90,14 @@ function CartModal({ product, closeModal }) {
             <button className="down" onClick={removeQuantity}>
               -
             </button>
-            <span className="quantity">{quantity}</span>
+            <input
+              className="quantity"
+              type="text"
+              value={quantity}
+              onChange={changeQuantityByInput}
+              onBlur={checkMinmumQuantity}
+            />
+
             <button className="up" onClick={addQuantity}>
               +
             </button>
