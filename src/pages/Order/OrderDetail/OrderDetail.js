@@ -33,7 +33,7 @@ function OrderDetail({ order, changeOrderState }) {
       })
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.log('catch', e);
+        console.error('catch', e);
       });
   };
 

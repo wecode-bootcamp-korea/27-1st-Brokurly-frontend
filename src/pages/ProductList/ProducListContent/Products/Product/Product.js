@@ -8,7 +8,7 @@ function Product({ product, putInfoIntoModal }) {
   return (
     <article className="product">
       <div className="imgContainer">
-        <img src={`/images/${image}`} alt={name} />
+        <img src={image} alt={name} />
         <button className="cartBtn" onClick={() => putInfoIntoModal(product)}>
           <AiOutlineShoppingCart />
         </button>
