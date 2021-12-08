@@ -35,6 +35,14 @@ function Signin() {
 
   const inputPwValue = e => setPwValue(e.target.value);
 
+  // keyDown event
+  // const [pressEnter, setPressEnter] = useState(false);
+
+  // const activeEnter = e => {
+  //   setPressEnter(e.key === 'enter');
+  //   return true;
+  // };
+
   return (
     <div className="login">
       <div className="loginSection">
@@ -80,6 +88,7 @@ function Signin() {
             <button
               className="loginBtn"
               onClick={successLoginBtn}
+              // keyPress={activeEnter}
               type="button"
             >
               로그인
