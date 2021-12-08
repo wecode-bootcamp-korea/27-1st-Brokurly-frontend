@@ -39,14 +39,22 @@ function Signin() {
   // const [pressEnter, setPressEnter] = useState(false);
 
   // const activeEnter = e => {
-  //   setPressEnter(e.key === 'enter');
+  //   setPressEnter(e.key.enter);
   //   return true;
   // };
+
+  function activeEnter() {
+    if (window.event.key === '13') {
+      successLoginBtn();
+    }
+  }
+  const test = activeEnter();
 
   return (
     <div className="login">
       <div className="loginSection">
         <div className="loginText">로그인</div>
+        {test}
         <div className="loginJoinSection">
           <form className="loginForm">
             <div className="loginIdForm">
@@ -85,14 +93,15 @@ function Signin() {
                 <Link to="/">비밀번호 찾기</Link>
               </div>
             </div>
-            <button
-              className="loginBtn"
-              onClick={successLoginBtn}
-              // keyPress={activeEnter}
-              type="button"
-            >
-              로그인
-            </button>
+            {activeEnter() && (
+              <button
+                className="loginBtn"
+                onClick={successLoginBtn}
+                type="button"
+              >
+                로그인
+              </button>
+            )}
             <Link to="/signup">
               <button className="joinBtn" type="button">
                 회원가입
