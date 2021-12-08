@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import API from '../../../config';
 import './ProductInformation.scss';
 
 function ProductInformation({
@@ -26,20 +27,14 @@ function ProductInformation({
 
   const totalPrice = count * price;
 
-  const isLogin = useRef();
-  const userName = useRef();
-
-  useEffect(() => {
-    isLogin.current = sessionStorage.getItem('token');
-    userName.current = sessionStorage.getItem('username');
-  });
+  const isToken = sessionStorage.getItem('token');
 
   const goToCart = () => {
-    if (isLogin.current) {
-      fetch('http://10.58.4.142:8000/cart', {
+    if (!!isToken) {
+      fetch(API.product, {
         method: 'POST',
         headers: {
-          Authorization: '토큰',
+          token: '토큰',
         },
         body: JSON.stringify({
           product_id: { productId },
@@ -47,12 +42,9 @@ function ProductInformation({
         }),
       })
         .then(response => response.json())
-        .then(result =>
-          result.success
-            ? navigate('/cart')
-            : alert('로그인해주세요^^') && navigate('/signin')
-        );
+        .then(result => (result.SUCCESS ? navigate('/cart') : null));
     } else {
+      alert('로그인해주세요^^');
     }
   };
 
@@ -116,9 +108,7 @@ function ProductInformation({
       </div>
       <button
         className="detailPurchase"
-        onClick={() =>
-          count > 0 ? { goToCart } : alert('수량을 선택해 주세요^^')
-        }
+        onClick={count > 0 ? goToCart : setCount(1)}
       >
         구매하기
       </button>
