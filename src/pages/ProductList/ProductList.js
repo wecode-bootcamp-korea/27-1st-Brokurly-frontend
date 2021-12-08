@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Modal from '../../components/Modal/Modal';
 import API from '../../config';
@@ -116,18 +116,16 @@ function ProductList() {
             changeCategoty={changeCategoty}
           />
         )}
-        {!loaded && <h2 className="loading">로딩중...</h2>}
-        {/* {loaded && !products.length ? (
+        {loaded && !products.length ? (
           <h2 className="loading">상품 없음</h2>
-        ) : ( */}
-        {
+        ) : (
           <ProducListContent
             products={products}
             changeSort={changeSort}
             currentSort={currentSort}
             putInfoIntoModal={putInfoIntoModal}
           />
-        }
+        )}
       </div>
       {isCartModalOpen && (
         <Modal closeModal={closeModal}>
