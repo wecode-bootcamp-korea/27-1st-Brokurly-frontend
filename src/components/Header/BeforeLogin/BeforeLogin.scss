@@ -1,0 +1,19 @@
+@import '../../../styles/variables.scss';
+
+.beforeLogin {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .joinSignup {
+    padding: 0 10px;
+    color: $green;
+    border-right: 1px solid $border-gray;
+    font-weight: 600;
+  }
+
+  .joinSignin {
+    padding: 10px;
+    font-weight: 600;
+  }
+}

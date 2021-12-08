@@ -1,0 +1,18 @@
+@import '../../../styles/variables.scss';
+
+.afterLogin {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .showUserName {
+    padding: 0 10px;
+    color: $green;
+    border-right: 1px solid $border-gray;
+    font-weight: 600;
+  }
+  .logOut {
+    padding: 10px;
+    font-weight: 600;
+  }
+}

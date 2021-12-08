@@ -8,7 +8,7 @@
     "unit": "1팩",
     "weight": "100g",
     "shipping": "샛별배송",
-    "package": "냉장배송",
+    "itemPackage": "냉장배송",
     "origin": "국내산",
     "description": "새빨간 거짓말을 믿으시나요. 브로컬리만의 새빨간 오레지를 맛봐보세요"
   }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ProductListHeader from './ProductListHeader/ProductListHeader';
 import ProducListContent from './ProducListContent/ProducListContent';
 import './ProductList.scss';
@@ -15,6 +15,11 @@ function ProductList() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const [loaded, setLoaded] = useState(false);
+  const token = useRef('');
+
+  useEffect(() => {
+    token.current = sessionStorage.getItem('token');
+  });
 
   useEffect(() => {
     const menu = searchParams.get('menu') || '채소';
@@ -26,7 +31,11 @@ function ProductList() {
     // const menu = searchParams.get('menu') || '채소';
     // const category = searchParams.get('category') || '';
     // const sort = searchParams.get('sort') || 0;
-    fetch('http://10.58.10.2:8000/products')
+    fetch('http://10.58.10.2:8000/products', {
+      headers: {
+        token: token.current,
+      },
+    })
       .then(res => res.json())
       .then(res => {
         setProducts(res);

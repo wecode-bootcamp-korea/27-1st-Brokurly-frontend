@@ -12,6 +12,13 @@
     cursor: pointer;
   }
 
+  .loading {
+    margin: 50px 0;
+    font-size: 30px;
+    font-weight: 500;
+    color: $color-gray;
+  }
+
   .cartWrapper {
     display: flex;
     flex-direction: column;
