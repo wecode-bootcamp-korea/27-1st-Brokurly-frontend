@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
-
 import './Item.scss';
-import { Link } from 'react-router-dom';
 
 function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
-  const { id, image, name, quantity, price, notChecked, itemPackage } = item;
+  const {
+    cart_id,
+    product_id,
+    product_image,
+    product_name,
+    quantity,
+    product_price,
+    notChecked,
+  } = item;
   const [inputValue, setInputValue] = useState(1);
-
   useEffect(() => setInputValue(quantity), [quantity]);
 
   const addQuantity = () => {
@@ -16,7 +22,7 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
       alert('최대 주문 수량은 100개 입니다.');
     }
 
-    changeItemQuantity(id, Number(quantity) + 1, itemPackage);
+    changeItemQuantity(cart_id, Number(quantity) + 1);
   };
 
   const removeQuantity = () => {
@@ -25,7 +31,7 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
       return;
     }
 
-    changeItemQuantity(id, Number(quantity) - 1, itemPackage);
+    changeItemQuantity(cart_id, Number(quantity) - 1);
   };
 
   const changeQuantityByInput = e => {
@@ -34,7 +40,7 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
 
     if (value === '0') {
       alert('최소 주문 수량은 1개 입니다.');
-      changeItemQuantity(id, 1, itemPackage);
+      changeItemQuantity(cart_id, 1);
       setInputValue(1);
       return;
     }
@@ -44,15 +50,15 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
       return;
     }
 
-    changeItemQuantity(id, value, itemPackage);
+    changeItemQuantity(cart_id, value);
     setInputValue(value);
   };
 
   const checkMinmumQuantity = e => {
     if (!e.target.value) {
-      alert('최소 주문 수량은 1개 입니다.');
-      changeItemQuantity(id, 1, itemPackage);
+      changeItemQuantity(cart_id, 1);
       setInputValue(1);
+      alert('최소 주문 수량은 1개 입니다.');
     }
   };
 
@@ -63,13 +69,13 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
           className={`checkBtn ${
             !notChecked ? 'checkBtn-green' : 'checkBtn-gray'
           }`}
-          onClick={() => changeItemCheck(id, itemPackage)}
+          onClick={() => changeItemCheck(cart_id)}
         >
           {!notChecked ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
         </button>
-        <Link to={`/products/${id}`} className="linkToProduct">
-          <img className="itemImg" src={`/images/${image}`} alt={name} />
-          <span className="name">{name}</span>
+        <Link to={`/products/${product_id}`} className="linkToProduct">
+          <img className="itemImg" src={product_image} alt={product_name} />
+          <span className="name">{product_name}</span>
         </Link>
       </div>
       <div className="right">
@@ -88,12 +94,9 @@ function Item({ item, changeItemQuantity, deleteItem, changeItemCheck }) {
           </button>
         </div>
         <div className="totalPrice">
-          {Number(price * quantity).toLocaleString()}원
+          {Number(product_price * quantity).toLocaleString()}원
         </div>
-        <button
-          className="deleteBtn"
-          onClick={() => deleteItem(id, itemPackage)}
-        >
+        <button className="deleteBtn" onClick={() => deleteItem(cart_id)}>
           <TiDeleteOutline />
         </button>
       </div>

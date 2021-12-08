@@ -1,1 +1,107 @@
 @import '../../styles/common.scss';
+
+$borderRadius: 3px;
+$letterSpacing: -1.2px;
+
+@mixin stopMouseDrag {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@mixin loginIdPwStyle {
+  width: 340px;
+  height: 54px;
+  padding-right: 19px;
+  padding-left: 19px;
+  border: solid 1px #cacaca;
+  border-radius: $borderRadius;
+  font-size: 14px;
+}
+
+@mixin BtnStyle {
+  width: 340px;
+  height: 54px;
+  margin-top: 10px;
+  border: solid 1px #333333;
+  border-radius: $borderRadius;
+  color: $green;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  cursor: pointer;
+}
+
+.login {
+  @include flexCenter;
+  @include stopMouseDrag;
+  width: 100%;
+
+  .loginSection {
+    width: 340px;
+    padding: 90px 0;
+
+    .loginText {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: $letterSpacing;
+    }
+    .loginForm {
+      padding-top: 36px;
+
+      .loginId {
+        @include loginIdPwStyle;
+        &::placeholder {
+          color: $color-gray;
+        }
+      }
+      .loginPw {
+        @include loginIdPwStyle;
+        margin-top: 10px;
+        &::placeholder {
+          color: $color-gray;
+        }
+      }
+      .checkboxBar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 13px;
+        padding-bottom: 28px;
+        font-size: 13px;
+        letter-spacing: $letterSpacing;
+
+        .CheckboxSection {
+          display: flex;
+          align-items: center;
+
+          .securityCheckbox[id='checkboxLabel'] {
+            width: 17px;
+            height: 16px;
+          }
+        }
+
+        .serchSectionBar {
+          margin: 0px 5px;
+        }
+      }
+
+      .loginBtn {
+        @include BtnStyle;
+        background-color: $green;
+        border-color: $green;
+        color: $bg-white;
+      }
+
+      .joinBtn {
+        @include BtnStyle;
+        background-color: $bg-white;
+        border-color: $green;
+        color: $green;
+      }
+    }
+  }
+}
