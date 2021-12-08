@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
-import ProductThumbnail from './ProductThumbnail/ProductThumbnail';
-import ProductInformation from './ProductInformation/ProductInformation';
+import { useParams, useNavigate } from 'react-router-dom';
 import DetailExplain from './DetailExplain/DetailExplain';
+import ProductInformation from './ProductInformation/ProductInformation';
+import ProductThumbnail from './ProductThumbnail/ProductThumbnail';
+import API from '../../config';
 import './ProductDetail.scss';
 
 function ProductDetail() {
   const [productData, setProductData] = useState([]);
-  //통신할 때의 코드
-  // const { id } = useParams();
 
-  // useEffect(() => {
-  //   fetch(`http://10.58.0.187:8000/products/${id}`)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setProductData(data.result);
-  //     });
-  // });
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    fetch('/data/productDetail.json')
+    fetch(`${API.product}/${id}`)
       .then(res => res.json())
       .then(data => {
-        setProductData(data[0]);
+        if (data.result) {
+          setProductData(data.result);
+        } else {
+          alert(
+            '예상치 못한 에러가 발생하였습니다. 처음부터 다시 시작해 주세요.'
+          );
+          navigate('/');
+        }
       });
-  }, []);
+  }, [id, navigate]);
 
   return (
     <div className="productDetail">
@@ -39,6 +41,7 @@ function ProductDetail() {
             shipping={productData.shipping}
             packages={productData.itemPackage}
             origin={productData.origin}
+            productId={productData.id}
           />
         </section>
         <DetailExplain
