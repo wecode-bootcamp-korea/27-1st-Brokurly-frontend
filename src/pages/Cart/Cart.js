@@ -33,7 +33,7 @@ function Cart() {
         console.error(e);
       })
       .finally(setIsLoaded(true));
-  }, []);
+  }, [token]);
 
   let coldItems = [];
   let boxItems = [];
