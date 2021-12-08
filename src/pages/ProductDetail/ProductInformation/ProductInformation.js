@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
 import API from '../../../config';
 import './ProductInformation.scss';
 
@@ -15,9 +14,6 @@ function ProductInformation({
   productId,
 }) {
   const [count, setCount] = useState(1);
-
-  const navigate = useNavigate();
-
   const increaseCount = () => setCount(prevCount => prevCount + 1);
   const decreaseCount = () => setCount(prevCount => prevCount - 1);
   const handleValue = e =>
@@ -27,22 +23,37 @@ function ProductInformation({
 
   const totalPrice = count * price;
 
-  const isToken = sessionStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
 
   const goToCart = () => {
-    if (!!isToken) {
-      fetch(API.product, {
+    if (!!token) {
+      fetch(API.cart, {
         method: 'POST',
         headers: {
-          token: '토큰',
+          authorization: token,
         },
         body: JSON.stringify({
-          product_id: { productId },
+          product_id: productId,
           quantity: count,
         }),
       })
         .then(response => response.json())
-        .then(result => (result.SUCCESS ? navigate('/cart') : null));
+        .then(res => {
+          switch (res.message) {
+            case 'SUCCESS':
+            case 'CREATED':
+              alert('장바구니에 상품이 추가 되었습니다.');
+              break;
+            case 'KEY_ERROR':
+              break;
+            case 'INVALID_USER':
+              break;
+            case 'INVALID_PRODUCT':
+              break;
+            default:
+              break;
+          }
+        });
     } else {
       alert('로그인해주세요^^');
     }
