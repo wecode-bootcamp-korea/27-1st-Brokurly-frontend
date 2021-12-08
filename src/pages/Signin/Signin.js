@@ -10,7 +10,7 @@ function Signin() {
   const navigate = useNavigate();
 
   const successLoginBtn = () => {
-    fetch(`${API.signin}`, {
+    fetch(API.signin, {
       method: 'POST',
       body: JSON.stringify({
         username: idValue,
@@ -45,6 +45,7 @@ function Signin() {
               <input
                 className="loginId"
                 onChange={inputIdValue}
+                autocomplete="username"
                 type="text"
                 placeholder="아이디를 입력해주세요"
               />
