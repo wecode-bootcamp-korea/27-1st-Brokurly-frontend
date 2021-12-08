@@ -1,0 +1,25 @@
+.modalBackground {
+  // position: absolute;
+  // display: none;
+  width: 100%;
+  height: 100;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: rgb(0, 0, 0);
+  z-index: 0;
+}
+
+.modalBox {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 250px;
+  padding: 16px;
+  background: gray;
+  border-radius: 10px;
+  text-align: center;
+}
