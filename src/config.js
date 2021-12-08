@@ -1,4 +1,4 @@
-const BASE_URL_SEYONG = 'http://';
+const BASE_URL_SEYONG = 'http://10.58.7.146:8000';
 const BASE_URL_JONGHO = 'http://';
 const BASE_URL_CHANGMIN = 'http://';
 
@@ -10,7 +10,7 @@ const API = {
   products: `${BASE_URL_CHANGMIN}/products`,
   product: `${BASE_URL_JONGHO}/product`,
   cart: `${BASE_URL_SEYONG}/cart`,
-  order: `${BASE_URL_JONGHO}/order`,
+  orders: `${BASE_URL_JONGHO}/orders`,
 };
 
 export default API;

@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Items from './Items/Items';
 import SelectBtns from './SelectBtns/SelectBtns';
 import CartSummary from './CartSummary/CartSummary';
 import './Cart.scss';
+import API from '../../config';
 
 function Cart() {
   const [items, setItems] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const token = useRef();
+
+  useEffect(() => {
+    token.current = sessionStorage.get('token');
+  });
 
   useEffect(() => {
     fetch('http://10.58.4.106:8000/cart')
@@ -116,6 +122,19 @@ function Cart() {
   };
 
   const orderItems = () => {
+    const orderItemsCartId = items
+      .filter(item => !item.notChecked)
+      .map(item => item.cart_id);
+
+    console.log('orderItemsCartIdo', orderItemsCartId);
+
+    fetch(API.orders, {
+      headers: {
+        token: token,
+        body: JSON.stringify({ cart_id: orderItemsCartId }),
+      },
+    }).then(res => res.json());
+
     if (checkedItemsLength < 1) {
       alert('주문하실 상품을 선택해주세요');
       return;
