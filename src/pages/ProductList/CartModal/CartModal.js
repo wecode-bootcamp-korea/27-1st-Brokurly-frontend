@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './CartModal.scss';
 
 function CartModal({ product, closeModal }) {
   const [quantity, setQuantity] = useState(1);
   const { name, price, id } = product;
+  const token = useRef('');
+
+  useEffect(() => {
+    token.current = sessionStorage.getItem('token');
+  });
 
   const addQuantity = () => {
     setQuantity(quantity + 1);
@@ -18,18 +23,37 @@ function CartModal({ product, closeModal }) {
   };
 
   const addProductToCart = () => {
-    fetch('http://10.58.4.106:8000/cart', {
-      method: 'POST',
-      body: JSON.stringify({
-        product_id: id,
-        quantity: quantity,
-      }),
-    })
-      .then(res => res.json())
-      .then(res => {
-        alert('장바구니에 상품이 추가 되었습니다.');
-      });
-    closeModal();
+    if (!!token) {
+      fetch('http://10.58.4.106:8000/cart', {
+        method: 'POST',
+        headers: {
+          token: token,
+        },
+        body: JSON.stringify({
+          product_id: id,
+          quantity: quantity,
+        }),
+      })
+        .then(res => res.json())
+        .then(res => {
+          switch (res.message) {
+            case 'UPDATE':
+            case 'CREATED':
+              alert('장바구니에 상품이 추가 되었습니다.');
+              closeModal();
+              break;
+            // TODO 에러 메세지 처리하기
+            default:
+              break;
+          }
+        })
+        .catch(e => {
+          // eslint-disable-next-line no-console
+          console.log(e);
+        });
+    } else {
+      alert('로그인해주세요^^');
+    }
   };
 
   return (
