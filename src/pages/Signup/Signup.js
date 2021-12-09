@@ -25,10 +25,16 @@ function Signup() {
 
   const [isPassedId, setIsPassedId] = useState(false);
 
+  const isCorrectPwValid = inputCorrectPw === inputPw;
+
   const successSignBtn = () => {
     if (!isPassedId) {
       openModal();
       setMessage('중복검사를 완료해주세요');
+      return;
+    }
+    if (!isCorrectPwValid) {
+      setMessage('비밀번호를 확인해주세요');
       return;
     }
     fetch(API.signup, {
@@ -74,6 +80,11 @@ function Signup() {
   };
 
   const isValidIdBtn = () => {
+    if (!inputId.length) {
+      alert('아이디를 입력해주세요');
+      return;
+    }
+
     fetch(API.signUsername, {
       method: 'POST',
       body: JSON.stringify({
@@ -135,6 +146,7 @@ function Signup() {
   const inputIdValue = e => {
     setInputId(e.target.value);
     setIsPassedId(false);
+    setIsIdValid2(false);
   };
 
   const isPwValid1 = inputPw.length >= 8;
@@ -153,8 +165,6 @@ function Signup() {
   function inputPwValue(e) {
     setInputPw(e.target.value);
   }
-
-  const isCorrectPwValid = inputCorrectPw === inputPw;
 
   const inputCorrectPwValue = e => {
     setInputCorrectPw(e.target.value);
