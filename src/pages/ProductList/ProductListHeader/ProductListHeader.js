@@ -1,11 +1,7 @@
 import React from 'react';
 import './ProductListHeader.scss';
 
-function ProductListHeader({
-  productMenu,
-  setCurrentCategory,
-  currentCategory,
-}) {
+function ProductListHeader({ productMenu, currentCategory, changeCategoty }) {
   const { menuName, categories } = productMenu;
 
   return (
@@ -18,7 +14,7 @@ function ProductListHeader({
               currentCategory === i ? 'category-checked' : ''
             }`}
             key={i}
-            onClick={() => setCurrentCategory(i)}
+            onClick={() => changeCategoty(i, categories[i])}
           >
             {category}
           </button>

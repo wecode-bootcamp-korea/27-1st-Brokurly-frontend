@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Items from './Items/Items';
 import SelectBtns from './SelectBtns/SelectBtns';
 import CartSummary from './CartSummary/CartSummary';
@@ -8,24 +8,26 @@ import API from '../../config';
 function Cart() {
   const [items, setItems] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const token = useRef();
+  const token = sessionStorage.getItem('token');
 
   useEffect(() => {
-    token.current = sessionStorage.getItem('token');
-  });
-
-  useEffect(() => {
-    fetch(API.cart)
+    fetch(API.cart, {
+      headers: {
+        Authorization: token,
+      },
+    })
       .then(res => res.json())
       .then(res => {
-        setItems(res.result);
+        if (!!res.result) {
+          setItems(res.result);
+        }
       })
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.log(e);
+        console.error(e);
       })
       .finally(setIsLoaded(true));
-  }, []);
+  }, [token]);
 
   let coldItems = [];
   let boxItems = [];
@@ -44,39 +46,80 @@ function Cart() {
     items.length - items.filter(item => item.notChecked).length;
 
   const changeItemQuantity = (cart_id, changedQuantity) => {
-    fetch('http://10.58.4.106:8000/cart', {
+    if (!changedQuantity.toString()) {
+      return;
+    }
+
+    fetch(API.cart, {
       method: 'PATCH',
+      headers: {
+        Authorization: token,
+      },
       body: JSON.stringify({
         cart_id: cart_id,
         quantity: changedQuantity,
       }),
     })
-      .then(res => res.json().then(res => res))
+      .then(res =>
+        res.json().then(res => {
+          switch (res.message) {
+            case 'Token not Exist':
+              alert('로그인을 해주세요');
+              break;
+            case 'SUCCESS':
+              setItems(
+                items.map(item =>
+                  item.cart_id !== cart_id
+                    ? item
+                    : { ...item, quantity: changedQuantity }
+                )
+              );
+              break;
+            case 'KEY_ERROR':
+              alert('에러입니다!');
+              break;
+            default:
+              break;
+          }
+        })
+      )
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.log(e);
+        console.error(e);
       });
-
-    setItems(
-      items.map(item =>
-        item.cart_id !== cart_id ? item : { ...item, quantity: changedQuantity }
-      )
-    );
   };
 
   const deleteItem = cart_id => {
-    fetch('http://10.58.4.106:8000/cart', {
+    fetch(API.cart, {
       method: 'DELETE',
-      headers: { cart_id: cart_id },
+      headers: { Authorization: token },
+      body: JSON.stringify({
+        cart_id: [cart_id],
+      }),
     })
       .then(res => res.json())
-      .then(res => res)
+      .then(res => {
+        switch (res.message) {
+          case 'Token not Exist':
+            alert('로그인을 해주세요');
+            break;
+          case 'SUCCESS':
+            setItems(items.filter(item => item.cart_id !== cart_id));
+            break;
+          case 'INVALID_CART':
+            alert('삭제할 상품이 없습니다');
+            break;
+          case 'KEY_ERROR':
+            alert('에러 입니다');
+            break;
+          default:
+            break;
+        }
+      })
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.log(e);
+        console.error(e);
       });
-
-    setItems(items.filter(item => item.cart_id !== cart_id));
   };
 
   const deleteAllCheckedItem = () => {
@@ -84,20 +127,37 @@ function Cart() {
       .filter(item => !item.notChecked)
       .map(item => item.cart_id);
 
-    fetch('http://10.58.4.106:8000/cart', {
+    fetch(API.cart, {
       method: 'DELETE',
-      headers: { cart_id: deleteItemsCartIdArray },
+      headers: { Authorization: token },
+      body: JSON.stringify({
+        cart_id: deleteItemsCartIdArray,
+      }),
     })
       .then(res => res.json())
       .then(res => {
-        alert('주문이 완료되었습니다.');
+        switch (res.message) {
+          case 'SUCCESS':
+            setItems(items.filter(item => item.notChecked));
+            break;
+          case 'Token not Exist':
+            alert('로그인을 해주세요');
+            break;
+          case 'INVALID_CART':
+            alert('삭제할 상품이 없습니다');
+            break;
+          case 'KEY_ERROR':
+            alert('에러 입니다');
+            break;
+
+          default:
+            break;
+        }
       })
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.log(e);
+        console.error(e);
       });
-
-    setItems(items.filter(item => item.notChecked));
   };
 
   const changeAllItemsCheck = changedCheck => {
@@ -133,41 +193,36 @@ function Cart() {
 
     fetch(API.orders, {
       method: 'POST',
+      headers: {
+        Authorization: token,
+      },
       body: JSON.stringify({ cart_ids: orderItemsCartId }),
     })
       .then(res => res.json())
       .then(res => {
         switch (res.message) {
+          case 'Token not Exist':
+            alert('로그인을 해주세요');
+            break;
           case 'INVALID_ORDER_STATUS':
-            alert('');
-            break;
           case 'INVALID_ORDER_ITEMS_STATUS':
-            alert('');
-            break;
           case 'DATA_ERROR':
-            alert('');
-            break;
           case 'TRANSACTION_ERROR':
-            alert('');
-            break;
           case 'KEY_ERROR':
-            alert('');
-            break;
           case 'INVALID_CART':
-            alert('');
+            alert('에러 입니다');
             break;
           case 'CREATE':
             setItems(items.filter(item => item.notChecked));
             alert('주문이 완료되었습니다.');
             break;
-
           default:
             break;
         }
       })
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.log(e);
+        console.error(e);
       });
   };
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import API from '../../../config';
 import './ProductInformation.scss';
 
 function ProductInformation({
@@ -14,9 +14,6 @@ function ProductInformation({
   productId,
 }) {
   const [count, setCount] = useState(1);
-
-  const navigate = useNavigate();
-
   const increaseCount = () => setCount(prevCount => prevCount + 1);
   const decreaseCount = () => setCount(prevCount => prevCount - 1);
   const handleValue = e =>
@@ -26,23 +23,40 @@ function ProductInformation({
 
   const totalPrice = count * price;
 
+  const token = sessionStorage.getItem('token');
+
   const goToCart = () => {
-    fetch('http://10.58.4.142:8000/cart', {
-      method: 'POST',
-      headers: {
-        Authorization: '토큰',
-      },
-      body: JSON.stringify({
-        product_id: { productId },
-        quantity: count,
-      }),
-    })
-      .then(response => response.json())
-      .then(result =>
-        result.success
-          ? navigate('/cart')
-          : alert('로그인해주세요^^') && navigate('/signin')
-      );
+    if (!!token) {
+      fetch(API.cart, {
+        method: 'POST',
+        headers: {
+          authorization: token,
+        },
+        body: JSON.stringify({
+          product_id: productId,
+          quantity: count,
+        }),
+      })
+        .then(response => response.json())
+        .then(res => {
+          switch (res.message) {
+            case 'SUCCESS':
+            case 'CREATED':
+              alert('장바구니에 상품이 추가 되었습니다.');
+              break;
+            case 'KEY_ERROR':
+              break;
+            case 'INVALID_USER':
+              break;
+            case 'INVALID_PRODUCT':
+              break;
+            default:
+              break;
+          }
+        });
+    } else {
+      alert('로그인해주세요^^');
+    }
   };
 
   return (
@@ -105,9 +119,7 @@ function ProductInformation({
       </div>
       <button
         className="detailPurchase"
-        onClick={() =>
-          count > 0 ? { goToCart } : alert('수량을 선택해 주세요^^')
-        }
+        onClick={count > 0 ? goToCart : setCount(1)}
       >
         구매하기
       </button>
