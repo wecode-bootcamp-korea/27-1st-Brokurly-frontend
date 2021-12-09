@@ -1,21 +1,17 @@
 import React from 'react';
 import '../SignupModal/SignupModal.scss';
 
-function SignupModal(props) {
-  // console.log(props);
-
-  // const [signUpModal, setSignUpModal] = useState(false);
-  // const openModal = () => {
-  //   setSignUpModal(true);
-  // };
-  // const closeModal = e => {
-  //   e.preventDefault();
-  //   setSignUpModal(false);
-  // };
-
+function SignupModal({ modalMessage, closeModalBtn }) {
   return (
-    <div className="modalBackground">
-      <div className="modalBox">모달창</div>
+    <div className="modalBackground" onClick={closeModalBtn}>
+      <div className="modalContainer">
+        <div className="textBox">
+          <div className="modalText">{modalMessage}</div>
+          <button className="closeBtn" onClick={closeModalBtn}>
+            확인
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

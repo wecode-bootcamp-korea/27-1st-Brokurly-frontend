@@ -81,7 +81,7 @@ $btnBorderRadius: 3px;
           display: flex;
           justify-content: center;
           width: 640px;
-          padding-top: 15px;
+          padding-top: 14px;
           border-top: solid 2px black;
           border-bottom: solid 2px black;
 
@@ -105,7 +105,7 @@ $btnBorderRadius: 3px;
         }
 
         .guideTextBox {
-          padding: 10px 0px 20px 0px;
+          padding: 0px 0px 20px 0px;
 
           .guideText {
             display: block;
@@ -116,6 +116,12 @@ $btnBorderRadius: 3px;
 
           .passSign {
             color: $green;
+            padding-bottom: 3px;
+          }
+
+          .passSign .dotMark {
+            color: $green;
+            padding-bottom: 3px;
           }
         }
 
@@ -130,7 +136,7 @@ $btnBorderRadius: 3px;
 
         .joinSection {
           @include flexCenter;
-          padding-top: 30px;
+          padding-top: 40px;
           padding-bottom: 60px;
 
           .joinBtn {
