@@ -9,7 +9,6 @@ function Cart() {
   const [items, setItems] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const token = sessionStorage.getItem('token');
-
   useEffect(() => {
     if (!token) {
       setIsLoaded(true);
@@ -39,7 +38,7 @@ function Cart() {
   isLoaded &&
     items.length &&
     items.forEach(item => {
-      if (item.product_package === '냉장/종이포장') {
+      if (item.product_package.slice(0, 2) === '냉장') {
         coldItems.push(item);
       } else {
         boxItems.push(item);
