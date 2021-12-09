@@ -73,7 +73,6 @@ function Signup() {
       .then(res => {
         if (res.message === 'USERNAME_NOT_EXISTS') {
           setIsIdValid2(true);
-
           openModal();
           setMessage('사용 가능한 아이디입니다');
         }
@@ -130,7 +129,7 @@ function Signup() {
   const isPwValid1 = inputPw.length >= 8;
   // MEMO: pw조건1: 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상 입력
   const isPwValid2 = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(inputPw);
-  // MEMO: pw조건2: 동일한 숫자 3개 이상 연속 사용불가
+  // MEMO: pw조건2: 동일한 숫자 또는 문자 3개 이상 연속 사용불가
   const isPwValid3Function = () => {
     if (inputPw.length === 0) {
       return false;
