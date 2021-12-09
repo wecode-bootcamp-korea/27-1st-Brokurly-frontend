@@ -11,8 +11,8 @@ function DetailExplain({ images, description }) {
         </ul>
       </nav>
       <div className="explainForUser">
-        <img src={images} alt="상세" />
-        <p>{description}</p>
+        <img className="detailImage" src={images} alt="상세" />
+        <p className="detailText">{description}</p>
       </div>
     </section>
   );
