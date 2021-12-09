@@ -6,7 +6,7 @@ function Product({ product }) {
   const { id, name, image, price, quantity } = product;
   return (
     <div className="orderProduct">
-      <Link to={`/products/${id}`}>
+      <Link to={`/product/${id}`}>
         {/* 백 image */}
         <img src={image} alt={name} />
         {/* <img src={`/images/${image}`} alt={name} /> */}
