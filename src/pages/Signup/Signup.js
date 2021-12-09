@@ -84,6 +84,11 @@ function Signup() {
       setMessage('아이디를 입력해주세요');
       return;
     }
+    if (inputId.length <= 5) {
+      openModal();
+      setMessage('6자 이상 입력해주세요');
+      return;
+    }
 
     fetch(API.signUsername, {
       method: 'POST',
