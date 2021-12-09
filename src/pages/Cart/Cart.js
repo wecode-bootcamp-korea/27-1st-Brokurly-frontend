@@ -11,6 +11,10 @@ function Cart() {
   const token = sessionStorage.getItem('token');
 
   useEffect(() => {
+    if (!token) {
+      setIsLoaded(true);
+    }
+
     fetch(API.cart, {
       headers: {
         Authorization: token,

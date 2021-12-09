@@ -25,6 +25,8 @@ function Signup() {
 
   const [isPassedId, setIsPassedId] = useState(false);
 
+  const isCorrectPwValid = inputCorrectPw === inputPw;
+
   const successSignBtn = () => {
     if (!isPassedId) {
       openModal();
@@ -165,8 +167,6 @@ function Signup() {
   function inputPwValue(e) {
     setInputPw(e.target.value);
   }
-
-  const isCorrectPwValid = inputCorrectPw === inputPw;
 
   const inputCorrectPwValue = e => {
     setInputCorrectPw(e.target.value);
