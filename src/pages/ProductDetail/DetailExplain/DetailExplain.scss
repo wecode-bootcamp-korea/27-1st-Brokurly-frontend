@@ -31,5 +31,15 @@
 
   .explainForUser {
     text-align: center;
+
+    .detailImage {
+      width: 1010px;
+    }
+
+    .detailText {
+      padding: 50px;
+      line-height: 30px;
+      font-size: 20px;
+    }
   }
 }
