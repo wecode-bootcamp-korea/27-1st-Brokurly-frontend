@@ -23,7 +23,11 @@ function Signin() {
           sessionStorage.setItem('token', result.ACCESS_TOKEN);
           sessionStorage.setItem('username', idValue);
           navigate('/');
+        } else if (result.message === 'INVALID_PASSWORD') {
+          alert('비밀번호를 다시 입력해 주세요');
         } else if (result.message === 'USER_DOES_NOT_EXIST') {
+          alert('존재하지 않는 아이디입니다');
+        } else {
           alert('아이디 또는 비밀번호 오류입니다');
         }
       });
