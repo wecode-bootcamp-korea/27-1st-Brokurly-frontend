@@ -7,7 +7,6 @@ import './Signup.scss';
 function Signup() {
   const navigate = useNavigate();
 
-  // MEMO: input 클릭시 텍스트 등장(set, setState)
   const [isInputIdGuide, setIsInputIdGuide] = useState(false);
   const [isInputPwGuide, setIsInputPwGuide] = useState(false);
   const [isCorrectPwGuide, setIsCorrectPwGuide] = useState(false);
@@ -24,8 +23,20 @@ function Signup() {
   const [inputContact, setInputContact] = useState('');
   const [inputAddress, setInputAddress] = useState('');
 
+  const [isPassedId, setIsPassedId] = useState(false);
+
   const successSignBtn = () => {
-    fetch(`${API.signup}`, {
+    if (!isPassedId) {
+      openModal();
+      setMessage('중복검사를 완료해주세요');
+      return;
+    }
+    if (!isCorrectPwValid) {
+      openModal();
+      setMessage('비밀번호가 일치하지 않습니다');
+      return;
+    }
+    fetch(API.signup, {
       method: 'POST',
       body: JSON.stringify({
         username: inputId,
@@ -38,34 +49,42 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
-        if (res.message === 'SUCCESS') {
+        if (res.message === 'SUCCESS' && isPassedId === true) {
           alert('가입을 환영합니다!');
+          navigate('/');
         }
-        // MEMO: 이하 else를 제외한 if부분은 테스트 결과에 따라 삭제 가능성 있음
+
         if (res.message === 'Invalid Username') {
-          console.log(res);
           openModal();
           setMessage('아이디를 다시 입력해주세요');
+          return;
         }
+
         if (res.message === 'Invalid Password') {
-          console.log(res);
           openModal();
           setMessage('비밀번호를 다시 입력해주세요');
+          return;
         }
+
         if (res.message === 'Invalid Email') {
-          console.log(res);
           openModal();
           setMessage('메일을 다시 입력해주세요');
+          return;
         } else {
-          console.log(res);
           openModal();
           setMessage('다시 시도해주세요');
+          return;
         }
       });
   };
 
   const isValidIdBtn = () => {
+    if (!inputId.length) {
+      openModal();
+      setMessage('아이디를 입력해주세요');
+      return;
+    }
+
     fetch(API.signUsername, {
       method: 'POST',
       body: JSON.stringify({
@@ -78,10 +97,13 @@ function Signup() {
           setIsIdValid2(true);
           openModal();
           setMessage('사용 가능한 아이디입니다');
+          setIsPassedId(true);
+          return;
         }
         if (res.message === 'USERNAME_ALREADY_EXISTS') {
           openModal();
           setMessage('이미 존재하는 아이디입니다');
+          return;
         }
       });
   };
@@ -100,7 +122,6 @@ function Signup() {
       });
   };
 
-  // MEMO: 모달
   const [signUpModal, setSignUpModal] = useState(false);
   const openModal = () => {
     setSignUpModal(true);
@@ -110,7 +131,6 @@ function Signup() {
     setSignUpModal(false);
   };
 
-  // MEMO: input 클릭시 텍스트 등장(함수)
   const openInputId = () => {
     setIsInputIdGuide(true);
   };
@@ -121,18 +141,16 @@ function Signup() {
     setIsCorrectPwGuide(true);
   };
 
-  // MEMO: 유효성 검사
-  // MEMO: id조건: 대, 소문자, 숫자, 6자리 이상 16자리 이하
   const isIdValid1 = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
 
   const inputIdValue = e => {
     setInputId(e.target.value);
+    setIsPassedId(false);
+    setIsIdValid2(false);
   };
 
   const isPwValid1 = inputPw.length >= 8;
-  // MEMO: pw조건1: 대,소문자, 숫자 -를 제외한 특수문자, 8자리 이상 입력
   const isPwValid2 = /^[a-zA-Z0-9!@#$%^&*+=_]{8,}$/.test(inputPw);
-  // MEMO: pw조건2: 동일한 숫자 및 문자 3개 이상 연속 사용불가
   const isPwValid3Function = () => {
     if (inputPw.length === 0) {
       return false;
@@ -175,8 +193,6 @@ function Signup() {
       <div className="signupWidth">
         <header className="signupHeader">
           <h2 className="signupHeaderName">회원가입</h2>
-          {/* MEMO: 모달 테스트용 버튼
-          <button onClick={openModal}>모달버튼</button> */}
           {signUpModal && (
             <SignupModal modalMessage={msg} closeModalBtn={closeModal} />
           )}
@@ -202,7 +218,7 @@ function Signup() {
                         placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"
                       />
                       {isInputIdGuide && (
-                        <p className="guideTextBox">
+                        <div className="guideTextBox">
                           <span className="guideText">
                             <div
                               className={!isIdValid1 ? 'guideText' : 'passSign'}
@@ -218,7 +234,7 @@ function Signup() {
                           >
                             <span className="dotMark">·</span> 아이디 중복확인
                           </span>
-                        </p>
+                        </div>
                       )}
                     </td>
                     <td>
@@ -244,7 +260,7 @@ function Signup() {
                         placeholder="비밀번호를 입력해주세요"
                       />
                       {isInputPwGuide && (
-                        <p className="guideTextBox">
+                        <div className="guideTextBox">
                           <span className="guideText">
                             <div
                               className={!isPwValid1 ? 'guideText' : 'passSign'}
@@ -268,7 +284,7 @@ function Signup() {
                               문자 3개 이상 연속 사용불가
                             </div>
                           </span>
-                        </p>
+                        </div>
                       )}
                     </td>
                     <td />
@@ -286,7 +302,7 @@ function Signup() {
                         placeholder="비밀번호를 한번 더 입력해주세요"
                       />
                       {isCorrectPwGuide && (
-                        <p className="guideTextBox">
+                        <div className="guideTextBox">
                           <span className="guideText">
                             <div
                               className={
@@ -299,7 +315,7 @@ function Signup() {
                               비밀번호를 입력해주세요
                             </div>
                           </span>
-                        </p>
+                        </div>
                       )}
                     </td>
                     <td />
