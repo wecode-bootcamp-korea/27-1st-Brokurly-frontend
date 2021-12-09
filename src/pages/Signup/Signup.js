@@ -38,24 +38,27 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
+        console.log(res);
         if (res.message === 'SUCCESS') {
-          navigate('/');
-          openModal();
-          setMessage('가입을 환영합니다!');
+          alert('가입을 환영합니다!');
         }
         // MEMO: 이하 else를 제외한 if부분은 테스트 결과에 따라 삭제 가능성 있음
         if (res.message === 'Invalid Username') {
+          console.log(res);
           openModal();
           setMessage('아이디를 다시 입력해주세요');
         }
         if (res.message === 'Invalid Password') {
+          console.log(res);
           openModal();
           setMessage('비밀번호를 다시 입력해주세요');
         }
         if (res.message === 'Invalid Email') {
+          console.log(res);
           openModal();
           setMessage('메일을 다시 입력해주세요');
         } else {
+          console.log(res);
           openModal();
           setMessage('다시 시도해주세요');
         }
