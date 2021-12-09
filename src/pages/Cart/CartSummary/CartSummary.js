@@ -1,15 +1,26 @@
 import React from 'react';
 import { GrLocation } from 'react-icons/gr';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './CartSummary.scss';
 
 function CartSummary({ items, orderItems }) {
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem('token');
   const total = items.reduce((previousTotal, currentItem) => {
     if (currentItem.notChecked) {
       return previousTotal;
     }
     return previousTotal + currentItem.quantity * currentItem.product_price;
   }, 0);
+
+  const gotoOrderPage = () => {
+    if (!token) {
+      alert('로그인해주세요^^');
+      return;
+    } else {
+      navigate('/order');
+    }
+  };
 
   return (
     <div className="cartSummery">
@@ -33,9 +44,9 @@ function CartSummary({ items, orderItems }) {
       <button className="orderBtn" onClick={orderItems}>
         주문하기
       </button>
-      <Link to="/order">
-        <button className="toOrderPageBtn">주문 내역</button>
-      </Link>
+      <button className="toOrderPageBtn" onClick={gotoOrderPage}>
+        주문 내역
+      </button>
     </div>
   );
 }
