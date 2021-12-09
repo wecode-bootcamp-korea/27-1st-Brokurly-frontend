@@ -206,7 +206,7 @@ function Signup() {
                         placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"
                       />
                       {isInputIdGuide && (
-                        <p className="guideTextBox">
+                        <div className="guideTextBox">
                           <span className="guideText">
                             <div
                               className={!isIdValid1 ? 'guideText' : 'passSign'}
@@ -222,7 +222,7 @@ function Signup() {
                           >
                             <span className="dotMark">·</span> 아이디 중복확인
                           </span>
-                        </p>
+                        </div>
                       )}
                     </td>
                     <td>
@@ -248,7 +248,7 @@ function Signup() {
                         placeholder="비밀번호를 입력해주세요"
                       />
                       {isInputPwGuide && (
-                        <p className="guideTextBox">
+                        <div className="guideTextBox">
                           <span className="guideText">
                             <div
                               className={!isPwValid1 ? 'guideText' : 'passSign'}
@@ -272,7 +272,7 @@ function Signup() {
                               문자 3개 이상 연속 사용불가
                             </div>
                           </span>
-                        </p>
+                        </div>
                       )}
                     </td>
                     <td />
@@ -290,7 +290,7 @@ function Signup() {
                         placeholder="비밀번호를 한번 더 입력해주세요"
                       />
                       {isCorrectPwGuide && (
-                        <p className="guideTextBox">
+                        <div className="guideTextBox">
                           <span className="guideText">
                             <div
                               className={
@@ -303,7 +303,7 @@ function Signup() {
                               비밀번호를 입력해주세요
                             </div>
                           </span>
-                        </p>
+                        </div>
                       )}
                     </td>
                     <td />
