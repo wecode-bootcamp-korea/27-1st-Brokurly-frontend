@@ -34,7 +34,8 @@ function Signup() {
       return;
     }
     if (!isCorrectPwValid) {
-      setMessage('비밀번호를 확인해주세요');
+      openModal();
+      setMessage('비밀번호가 일치하지 않습니다');
       return;
     }
     fetch(API.signup, {
@@ -81,7 +82,8 @@ function Signup() {
 
   const isValidIdBtn = () => {
     if (!inputId.length) {
-      alert('아이디를 입력해주세요');
+      openModal();
+      setMessage('아이디를 입력해주세요');
       return;
     }
 
