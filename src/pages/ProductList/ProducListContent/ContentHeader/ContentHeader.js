@@ -9,7 +9,7 @@ function ContentHeader({ changeSort, productTotal, currentSort }) {
         {SORT_KOREAN.map((name, i) => (
           <button
             className={`sortBtn ${currentSort === i ? 'sortBtnChecked' : ''}`}
-            onClick={() => changeSort(i, SORT_ENGLISH[i])}
+            onClick={() => changeSort(i, SORTNAME[i])}
             key={i}
           >
             {name}
@@ -23,4 +23,4 @@ function ContentHeader({ changeSort, productTotal, currentSort }) {
 export default ContentHeader;
 
 const SORT_KOREAN = ['신상품순', '낮은 가격순', '높은 가격순'];
-const SORT_ENGLISH = ['dateHigh', 'priceLow', 'priceHigh'];
+const SORTNAME = ['-created_at', 'price', '-price'];
