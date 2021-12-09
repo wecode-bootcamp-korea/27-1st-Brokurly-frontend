@@ -30,7 +30,7 @@ function ProductInformation({
       fetch(API.cart, {
         method: 'POST',
         headers: {
-          authorization: token,
+          Authorization: token,
         },
         body: JSON.stringify({
           product_id: productId,
