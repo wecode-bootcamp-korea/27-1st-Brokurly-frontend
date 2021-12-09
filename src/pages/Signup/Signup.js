@@ -41,6 +41,7 @@ function Signup() {
         console.log(res);
         if (res.message === 'SUCCESS') {
           alert('가입을 환영합니다!');
+          navigate('/');
         }
         // MEMO: 이하 else를 제외한 if부분은 테스트 결과에 따라 삭제 가능성 있음
         if (res.message === 'Invalid Username') {
