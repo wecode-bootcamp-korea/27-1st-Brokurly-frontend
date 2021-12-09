@@ -31,6 +31,11 @@ function Signup() {
       setMessage('중복검사를 완료해주세요');
       return;
     }
+    if (!isCorrectPwValid) {
+      openModal();
+      setMessage('비밀번호가 일치하지 않습니다');
+      return;
+    }
     fetch(API.signup, {
       method: 'POST',
       body: JSON.stringify({
@@ -74,6 +79,12 @@ function Signup() {
   };
 
   const isValidIdBtn = () => {
+    if (!inputId.length) {
+      openModal();
+      setMessage('아이디를 입력해주세요');
+      return;
+    }
+
     fetch(API.signUsername, {
       method: 'POST',
       body: JSON.stringify({
@@ -135,6 +146,7 @@ function Signup() {
   const inputIdValue = e => {
     setInputId(e.target.value);
     setIsPassedId(false);
+    setIsIdValid2(false);
   };
 
   const isPwValid1 = inputPw.length >= 8;
