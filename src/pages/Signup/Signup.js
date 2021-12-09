@@ -28,6 +28,11 @@ function Signup() {
   const isCorrectPwValid = inputCorrectPw === inputPw;
 
   const successSignBtn = () => {
+    if (!isPwValid3) {
+      openModal();
+      setMessage('비밀번호를 다시 입력해주세요');
+      return;
+    }
     if (!isPassedId) {
       openModal();
       setMessage('중복검사를 완료해주세요');
