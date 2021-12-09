@@ -5,14 +5,14 @@ import './ProducListContent';
 
 function ProducListContent({
   products,
-  setCurrentSort,
+  changeSort,
   currentSort,
   putInfoIntoModal,
 }) {
   return (
     <div className="productListContent">
       <ContentHeader
-        setCurrentSort={setCurrentSort}
+        changeSort={changeSort}
         currentSort={currentSort}
         productTotal={products.length}
       />

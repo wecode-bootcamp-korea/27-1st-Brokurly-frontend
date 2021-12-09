@@ -5,10 +5,13 @@ import API from '../../../config';
 
 function OrderDetail({ order, changeOrderState }) {
   const { order_id, order_number, order_status, products } = order;
-
+  const token = sessionStorage.getItem('token');
   const cancelOrder = order_id => {
     fetch(API.orders, {
       method: 'PATCH',
+      headers: {
+        Authorization: token,
+      },
       body: JSON.stringify({
         order_id: order_id,
       }),
@@ -20,7 +23,7 @@ function OrderDetail({ order, changeOrderState }) {
           case 'INVALID_ORDER_ITEMS_STATUS':
           case 'KEY_ERROR':
             // eslint-disable-next-line no-console
-            console.log('ERROR', res.message);
+            console.error('ERROR', res.message);
             alert('에러입니다!');
             break;
           case 'SUCCESS':
@@ -33,7 +36,7 @@ function OrderDetail({ order, changeOrderState }) {
       })
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.log('catch', e);
+        console.error('catch', e);
       });
   };
 
@@ -45,7 +48,7 @@ function OrderDetail({ order, changeOrderState }) {
       </div>
       <div className="orderDetailContent">
         <div className="orderProducts">
-          {products &&
+          {products.length &&
             products.map(product => (
               <Product product={product} key={product.id} />
             ))}

@@ -6,18 +6,26 @@ import API from '../../config';
 function Order() {
   const [orders, setOrders] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const token = sessionStorage.getItem('token');
 
   useEffect(() => {
-    // fetch('/data/orderData.json')
-    fetch(API.orders)
+    fetch(API.orders, {
+      headers: {
+        Authorization: token,
+      },
+    })
       .then(res => res.json())
-      .then(res => setOrders(res.result))
+      .then(res => {
+        setOrders(res.result);
+      })
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.log(e);
+        console.error(e);
       })
-      .finally(setLoaded(true));
-  }, []);
+      .finally(() => {
+        setLoaded(true);
+      });
+  }, [token]);
 
   const changeOrderState = order_id => {
     setOrders(
@@ -42,7 +50,7 @@ function Order() {
             orders.map(order => (
               <OrderDetail
                 order={order}
-                key={order.id}
+                key={order.order_id}
                 changeOrderState={changeOrderState}
               />
             ))
