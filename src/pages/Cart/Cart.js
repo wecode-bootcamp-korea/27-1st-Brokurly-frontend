@@ -9,7 +9,6 @@ function Cart() {
   const [items, setItems] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const token = sessionStorage.getItem('token');
-
   useEffect(() => {
     if (!token) {
       setIsLoaded(true);
