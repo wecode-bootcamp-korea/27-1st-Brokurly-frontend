@@ -1,4 +1,4 @@
-const BASE_URL_CHANGMIN = 'http://10.58.1.226:8000';
+const BASE_URL_CHANGMIN = 'http://15.165.18.240:8000';
 
 const API = {
   signin: `${BASE_URL_CHANGMIN}/users/signin`,
