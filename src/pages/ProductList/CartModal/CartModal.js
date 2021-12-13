@@ -57,6 +57,7 @@ function CartModal({ product, closeModal }) {
 
   const changeQuantityByInput = e => {
     const value = e.target.value;
+
     if (isNaN(value)) return;
 
     if (value === '0') {
