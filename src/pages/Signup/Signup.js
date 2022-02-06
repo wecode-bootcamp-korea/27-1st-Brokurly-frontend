@@ -1,28 +1,66 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Signup.scss';
 import API from '../../../src/config';
 import SignupModal from './SignupModal/SignupModal';
-import './Signup.scss';
+import { useSignUp } from './hooks/useSignUp';
 
 function Signup() {
+  const { inputs, onChangeEvents } = useSignUp();
+  const {
+    inputId,
+    inputPw,
+    inputCorrectPw,
+    inputName,
+    inputEmail,
+    inputContact,
+    inputAddress,
+  } = inputs;
+
   const navigate = useNavigate();
+
+  //MEMO: useState 여러 개 관리 (inputs, setInputs)
+  // const [inputs, setInputs] = useState({
+  //   inputId: '',
+  //   inputPw: '',
+  //   inputCorrectPw: '',
+  //   inputName: '',
+  //   inputEmail: '',
+  //   inputContact: '',
+  //   inputAddress: '',
+  // });
+
+  // const {
+  //   inputId,
+  //   inputPw,
+  //   inputCorrectPw,
+  //   inputName,
+  //   inputEmail,
+  //   inputContact,
+  //   inputAddress,
+  // } = inputs;
+
+  // const onChangeEvents = e => {
+  //   setInputs({
+  //     ...inputs,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  const [msg, setMessage] = useState('');
+
+  // const [inputId, setInputId] = useState('');
+  // const [inputPw, setInputPw] = useState('');
+  // const [inputCorrectPw, setInputCorrectPw] = useState('');
+  // const [inputName, setInputName] = useState('');
+  // const [inputEmail, setInputEmail] = useState('');
+  // const [inputContact, setInputContact] = useState('');
+  // const [inputAddress, setInputAddress] = useState('');
 
   const [isInputIdGuide, setIsInputIdGuide] = useState(false);
   const [isInputPwGuide, setIsInputPwGuide] = useState(false);
   const [isCorrectPwGuide, setIsCorrectPwGuide] = useState(false);
-
   const [isIdValid2, setIsIdValid2] = useState(false);
-
-  const [msg, setMessage] = useState('');
-
-  const [inputId, setInputId] = useState('');
-  const [inputPw, setInputPw] = useState('');
-  const [inputCorrectPw, setInputCorrectPw] = useState('');
-  const [inputName, setInputName] = useState('');
-  const [inputEmail, setInputEmail] = useState('');
-  const [inputContact, setInputContact] = useState('');
-  const [inputAddress, setInputAddress] = useState('');
-
   const [isPassedId, setIsPassedId] = useState(false);
 
   const isCorrectPwValid = inputCorrectPw === inputPw;
@@ -56,6 +94,15 @@ function Signup() {
     })
       .then(res => res.json())
       .then(res => {
+        // MEMO: 리팩토링 부분
+        // switch (res.message) {
+        //   case  === 'SUCCESS' && isPassedId === true;
+        //   alert('가입을 환영합니다!');
+        //   navigate('/');
+        //   break;
+        //   case
+        // }
+
         if (res.message === 'SUCCESS' && isPassedId === true) {
           alert('가입을 환영합니다!');
           navigate('/');
@@ -156,7 +203,7 @@ function Signup() {
   const isIdValid1 = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{6,16}$/.test(inputId);
 
   const inputIdValue = e => {
-    setInputId(e.target.value);
+    // setInputId(e.target.value);
     setIsPassedId(false);
     setIsIdValid2(false);
   };
@@ -174,29 +221,29 @@ function Signup() {
   };
   const isPwValid3 = isPwValid3Function();
 
-  function inputPwValue(e) {
-    setInputPw(e.target.value);
-  }
+  // function inputPwValue(e) {
+  //   setInputPw(e.target.value);
+  // }
 
-  const inputCorrectPwValue = e => {
-    setInputCorrectPw(e.target.value);
-  };
+  // const inputCorrectPwValue = e => {
+  //   setInputCorrectPw(e.target.value);
+  // };
 
-  const inputNameValue = e => {
-    setInputName(e.target.value);
-  };
+  // const inputNameValue = e => {
+  //   setInputName(e.target.value);
+  // };
 
-  const inputEmailValue = e => {
-    setInputEmail(e.target.value);
-  };
+  // const inputEmailValue = e => {
+  //  setInputEmail(e.target.value);
+  // };
 
-  const inputContactValue = e => {
-    setInputContact(e.target.value);
-  };
+  // const inputContactValue = e => {
+  //   setInputContact(e.target.value);
+  // };
 
-  const inputAddressValue = e => {
-    setInputAddress(e.target.value);
-  };
+  // const inputAddressValue = e => {
+  //   setInputAddress(e.target.value);
+  // };
 
   return (
     <div className="signup">
@@ -264,7 +311,7 @@ function Signup() {
                     <td colSpan="2">
                       <input
                         className="tableInput"
-                        onChange={inputPwValue}
+                        onChange={onChangeEvents}
                         onClick={openInputPw}
                         type="password"
                         placeholder="비밀번호를 입력해주세요"
@@ -306,7 +353,7 @@ function Signup() {
                     <td colSpan="2">
                       <input
                         className="tableInput"
-                        onChange={inputCorrectPwValue}
+                        onChange={onChangeEvents}
                         onClick={openCorrectPw}
                         type="password"
                         placeholder="비밀번호를 한번 더 입력해주세요"
@@ -337,7 +384,7 @@ function Signup() {
                     <td colSpan="2">
                       <input
                         className="tableInput username"
-                        onChange={inputNameValue}
+                        onChange={onChangeEvents}
                         placeholder="이름을 입력해주세요"
                       />
                     </td>
@@ -350,7 +397,7 @@ function Signup() {
                     <td>
                       <input
                         className="tableInput email"
-                        onChange={inputEmailValue}
+                        onChange={onChangeEvents}
                         placeholder="예: brokurly@brokurly.com"
                       />
                     </td>
@@ -371,7 +418,7 @@ function Signup() {
                     <td>
                       <input
                         className="tableInput contact"
-                        onChange={inputContactValue}
+                        onChange={onChangeEvents}
                         type="text"
                         placeholder="숫자만 입력해주세요"
                       />
@@ -392,7 +439,7 @@ function Signup() {
                     <td colSpan="2">
                       <input
                         className="tableInput address"
-                        onChange={inputAddressValue}
+                        onChange={onChangeEvents}
                         placeholder="주소를 입력해주세요"
                       />
                     </td>
