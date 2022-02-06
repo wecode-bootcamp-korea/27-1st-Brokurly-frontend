@@ -6,7 +6,9 @@ import './Product.scss';
 function Product({ product, putInfoIntoModal }) {
   const { name, image, price, introduction, id } = product;
   const cartBtn = useRef();
+
   const navigate = useNavigate();
+
   const gotoProductDetail = e => {
     if (!cartBtn.current.contains(e.target)) {
       navigate(`product/${id}`);
